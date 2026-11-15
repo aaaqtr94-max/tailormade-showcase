@@ -9,6 +9,8 @@ $site = Join-Path $env:TEMP ("tm-pages-" + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force (Join-Path $site 'showcase'), (Join-Path $site 'experience') | Out-Null
 Copy-Item (Join-Path $repo 'experience\index.html') (Join-Path $site 'index.html')
 Copy-Item (Join-Path $repo 'index.html') (Join-Path $site 'showcase\index.html')
+New-Item -ItemType Directory -Force (Join-Path $site 'assets') | Out-Null
+Copy-Item (Join-Path $repo 'assets\hfc-burgundy-face.jpg') (Join-Path $site 'assets\')
 $redirect = '<!doctype html><meta charset="utf-8"><title>Tailormade</title><meta http-equiv="refresh" content="0; url=../"><link rel="canonical" href="../"><a href="../">Continue to Tailormade</a>'
 [IO.File]::WriteAllText((Join-Path $site 'experience\index.html'), $redirect, (New-Object Text.UTF8Encoding $false))
 New-Item -ItemType File (Join-Path $site '.nojekyll') | Out-Null

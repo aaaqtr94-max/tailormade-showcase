@@ -246,7 +246,7 @@ camera.position.set(0, 0, 9);
 
 const key = new THREE.DirectionalLight('#ffe7c7', 2.4); key.position.set(3.5, 4, 5); scene.add(key);
 const rim = new THREE.DirectionalLight('#9fb8ff', 1.6); rim.position.set(-5, 2, -4); scene.add(rim);
-const fill = new THREE.PointLight('#c8a26b', 6, 12); fill.position.set(-2.5, -2, 3); scene.add(fill);
+const fill = new THREE.PointLight('#c8a26b', 2.5, 12); fill.position.set(-2.5, 0, 3); scene.add(fill);
 scene.add(new THREE.AmbientLight('#ffffff', 0.12));
 
 /* ---------------- Helpers ---------------- */
@@ -272,10 +272,16 @@ function houndstooth(ctx, x0, y0, w, h, t){
   ctx.restore();
 }
 
-/* ---------------- The case (proportions measured from the HFC Burgundy product photo) ---------------- */
-const W = 1.62, H = 3.52, R = 0.26, D = 0.16;
-const HW = 1.43, HH = 0.895, HR = 0.13, HY = H / 2 - 0.06 - HH / 2;
-const BAND = 0.296; // share of the height covered by houndstooth on HFC cases
+/* ---------------- The case ----------------
+   Every size below is measured in pixels from the HFC Burgundy product photo (case = 535 x 1100 px,
+   drop shadow excluded) and converted with PX, so the photo can be laid on the geometry edge to edge. */
+const PX = 1.62 / 535;
+const W = 535 * PX, H = 1100 * PX, R = 95 * PX, D = 0.16;
+const HW = 500 * PX, HH = 289 * PX, HR = 40 * PX, HY = (550 - 168.5) * PX;     // outer edge of the silver frame
+const IW = 456 * PX, IH = 260 * PX, IR = 30 * PX;                              // opening inside the frame
+const BAND = 336 / 1100; // share of the height covered by houndstooth on HFC cases
+const at = (x, y) => [(x - 267.5) * PX, (550 - y) * PX];                      // photo px (case-relative) -> world
+const ASSETS = location.pathname.includes('/experience/') ? '../assets/' : 'assets/';
 
 const caseShape = roundRect(W, H, R);
 caseShape.holes.push(roundRect(HW, HH, HR, 0, HY, new THREE.Path()));
@@ -345,39 +351,64 @@ function faceTexture(p){
   return t;
 }
 const faceMat = new THREE.MeshPhysicalMaterial({roughness: .95, sheen: .25, sheenRoughness: .7, envMapIntensity: .3});
-const sideMat = new THREE.MeshPhysicalMaterial({roughness: .9, sheen: .2, sheenRoughness: .7, envMapIntensity: .3});
+const sideMat = new THREE.MeshPhysicalMaterial({roughness: 1, sheen: .08, sheenRoughness: .9, envMapIntensity: .12});
 const caseMesh = new THREE.Mesh(caseGeo, [faceMat, sideMat]);
 
 // polished frame sitting inside the cut-out, as in the photo
-const rimShape = roundRect(HW + .02, HH + .02, HR + .01, 0, HY);
-rimShape.holes.push(roundRect(HW - .085, HH - .085, HR - .03, 0, HY, new THREE.Path()));
+const rimShape = roundRect(HW + .01, HH + .01, HR, 0, HY);
+rimShape.holes.push(roundRect(IW, IH, IR, 0, HY, new THREE.Path()));
 const rimGeo = new THREE.ExtrudeGeometry(rimShape, {depth: .24, bevelEnabled: true, bevelThickness: .018, bevelSize: .014, bevelSegments: 6, curveSegments: 32});
 rimGeo.translate(0, 0, -.1);
-const rimMat = new THREE.MeshPhysicalMaterial({metalness: 1, roughness: .16, color: '#e2e4e8', clearcoat: .6});
+const rimMat = new THREE.MeshPhysicalMaterial({metalness: 1, roughness: .12, color: '#eef0f3', clearcoat: .8, envMapIntensity: 2.4});
 const rimMesh = new THREE.Mesh(rimGeo, rimMat);
 
 // the phone's own camera plateau, seen through the frame (same colour family as the case)
 const cam = new THREE.Group();
 const plateMat = new THREE.MeshPhysicalMaterial({color: '#5a1a26', roughness: .3, metalness: .55, clearcoat: 1, clearcoatRoughness: .08});
-const plate = new THREE.Mesh(new THREE.ShapeGeometry(roundRect(HW - .06, HH - .06, HR, 0, HY)), plateMat);
+const plate = new THREE.Mesh(new THREE.ShapeGeometry(roundRect(IW + .02, IH + .02, IR, 0, HY), 24), plateMat);
 plate.position.z = -.03; cam.add(plate);
+const lenses = new THREE.Group(); cam.add(lenses);
 const lensGlass = new THREE.MeshPhysicalMaterial({color: '#050507', roughness: .04, metalness: .3, clearcoat: 1, envMapIntensity: .8, iridescence: .15, iridescenceIOR: 1.4});
 const lensCore = new THREE.MeshPhysicalMaterial({color: '#11131c', roughness: .1, metalness: .4, clearcoat: 1});
 // three lenses: two stacked on the left, one in the middle (from the photo)
-[[-.47, 1.45], [-.47, 1.05], [-.085, 1.245]].forEach(([x, y]) => {
-  const ring = new THREE.Mesh(new THREE.CylinderGeometry(.175, .18, .09, 64), plateMat);
-  ring.rotation.x = Math.PI / 2; ring.position.set(x, y, .005); cam.add(ring);
-  const glass = new THREE.Mesh(new THREE.CylinderGeometry(.138, .138, .1, 64), lensGlass);
-  glass.rotation.x = Math.PI / 2; glass.position.set(x, y, .012); cam.add(glass);
+[at(113, 104), at(113, 234), at(238, 171)].forEach(([x, y]) => {
+  const ring = new THREE.Mesh(new THREE.CylinderGeometry(.17, .175, .09, 64), plateMat);
+  ring.rotation.x = Math.PI / 2; ring.position.set(x, y, .005); lenses.add(ring);
+  const glass = new THREE.Mesh(new THREE.CylinderGeometry(.13, .13, .1, 64), lensGlass);
+  glass.rotation.x = Math.PI / 2; glass.position.set(x, y, .012); lenses.add(glass);
   const core = new THREE.Mesh(new THREE.CircleGeometry(.045, 32), lensCore);
-  core.position.set(x, y, .064); cam.add(core);
+  core.position.set(x, y, .064); lenses.add(core);
 });
-const flash = new THREE.Mesh(new THREE.CircleGeometry(.068, 40), new THREE.MeshStandardMaterial({color: '#bdb6a6', roughness: .3, metalness: .2}));
-flash.position.set(.486, 1.48, .0); cam.add(flash);
-const sensor = new THREE.Mesh(new THREE.CircleGeometry(.068, 40), new THREE.MeshPhysicalMaterial({color: '#0b0b0d', roughness: .1, clearcoat: 1}));
-sensor.position.set(.486, 1.034, .0); cam.add(sensor);
+const flash = new THREE.Mesh(new THREE.CircleGeometry(.066, 40), new THREE.MeshStandardMaterial({color: '#bdb6a6', roughness: .3, metalness: .2}));
+flash.position.set(...at(423, 94), 0); lenses.add(flash);
+const sensor = new THREE.Mesh(new THREE.CircleGeometry(.066, 40), new THREE.MeshPhysicalMaterial({color: '#0b0b0d', roughness: .1, clearcoat: 1}));
+sensor.position.set(...at(423, 239), 0); lenses.add(sensor);
 const mic = new THREE.Mesh(new THREE.CircleGeometry(.012, 16), new THREE.MeshBasicMaterial({color: '#140608'}));
-mic.position.set(.486, 1.25, .001); cam.add(mic);
+mic.position.set(...at(423, 171), .001); lenses.add(mic);
+
+/* Products that have a real photo use it directly on the case face and on the camera plateau. */
+const PHOTOS = {'iphone-18-hfc-burgundy-edition-ll': 'hfc-burgundy-face.jpg'};
+const photoTex = {};
+function loadPhoto(p){
+  const file = PHOTOS[p.h]; if (!file) return Promise.resolve(null);
+  if (photoTex[p.h]) return Promise.resolve(photoTex[p.h]);
+  return new THREE.ImageLoader().loadAsync(ASSETS + file).then(img => {
+    // paint the photo's white background (visible in the rounded corners) in the case colour
+    const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
+    const g = c.getContext('2d');
+    g.fillStyle = p.color; g.fillRect(0, 0, c.width, c.height);
+    const k = c.width / W, inset = 4;
+    g.save(); g.beginPath();
+    g.roundRect(inset, inset, c.width - inset * 2, c.height - inset * 2, R * k - inset); g.clip();
+    g.drawImage(img, 0, 0); g.restore();
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    t.repeat.set(1 / W, 1 / H); t.offset.set(.5, .5);
+    return (photoTex[p.h] = t);
+  }).catch(() => null);
+}
+const photoPlateMat = new THREE.MeshPhysicalMaterial({color: '#a6878d', roughness: .4, metalness: .05, clearcoat: 1, clearcoatRoughness: .1, envMapIntensity: .35});
 
 const back = new THREE.Mesh(new THREE.ShapeGeometry(roundRect(W - .02, H - .02, R)), new THREE.MeshPhysicalMaterial({color: '#050506', roughness: .08, clearcoat: 1, side: THREE.DoubleSide}));
 back.position.z = -D / 2 - .052; back.rotation.y = Math.PI;
@@ -385,22 +416,29 @@ back.position.z = -D / 2 - .052; back.rotation.y = Math.PI;
 const phone = new THREE.Group();
 phone.add(caseMesh, rimMesh, cam, back);
 const caseRoot = new THREE.Group(); caseRoot.add(phone); scene.add(caseRoot);
+window.__parts = {caseMesh, rimMesh, cam, back, faceMat, sideMat};
 
 function applyProduct(p, animate){
   const target = new THREE.Color(p.color);
-  faceMat.map = faceTexture(p); faceMat.needsUpdate = true;
+  const photo = photoTex[p.h];
+  faceMat.map = photo || faceTexture(p); faceMat.needsUpdate = true;
   faceMat.color.set('#ffffff');
+  // with a photo, the plateau, lenses and flash come straight from the picture
+  lenses.visible = !photo;
+  if (photo) { photoPlateMat.map = photo; photoPlateMat.needsUpdate = true; plate.material = photoPlateMat; }
+  else plate.material = plateMat;
+  if (!photo && PHOTOS[p.h]) loadPhoto(p).then(t => { if (t && PRODUCTS[current] === p) applyProduct(p, false); });
   if (animate) gsap.to(sideMat.color, {r: target.r, g: target.g, b: target.b, duration: .8, ease: 'power2.out'});
   else sideMat.color.copy(target);
   sideMat.sheenColor = target.clone().lerp(new THREE.Color('#ffffff'), .15);
   faceMat.sheenColor = target.clone().lerp(new THREE.Color('#ffffff'), .2);
-  rimMat.color.set(p.hfc ? '#e2e4e8' : '#141416');
-  rimMat.roughness = p.hfc ? .16 : .38; rimMat.metalness = p.hfc ? 1 : .55;
+  rimMat.color.set(p.hfc ? '#eef0f3' : '#141416');
+  rimMat.roughness = p.hfc ? .12 : .38; rimMat.metalness = p.hfc ? 1 : .55;
   // the phone behind the cut-out takes a deep metallic tone of the case colour
   const plateTarget = target.clone().lerp(new THREE.Color('#0b0b0d'), p.light ? .35 : .15);
   if (animate) gsap.to(plateMat.color, {r: plateTarget.r, g: plateTarget.g, b: plateTarget.b, duration: .8});
   else plateMat.color.copy(plateTarget);
-  faceMat.bumpMap = suedeBump(); faceMat.bumpScale = .8;
+  faceMat.bumpMap = suedeBump(); faceMat.bumpScale = photo ? .35 : .8;
 }
 
 /* ---------------- 3D TM monogram ---------------- */
@@ -424,7 +462,7 @@ const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({size: .05, map:
 scene.add(dust);
 const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'); const r = g.createRadialGradient(128, 128, 0, 128, 128, 128); r.addColorStop(0, 'rgba(200,162,107,.5)'); r.addColorStop(1, 'rgba(200,162,107,0)'); g.fillStyle = r; g.fillRect(0, 0, 256, 256); return new THREE.CanvasTexture(c); })();
 const floor = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), new THREE.MeshBasicMaterial({map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0}));
-floor.rotation.x = -Math.PI / 2; floor.position.y = -2.1; scene.add(floor);
+floor.rotation.x = -Math.PI / 2; floor.position.set(0, -2.1, -1.4); scene.add(floor); // behind the case, never over it
 
 /* ---------------- State driven by GSAP ---------------- */
 const st = {
@@ -441,6 +479,7 @@ function fitLogo(){
   logoFit.y = -((r.top + r.height / 2) - innerHeight / 2) * worldPerPx;
 }
 const tmBase = () => logoFit.scale;
+window.__st = st; // handy for checking poses from the console
 
 function resize(){
   const w = innerWidth, h = innerHeight;

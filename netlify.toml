@@ -3,5 +3,5 @@
 #   /showcase/  -> the case shelf      (index.html, also the Shopify Custom Liquid source)
 #   /experience -> redirects to /
 [build]
-  command = "rm -rf deploy && mkdir -p deploy/showcase && cp experience/index.html deploy/index.html && cp index.html deploy/showcase/index.html && printf '/experience / 301\\n/experience/ / 301\\n' > deploy/_redirects"
+  command = "rm -rf deploy && mkdir -p deploy/showcase && cp experience/index.html deploy/index.html && cp index.html deploy/showcase/index.html && mkdir -p deploy/assets && cp assets/hfc-burgundy-face.jpg deploy/assets/ &&printf '/experience / 301\\n/experience/ / 301\\n' > deploy/_redirects"
   publish = "deploy"
