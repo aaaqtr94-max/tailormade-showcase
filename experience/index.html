@@ -477,7 +477,7 @@ const pens = document.querySelectorAll('#mono .pen');
 function intro(){
   const tl = gsap.timeline();
   tl.to(letters, {opacity: 1, y: 0, filter: 'blur(0px)', duration: .5, ease: 'power3.out', stagger: .11}, .3)
-    .to('.caret', {opacity: 0, duration: .3}, '+=.2')
+    .to('.caret', {opacity: 0, duration: .3, onStart: () => { document.querySelector('.caret').style.animation = 'none'; }, onComplete: () => document.querySelector('.caret')?.remove()}, '+=.2')
     .to(pens[0], {strokeDashoffset: 0, duration: .8, ease: 'power2.inOut'}, '-=.1')
     .to(pens[1], {strokeDashoffset: 0, duration: .6, ease: 'power2.inOut'})
     .to(pens[2], {strokeDashoffset: 0, duration: .9, ease: 'power2.inOut'}, '+=.1')
