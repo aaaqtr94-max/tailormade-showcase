@@ -46,7 +46,7 @@ section{position:relative;padding-left:var(--gx);padding-right:var(--gxr)}
 .word span{display:inline-block;opacity:0;transform:translateY(.35em);filter:blur(8px)}
 .caret{display:inline-block;width:2px;height:.95em;background:var(--gold);margin-left:.18em;align-self:center;animation:blink .9s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.mono{width:min(58vw,330px);height:auto;overflow:visible}
+.mono{width:min(58vw,330px);height:auto;overflow:visible;visibility:hidden} /* keeps the logo's place; the 3D logo fades in there */
 .mono path.pen{fill:none;stroke:#fff;stroke-linecap:butt;stroke-dasharray:1 1;stroke-dashoffset:1}
 .cue{position:absolute;left:0;right:0;bottom:calc(26px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center;gap:10px;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);opacity:0}
 .cue i{width:1px;height:42px;background:linear-gradient(var(--ink),transparent);animation:cue 2s ease-in-out infinite;transform-origin:top}
@@ -786,15 +786,9 @@ function intro(){
   const tl = gsap.timeline();
   tl.to(letters, {opacity: 1, y: 0, filter: 'blur(0px)', duration: .5, ease: 'power3.out', stagger: .11}, .3)
     .to('.caret', {opacity: 0, duration: .3, onStart: () => { document.querySelector('.caret').style.animation = 'none'; }, onComplete: () => document.querySelector('.caret')?.remove()}, '+=.2')
-    // one continuous pen: each stroke starts before the last one lands
-    .to(pens[0], {strokeDashoffset: 0, duration: 1.1, ease: 'sine.inOut'}, '-=.1')
-    .to(pens[1], {strokeDashoffset: 0, duration: .9, ease: 'sine.inOut'}, '-=.45')
-    .to(pens[2], {strokeDashoffset: 0, duration: 1.2, ease: 'sine.inOut'}, '-=.4')
-    .to(pens[3], {strokeDashoffset: 0, duration: 1.2, ease: 'sine.inOut'}, '-=.55')
-    // the drawn monogram melts into the 3D one in place, then it starts to breathe
-    .to('#mono', {opacity: 0, duration: 1.6, ease: 'sine.inOut'}, '+=.15')
-    .fromTo(st, {tmIntro: 0}, {tmIntro: 1, duration: 1.6, ease: 'sine.inOut'}, '<')
-    .to(st, {idle: 1, duration: 3, ease: 'sine.inOut'}, '-=.6')
+    // the logo simply fades in under the word, then starts to breathe
+    .fromTo(st, {tmIntro: 0}, {tmIntro: 1, duration: 1.8, ease: 'sine.inOut'}, '+=.1')
+    .to(st, {idle: 1, duration: 3, ease: 'sine.inOut'}, '-=.8')
     .to(['#bar', '#cue'], {opacity: 1, duration: .8, onStart: () => $('bar').classList.add('on')}, '-=.8');
   return tl;
 }
@@ -804,9 +798,11 @@ function story(){
   const m = isMobile;
   const tl = gsap.timeline({defaults: {ease: 'none'}, scrollTrigger: {trigger: 'main', start: 'top top', end: 'bottom bottom', scrub: 1, invalidateOnRefresh: true,
     onUpdate: s => { $('progress').style.transform = `scaleX(${s.progress})`; }}});
-  // opening → ending: the 3D logo glides up and settles above the closing line
+  // opening → ending: the logo fades out as you leave the opening, and fades back in above the closing line
   tl.to('#cue', {opacity: 0, duration: .2}, 0)
-    .to(st, {tmY: () => (m() ? 1.45 : 1.4), tmScale: () => (m() ? .95 : .78), duration: 1}, 0);
+    .to(st, {tmScroll: 0, duration: .35, ease: 'sine.inOut'}, 0)
+    .set(st, {tmY: () => (m() ? 1.45 : 1.4), tmScale: () => (m() ? .95 : .78)}, .4)
+    .to(st, {tmScroll: 1, duration: .4, ease: 'sine.inOut'}, .6);
 
   gsap.utils.toArray('.s4 .reveal').forEach(el => gsap.to(el, {opacity: 1, y: 0, duration: 1, ease: 'power3.out',
     scrollTrigger: {trigger: el.closest('section'), start: 'top 55%', toggleActions: 'play none none reverse'}}));
