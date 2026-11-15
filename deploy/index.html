@@ -239,19 +239,6 @@ h2 em{color:var(--gold)}
     </div>
   </section>
 
-  <section class="s3" aria-label="Choose your case">
-    <div class="stick">
-      <div class="panel reveal" id="panel">
-        <p class="eyebrow">Choose yours</p>
-        <h3 id="pName"></h3>
-        <div class="meta"><span id="pEd"></span><b id="pPrice"></b></div>
-        <div class="sw" id="sw" role="group" aria-label="Colour"></div>
-        <div class="models" id="models" role="group" aria-label="Model"></div>
-        <a class="btn" id="buy" href="#">View case</a>
-      </div>
-    </div>
-  </section>
-
   <section class="s4" aria-label="Shop">
     <div class="stick">
       <p class="eyebrow reveal">Tailormade</p>
@@ -790,37 +777,10 @@ function render(){
   renderer.render(scene, camera);
 }
 
-/* ---------------- Configurator ---------------- */
-let current = 0, model = 0;
+/* ---------------- The case shown: HFC Burgundy (from the product photo) ---------------- */
+let current = 0;
 const $ = id => document.getElementById(id);
-const fmt = n => 'QAR ' + n.toFixed(2).replace('.', ',');
-function swatch(p, k){
-  if (!p.hfc) return `<svg viewBox="0 0 32 32"><rect width="32" height="32" fill="${p.color}"/></svg>`;
-  return `<svg viewBox="0 0 32 32"><defs><pattern id="hp${k}" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="scale(.7)"><rect width="8" height="8" fill="#ece8e1"/><path d="M0 0h4v4H0zM4 4h4v4H4zM4 2l2-2h2L4 4zM0 6l2-2h2L0 8z" fill="#1a1a1a"/></pattern></defs><rect width="32" height="12" fill="url(#hp${k})"/><rect y="12" width="32" height="20" fill="${p.color}"/></svg>`;
-}
-$('sw').innerHTML = PRODUCTS.map((p, k) => `<button aria-label="${p.t1} ${p.t2}" data-k="${k}">${swatch(p, k)}</button>`).join('');
-function fillPanel(){
-  const p = PRODUCTS[current];
-  if (!p.v[model]) model = 0;
-  $('pName').innerHTML = `${p.t1}<br><em>${p.t2}</em>`;
-  $('pEd').innerHTML = p.ed;
-  const v = p.v[model];
-  $('pPrice').innerHTML = fmt(p.price);
-  $('models').innerHTML = p.v.map((x, k) => `<button data-m="${k}" aria-pressed="${k === model}">${x[1]}${x[2] ? '' : ' · Sold out'}</button>`).join('');
-  [...$('sw').children].forEach((b, k) => b.setAttribute('aria-pressed', k === current));
-  const buy = $('buy');
-  buy.href = `${STORE}/products/${p.h}?variant=${v[0]}`;
-  buy.textContent = v[2] ? 'Shop this case' : 'Sold out · View case';
-  buy.classList.toggle('off', !v[2]);
-}
-$('sw').addEventListener('click', e => {
-  const b = e.target.closest('[data-k]'); if (!b || +b.dataset.k === current) return;
-  current = +b.dataset.k; model = 0;
-  applyProduct(PRODUCTS[current], true); fillPanel();
-  if (!reduced) gsap.fromTo(st, {spin: 0}, {spin: Math.PI * 2, duration: 1.3, ease: 'power3.inOut', onComplete: () => { st.spin = 0; }});
-});
-$('models').addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (b) { model = +b.dataset.m; fillPanel(); } });
-applyProduct(PRODUCTS[0], false); fillPanel();
+applyProduct(PRODUCTS[current], false);
 
 /* ---------------- Hero: wordmark types, monogram writes ---------------- */
 $('monoPath').setAttribute('d', TM);
@@ -855,16 +815,14 @@ function story(){
   tl.to(st, {tmY: 2.4, tmScale: .55, tmScroll: 0, duration: 1}, 0)
     .to(st, {caseY: () => (m() ? 1.15 : 0), caseX: () => (m() ? 0 : 1.35), caseRotY: -.42, glow: .32, duration: 1.2}, 0)
     .to('#cue', {opacity: 0, duration: .2}, 0)
-  // configurator: the case glides across (turning once) to make room for the panel
-    .to(st, {caseX: () => (m() ? 0 : -1.25), caseY: () => (m() ? 1.55 : 0), caseScale: () => (m() ? .78 : 1), caseRotY: () => -.3 + Math.PI * 2, duration: 1.1}, 1.5)
-    .to({}, {duration: 1}, 2.6)
+  // the case turns slowly while its copy is read
+    .to(st, {caseRotY: .35, duration: .8}, 1.2)
   // finale: the case drops away and the logo returns
-    .to(st, {caseX: 0, caseY: -7, glow: 0, duration: 1}, 3.7)
-    .to(st, {tmScroll: 1, tmY: () => (m() ? 1.45 : 1.4), tmScale: () => (m() ? .95 : .78), duration: 1}, 4.0);
+    .to(st, {caseX: 0, caseY: -7, glow: 0, duration: 1}, 2.0)
+    .to(st, {tmScroll: 1, tmY: () => (m() ? 1.45 : 1.4), tmScale: () => (m() ? .95 : .78), duration: 1}, 2.3);
 
   gsap.utils.toArray('.s1 .reveal, .s4 .reveal').forEach(el => gsap.to(el, {opacity: 1, y: 0, duration: 1, ease: 'power3.out',
     scrollTrigger: {trigger: el.closest('section'), start: 'top 55%', toggleActions: 'play none none reverse'}}));
-  gsap.to('#panel', {opacity: 1, y: 0, duration: .9, ease: 'power3.out', scrollTrigger: {trigger: '.s3', start: 'top 30%', end: 'bottom 70%', toggleActions: 'play reverse play reverse'}});
 }
 
 /* ---------------- Boot ---------------- */
