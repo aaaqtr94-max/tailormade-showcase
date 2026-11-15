@@ -32,7 +32,7 @@ html{background:#fff} body{background:transparent} /* body must not paint over t
 .film,.film-shade,.film-veil{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
 .film{z-index:-3;object-fit:cover;background:#2b2523}
 .film-shade{z-index:-2;background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,.12) 45%,rgba(0,0,0,.38) 100%)}
-.film-veil{z-index:-1;background:#fff;opacity:.86}
+.film-veil{z-index:-1;background:#fff;opacity:.72}
 .ann,.hdr,main,.news,.foot,.legal{position:relative}
 .ann{z-index:31}
 body.on-film .ann,body.on-film .hdr{background:transparent;color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none}
@@ -108,11 +108,52 @@ main.leaving{opacity:0;transform:translateY(8px)}
 .cue i{width:1px;height:42px;background:linear-gradient(#000,transparent);animation:cue 2s ease-in-out infinite;transform-origin:top}
 @keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
-/* ---------- home: the store's hero image ---------- */
-.hero{position:relative;height:clamp(420px,53vw,860px);overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s var(--ease)}
-.hero.in img{transform:none}
-.hero p{position:absolute;left:var(--gx);bottom:28px;max-width:440px;color:#fff;font-style:italic;font-size:14px;line-height:1.4;text-shadow:0 1px 12px rgba(0,0,0,.25)}
+/* ---------- product page (as on the store's /products/… page) ---------- */
+.pp{display:grid;grid-template-columns:minmax(0,62fr) minmax(0,38fr);gap:48px;align-items:start;padding:40px var(--gxr) 72px var(--gx)}
+.pp-gallery{min-width:0}
+.pp-main{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:10px;background:#fff}
+.pp-main::-webkit-scrollbar{display:none}
+.pp-main img{flex:0 0 100%;width:100%;aspect-ratio:1/1;object-fit:cover;scroll-snap-align:start}
+.pp-dots{display:none;justify-content:center;gap:6px;margin-top:14px}
+.pp-dots i{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.2);transition:background .2s}
+.pp-dots i.on{background:#000}
+.pp-thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}
+.pp-thumbs button{border-radius:8px;overflow:hidden;background:#fff;outline:1px solid transparent;outline-offset:-1px;transition:outline-color .2s}
+.pp-thumbs button[aria-pressed="true"]{outline-color:#000}
+.pp-thumbs img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.pp-info{position:sticky;top:96px;display:flex;flex-direction:column;gap:20px;min-width:0}
+.pp-title{font-family:var(--serif);font-weight:400;font-size:48px;line-height:1.1;text-wrap:balance}
+.pp-price{font-size:24px;line-height:1.2}
+.pp-opts{border:0;display:flex;flex-wrap:wrap;gap:8px}
+.pp-opts legend{font-size:14px;margin-bottom:10px;padding:0}
+.pp-opts button{min-height:44px;padding:0 20px;border-radius:100px;border:1px solid rgba(0,0,0,.2);background:#fff;font-size:14px;transition:background .2s,color .2s,border-color .2s}
+.pp-opts button[aria-pressed="true"]{background:#000;color:#fff;border-color:#000}
+.pp-opts button.off{color:rgba(0,0,0,.45);text-decoration:line-through}
+.pp-opts button.off[aria-pressed="true"]{color:rgba(255,255,255,.7)}
+.pp-buy{display:flex;gap:10px}
+.qty{display:flex;align-items:center;height:52px;border:1px solid rgba(0,0,0,.2);border-radius:100px;background:#fff}
+.qty button{width:44px;height:100%;font-size:18px}
+.qty span{min-width:22px;text-align:center;font-size:15px}
+.pp-add,.pp-now{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:100px;font-size:15px}
+.pp-add{background:#000;color:#fff}
+.pp-add svg{width:20px;height:20px}
+.pp-add.off{background:#f1f1f1;color:rgba(0,0,0,.5);cursor:not-allowed}
+.pp-now{flex:none;border:1px solid #000;background:#fff;color:#000}
+.pp-add,.pp-now{transition:opacity .2s}
+.pp-add:hover,.pp-now:hover{opacity:.85}
+.pp-acc{border-top:1px solid var(--line)}
+.pp-acc:last-child{border-bottom:1px solid var(--line)}
+.pp-acc summary{list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:56px;cursor:pointer;font-size:15px}
+.pp-acc summary::-webkit-details-marker{display:none}
+.pp-acc summary i{position:relative;width:12px;height:12px}
+.pp-acc summary i::before,.pp-acc summary i::after{content:"";position:absolute;left:0;top:5.5px;width:12px;height:1px;background:#000;transition:transform .25s}
+.pp-acc summary i::after{transform:rotate(90deg)}
+.pp-acc[open] summary i::after{transform:rotate(0)}
+.pp-acc p,.pp-body{color:rgba(0,0,0,.75);font-size:14px;line-height:1.6;padding-bottom:18px}
+.pp-acc p+p{margin-top:-6px}
+.pp-body p{padding:0;margin:0 0 10px}
+.related{padding-top:24px}
+.related .shop-title{font-size:clamp(34px,4.4vw,52px);margin-bottom:32px}
 
 /* ---------- reveal on scroll ---------- */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform 1s var(--ease)}
@@ -206,7 +247,12 @@ main.leaving{opacity:0;transform:translateY(8px)}
   .lb-stage{padding:calc(70px + env(safe-area-inset-top,0px)) 12px calc(120px + env(safe-area-inset-bottom,0px))}
   .lb-nav{top:auto;bottom:calc(84px + env(safe-area-inset-bottom,0px));margin:0}
   .lb-info{flex-direction:column;align-items:flex-start}
-  .hero p{left:16px;right:16px}
+  .pp{grid-template-columns:1fr;gap:24px;padding:0 0 48px}
+  .pp-main{border-radius:0}
+  .pp-dots{display:flex}
+  .pp-thumbs{display:none}
+  .pp-info{position:static;padding:0 var(--gxr) 0 var(--gx)}
+  .pp-title{font-size:36px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
@@ -330,8 +376,15 @@ const FEATURED = ['iphone-17-tailormade-x-alosttraveler', 'pepita-houndstooth-fa
 // Snapshot of every product (2026-11-15), used until live data arrives or if the store can't be reached
 // [title, handle, created_at, price, available, variant count, image file]
 const SNAPSHOT = [["Full Baby Blue Alcantara | iPhone 16 Series","iphone-16-full-alcantara-baby-blue-copy","2026-07-20T19:45:24",240,1,2,"B23E0D32-72C3-4D4B-9B73-4D8837A27921.jpg?v=1791099774"],["Full Baby Blue Alcantara | iPhone 17 Series","iphone-17-full-alcantara-baby-blue","2026-07-20T19:10:07",240,1,3,"IMG-3927.jpg?v=1791100496"],["Full Baby Blue Alcantara | iPhone 18 Series","full-baby-blue-alcantara-iphone-18-series","2026-10-06T14:42:25",240,1,2,"IMG-3927.jpg?v=1791100496"],["Full Baby Blue Alcantara | iPhone Air Series","full-baby-blue-alcantara-iphone-air-series","2026-07-20T19:16:39",240,1,1,"IMG-3929.jpg?v=1791098290"],["Full Black Alcantara | iPhone 16 Series","iphone-16-full-alcantara-black","2026-07-20T19:47:08",240,1,2,"EC31140C-30AD-4CB3-B351-7CB9DE78C243.jpg?v=1791099709"],["Full Black Alcantara | iPhone 17 Series","iphone-17-full-alcantara-black","2026-07-14T20:35:02",240,1,3,"4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632"],["Full Black Alcantara | iPhone 18 Series","full-black-alcantara-iphone-18-series","2026-10-06T14:46:46",240,1,2,"4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632"],["Full Black Alcantara | iPhone Air Series","iphone-air-full-alcantara-black","2026-07-19T10:50:19",240,1,1,"IMG-4827.png?v=1791098183"],["Full Pink Alcantara | iPhone 16 Series","iphone-16-full-alcantara-pink","2026-07-20T19:46:40",240,1,2,"IMG-3925.jpg?v=1791099742"],["Full Pink Alcantara | iPhone 17 Series","iphone-17-alcantara-phone-cases","2026-07-14T20:20:54",240,1,3,"12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100"],["Full Pink Alcantara | iPhone 18 Series","full-pink-alcantara-iphone-18-series","2026-10-06T14:47:46",240,1,2,"12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100"],["Full Pink Alcantara | iPhone Air Series","full-pink-alcantara-iphone-air-series","2026-07-20T19:15:58",240,1,1,"IMG-3924.jpg?v=1791098321"],["Grey Tartan Check | Beige & Black","highland-watch-roll-tartan-edition","2026-05-05T15:44:26",820,1,1,"3.2_10ee5926-3276-4fb0-8900-a8a597ec44d3.jpg?v=1777985050"],["iPhone 15 HFC | Burgundy (Edition ll)","houndstooth-fabric-iphone-15-cases-burgundy-edition-ll","2026-04-30T13:35:31",325,1,2,"15_pro_max_02_b5048119-7b55-4e25-80f2-b0df4b34e33e.jpg?v=1791282236"],["iPhone 15 HFC | Grey","houndstooth-fabric-iphone-15-case-premium-style-protection-copy-2","2025-02-06T14:13:47",300,1,2,"Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802"],["iPhone 15 HFC | Grey (Edition II)","iphone-15-cases-houndstooth-fabric-grey-edition-ii","2026-07-20T19:51:03",325,1,2,"IMG-3921.jpg?v=1791099671"],["iPhone 15 HFC | Navy (Edition II)","houndstooth-fabric-iphone-15-cases-navy-edition-ll","2026-04-30T13:48:51",325,1,2,"15_pro_max_01_b2d77a26-eb38-4dd7-b458-e163b92a10fa.jpg?v=1791282209"],["iPhone 15 HFC | Tan (Edition II)","houndstooth-fabric-iphone-15-cases-tan-edition-ll","2026-04-30T13:52:50",325,1,2,"15_pro_max_03_20d31e75-6406-4318-8e1b-17d1cc5e0c69.jpg?v=1791282176"],["iPhone 16 HFC | Burgundy (Edition II)","houndstooth-fabric-iphone-16-cases-burgundy-edition-ll","2026-04-30T14:02:57",325,1,2,"16_pro_max_02_1a0984ac-b17c-4cba-9cf5-5922148f029d.jpg?v=1791100069"],["iPhone 16 HFC | Grey","houndstooth-fabric-iphone-15-case-premium-style-protection-copy-1","2025-02-06T14:13:38",300,1,2,"Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802"],["iPhone 16 HFC | Grey (Edition II)","iphone-16-cases-houndstooth-fabric-grey-edition-ii","2026-07-22T11:58:30",325,1,2,"IMG-3921.jpg?v=1791099671"],["iPhone 16 HFC | Navy (Edition II)","houndstooth-fabric-iphone-16-cases-navy-edition-ll","2026-04-30T14:05:31",325,1,2,"16_pro_max_01_a22f3f71-f6c2-4dd7-a17d-03870876bd3f.jpg?v=1791100022"],["iPhone 16 HFC | Tan (Edition II)","houndstooth-fabric-iphone-16-cases-tan-edition-ll","2026-04-30T14:08:05",325,1,2,"16_pro_max_03_1c7a2370-a516-4a8e-b406-9defabbcfaaa.jpg?v=1791099918"],["iPhone 17 HFC | 4 Colors","iphone-17-cases-houndstooth-fabric-all-colors","2026-07-23T20:02:50",325,1,4,"46577F38-8BBD-4D38-8A0C-78A2665767A0.jpg?v=1791098833"],["iPhone 17 HFC | Burgundy (Edition ll)","houndstooth-fabric-iphone-17-cases-maroon-edition-ll","2026-04-30T11:23:28",325,0,2,"17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648"],["iPhone 17 HFC | Grey (Edition ll)","iphone-17-cases-houndstooth-fabric-grey-edition-ll","2026-07-22T13:03:19",325,0,2,"IMG-3938.png?v=1791098558"],["iPhone 17 HFC | Navy (Edition ll)","houndstooth-fabric-iphone-17-cases-navy-edition-ll","2026-04-30T11:18:24",325,0,2,"17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935"],["iPhone 17 HFC | Tan (Edition II)","houndstooth-fabric-iphone-17-cases-tan-edition-ll","2026-04-30T11:09:43",325,0,2,"17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068"],["iPhone 18 HFC | Burgundy (Edition ll)","iphone-18-hfc-burgundy-edition-ll","2026-10-06T14:50:30",325,0,2,"17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648"],["iPhone 18 HFC | Grey (Edition ll)","iphone-18-hfc-grey-edition-ll-copy","2026-11-03T15:36:29",325,0,2,"IMG-3938.png?v=1791098558"],["iPhone 18 HFC | Navy (Edition ll)","iphone-18-hfc-navy-edition-ll","2026-10-06T14:49:15",325,0,2,"17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935"],["iPhone 18 HFC | Tan (Edition II)","iphone-18-hfc-tan-edition-ii","2026-10-06T22:07:50",325,0,2,"17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068"],["iPhone Air HFC | Burgundy (Edition II)","houndstooth-fabric-iphone-17-air-case-burgundy","2026-04-30T11:47:27",325,1,1,"IMG-5039.png?v=1792185675"],["iPhone Air HFC | Grey (Edition II)","houndstooth-fabric-iphone-17-air-case-grey","2026-04-30T12:37:27",325,1,1,"17air04.2.jpg?v=1791282046"],["iPhone Air HFC | Navy (Edition ll)","houndstooth-fabric-iphone-17-air-case-navy","2026-04-30T11:50:46",325,1,1,"17air01.jpg?v=1791098435"],["iPhone Air HFC | Tan (Edition ll)","houndstooth-fabric-iphone-17-air-case-tan","2026-04-30T12:07:40",325,1,1,"17air03.jpg?v=1791098394"],["Pepita Houndstooth | Black & White","pepita-houndstooth-fabric","2026-05-05T15:30:36",820,1,1,"1.2.jpg?v=1777982566"],["Pepita Houndstooth | Navy & Green","pepita-houndstooth-fabric-navy-green","2026-05-05T15:42:50",820,1,1,"2.2_312f2f9e-34fd-4a96-806f-f792e68dc217.jpg?v=1777984939"],["TAILORMADE X ALOSTTRAVELER | iPhone 15 Series","iphone-15-tailormade-x-alosttraveler","2026-07-14T23:25:17",325,1,2,"IMG-0675.png?v=1791282320"],["TAILORMADE X ALOSTTRAVELER | iPhone 16 Series","iphone-16-tailormade-x-alosttraveler","2026-07-14T23:21:49",325,1,2,"BFDF1180-CE0F-44EA-A6CF-8803D71196F4.png?v=1791099876"],["TAILORMADE X ALOSTTRAVELER | iPhone 17 Series","iphone-17-tailormade-x-alosttraveler","2026-07-14T20:41:55",325,1,3,"IMG-0673.png?v=1791099401"],["TAILORMADE X ALOSTTRAVELER | iPhone 18 Series","tailormade-x-alosttraveler-iphone-18-series","2026-10-06T14:51:49",325,1,2,"IMG-0673.png?v=1791099401"],["TAILORMADE X ALOSTTRAVELER | iPhone Air Series","iphone-air-tailormade-x-alosttraveler","2026-07-19T11:04:13",325,1,1,"A4489F84-D27C-4284-A4CF-D9E40CAFA17F.png?v=1791098250"]];
-const ALL = SNAPSHOT.map(([title, handle, created, price, available, variants, file], i) =>
-  ({title, handle, created, price, available: !!available, image: file ? CDN + file : '', images: file ? [CDN + file] : [], order: i}));
+/* STORE-DATA:START */
+const DOCS = {"iphone-16-full-alcantara-baby-blue-copy":{"o":"Series","v":[[59845708251217,"16 Pro",1,240],[59845708283985,"16 Pro Max",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/B23E0D32-72C3-4D4B-9B73-4D8837A27921.jpg?v=1791099774"],"d":""},"iphone-17-full-alcantara-baby-blue":{"o":"Series","v":[[59845682790481,"17 Pro",1,240],[59845682823249,"17 Pro Max",1,240],[59845682856017,"iPhone 17",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3927.jpg?v=1791100496"],"d":""},"full-baby-blue-alcantara-iphone-18-series":{"o":"Series","v":[[62824256929873,"18 Pro",1,240],[62824256962641,"18 Pro Max",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3927.jpg?v=1791100496"],"d":""},"full-baby-blue-alcantara-iphone-air-series":{"o":"Title","v":[[59845684199505,"Default Title",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3929.jpg?v=1791098290"],"d":""},"iphone-16-full-alcantara-black":{"o":"Series","v":[[59845709430865,"16 Pro",1,240],[59845709463633,"16 Pro Max",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/EC31140C-30AD-4CB3-B351-7CB9DE78C243.jpg?v=1791099709"],"d":""},"iphone-17-full-alcantara-black":{"o":"Series","v":[[59805896736849,"17 Pro",1,240],[59805896769617,"17 Pro Max",1,240],[59805896802385,"iPhone 17",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632"],"d":""},"full-black-alcantara-iphone-18-series":{"o":"Series","v":[[62824257978449,"18 Pro",1,240],[62824258011217,"18 Pro Max",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632"],"d":""},"iphone-air-full-alcantara-black":{"o":"Title","v":[[59841856438353,"Default Title",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-4827.png?v=1791098183"],"d":""},"iphone-16-full-alcantara-pink":{"o":"Series","v":[[59845709201489,"16 Pro",1,240],[59845709234257,"16 Pro Max",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3925.jpg?v=1791099742"],"d":""},"iphone-17-alcantara-phone-cases":{"o":"Series","v":[[59805817765969,"17 Pro",1,240],[59805817798737,"17 Pro Max",1,240],[60076965331025,"iPhone 17",0,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100"],"d":""},"full-pink-alcantara-iphone-18-series":{"o":"Series","v":[[62824258437201,"18 Pro",1,240],[62824258469969,"18 Pro Max",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100"],"d":""},"full-pink-alcantara-iphone-air-series":{"o":"Title","v":[[59845684068433,"Default Title",1,240]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3924.jpg?v=1791098321"],"d":""},"highland-watch-roll-tartan-edition":{"o":"Title","v":[[59464804401233,"Default Title",1,820]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/3.2_10ee5926-3276-4fb0-8900-a8a597ec44d3.jpg?v=1777985050","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/3_6fc82afe-adbc-400a-9aaf-6b460a5ce7d3.jpg?v=1777985049","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/3.4.jpg?v=1777985049","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/3.3.jpg?v=1777985049"],"d":"<p>The Grey Tartan Check Fabric &amp; Grey Leather Watch Roll blends classic tartan fabric with refined grey leather accents. Designed to hold up to three watches, it features a soft charcoal suede lining, cushioned compartments, and an embroidered “TM” monogram for secure and stylish storage on the go.</p>\n<p>Please note that layout variations may differ from the version shown in the product images.<br></p>"},"houndstooth-fabric-iphone-15-cases-burgundy-edition-ll":{"o":"Series","v":[[59442665619537,"15 Pro",1,325],[59442665652305,"15 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/15_pro_max_02_b5048119-7b55-4e25-80f2-b0df4b34e33e.jpg?v=1791282236"],"d":""},"houndstooth-fabric-iphone-15-case-premium-style-protection-copy-2":{"o":"Series","v":[[59020405014609,"15 Pro",1,300],[59020405047377,"15 Pro Max",0,300]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802"],"d":""},"iphone-15-cases-houndstooth-fabric-grey-edition-ii":{"o":"Series","v":[[59845712052305,"15 Pro",1,325],[59845712085073,"15 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3921.jpg?v=1791099671"],"d":""},"houndstooth-fabric-iphone-15-cases-navy-edition-ll":{"o":"Series","v":[[59442697338961,"15 Pro",1,325],[59442697371729,"15 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/15_pro_max_01_b2d77a26-eb38-4dd7-b458-e163b92a10fa.jpg?v=1791282209"],"d":""},"houndstooth-fabric-iphone-15-cases-tan-edition-ll":{"o":"Series","v":[[59442703532113,"15 Pro",1,325],[59442703564881,"15 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/15_pro_max_03_20d31e75-6406-4318-8e1b-17d1cc5e0c69.jpg?v=1791282176"],"d":"<p><br></p>"},"houndstooth-fabric-iphone-16-cases-burgundy-edition-ll":{"o":"Series","v":[[59442717327441,"16 Pro",1,325],[59442717360209,"16 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/16_pro_max_02_1a0984ac-b17c-4cba-9cf5-5922148f029d.jpg?v=1791100069"],"d":""},"houndstooth-fabric-iphone-15-case-premium-style-protection-copy-1":{"o":"Series","v":[[59104379830353,"16 Pro",1,300],[59104379863121,"16 Pro Max",0,300]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802"],"d":""},"iphone-16-cases-houndstooth-fabric-grey-edition-ii":{"o":"Series","v":[[59850581901393,"16 Pro",1,325],[59850581934161,"16 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3921.jpg?v=1791099671"],"d":""},"houndstooth-fabric-iphone-16-cases-navy-edition-ll":{"o":"Series","v":[[59442721357905,"16 Pro",1,325],[59442721390673,"16 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/16_pro_max_01_a22f3f71-f6c2-4dd7-a17d-03870876bd3f.jpg?v=1791100022"],"d":""},"houndstooth-fabric-iphone-16-cases-tan-edition-ll":{"o":"Series","v":[[59442724798545,"16 Pro",1,325],[59442724831313,"16 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/16_pro_max_03_1c7a2370-a516-4a8e-b406-9defabbcfaaa.jpg?v=1791099918"],"d":"<p> </p>\n<p> </p>"},"iphone-17-cases-houndstooth-fabric-all-colors":{"o":"Series","v":[[59856328228945,"Navy",1,325],[59856328261713,"Tan",1,325],[59856328294481,"Grey",1,325],[60012075090001,"Burgundy",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/46577F38-8BBD-4D38-8A0C-78A2665767A0.jpg?v=1791098833","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-4047.jpg?v=1793270660","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/0F148EDF-63F7-4014-BA65-1418D455ABB6.jpg?v=1785751109","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/82070042-DDFB-4725-A89D-4BF55DD895D7.jpg?v=1786216515"],"d":""},"houndstooth-fabric-iphone-17-cases-maroon-edition-ll":{"o":"Series","v":[[59441238900817,"17 Pro",0,325],[59441238933585,"17 Pro Max",0,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648"],"d":""},"iphone-17-cases-houndstooth-fabric-grey-edition-ll":{"o":"Series","v":[[59850632396881,"17 Pro",0,325],[59850632429649,"17 Pro Max",0,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3938.png?v=1791098558"],"d":""},"houndstooth-fabric-iphone-17-cases-navy-edition-ll":{"o":"Series","v":[[59441223467089,"17 Pro",0,325],[59441223499857,"17 Pro Max",0,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935"],"d":""},"houndstooth-fabric-iphone-17-cases-tan-edition-ll":{"o":"Series","v":[[59441194172497,"17 Pro",0,325],[59441194205265,"17 Pro Max",0,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068"],"d":""},"iphone-18-hfc-burgundy-edition-ll":{"o":"Series","v":[[62824267022417,"18 Pro",0,325],[62824267055185,"18 Pro Max",0,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648"],"d":""},"iphone-18-hfc-grey-edition-ll-copy":{"o":"Series","v":[[63392286015569,"18 Pro",0,325],[63392286048337,"18 Pro Max",0,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3938.png?v=1791098558"],"d":""},"iphone-18-hfc-navy-edition-ll":{"o":"Series","v":[[62824258994257,"18 Pro",0,325],[62824259027025,"18 Pro Max",0,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935"],"d":""},"iphone-18-hfc-tan-edition-ii":{"o":"Series","v":[[62827181965393,"18 Pro",0,325],[62827181998161,"18 Pro Max",0,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068"],"d":""},"houndstooth-fabric-iphone-17-air-case-burgundy":{"o":"Title","v":[[59441347067985,"Default Title",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-5039.png?v=1792185675"],"d":""},"houndstooth-fabric-iphone-17-air-case-grey":{"o":"Title","v":[[59442010783825,"Default Title",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17air04.2.jpg?v=1791282046"],"d":""},"houndstooth-fabric-iphone-17-air-case-navy":{"o":"Title","v":[[59441395335249,"Default Title",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17air01.jpg?v=1791098435"],"d":""},"houndstooth-fabric-iphone-17-air-case-tan":{"o":"Title","v":[[59441600528465,"Default Title",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17air03.jpg?v=1791098394"],"d":""},"pepita-houndstooth-fabric":{"o":"Title","v":[[59464771666001,"Default Title",1,820]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/1.2.jpg?v=1777982566","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/1_dd4a80d8-920e-4b5b-a225-bc1898733fda.jpg?v=1780480670","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/1.4.jpg?v=1777982566","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/1.3.jpg?v=1777982566"],"d":"<div class=\"desc-text\">\n<p data-start=\"69\" data-end=\"260\">Meet your new travel essential — <strong>the Pepita Houndstooth Fabric (Black &amp; White) &amp; Tan Leather Watch Roll</strong>. Designed to hold up to three watches, it features a timeless black-and-white houndstooth exterior with refined cognac leather accents.</p>\n<p data-start=\"262\" data-end=\"427\">Inside, a soft terracotta suede lining and padded cushions keep your timepieces protected and secure, while gold-tone snap closures ensure everything stays in place.</p>\n<p data-start=\"429\" data-end=\"526\">Perfect for travel or display, the Pepita Houndstooth Fabric is crafted for those who appreciate thoughtful detail.</p>\n</div>"},"pepita-houndstooth-fabric-navy-green":{"o":"Title","v":[[59464798371921,"Default Title",1,820]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/2.2_312f2f9e-34fd-4a96-806f-f792e68dc217.jpg?v=1777984939","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/2_986e8eb7-cae1-4efe-b493-eaf161367a60.jpg?v=1777984939","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/2.4.jpg?v=1777984952","https://cdn.shopify.com/s/files/1/0625/1098/9393/files/2.3.jpg?v=1777984939"],"d":"<p>The Pepita Houndstooth Fabric (Navy &amp; Green) &amp; Green Leather Watch Roll pairs classic houndstooth tweed with green leather accents. Designed for up to three watches, it features a soft suede lining, cushioned compartments, and an embossed “TM” monogram.<br></p>"},"iphone-15-tailormade-x-alosttraveler":{"o":"Series","v":[[59807065669713,"15 Pro",1,325],[59807065702481,"15 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-0675.png?v=1791282320"],"d":""},"iphone-16-tailormade-x-alosttraveler":{"o":"Series","v":[[59807024513105,"16 Pro",1,325],[59807024545873,"16 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/BFDF1180-CE0F-44EA-A6CF-8803D71196F4.png?v=1791099876"],"d":""},"iphone-17-tailormade-x-alosttraveler":{"o":"Series","v":[[59805941825617,"17 Pro",1,325],[59805941858385,"17 Pro Max",1,325],[59841861582929,"iPhone 17",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-0673.png?v=1791099401"],"d":""},"tailormade-x-alosttraveler-iphone-18-series":{"o":"Series","v":[[62824278327377,"18 Pro",1,325],[62824278360145,"18 Pro Max",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-0673.png?v=1791099401"],"d":""},"iphone-air-tailormade-x-alosttraveler":{"o":"Title","v":[[59841858404433,"Default Title",1,325]],"i":["https://cdn.shopify.com/s/files/1/0625/1098/9393/files/A4489F84-D27C-4284-A4CF-D9E40CAFA17F.png?v=1791098250"],"d":""}};
+/* STORE-DATA:END */
+const ALL = SNAPSHOT.map(([title, handle, created, price, available, variants, file], i) => {
+  const d = DOCS[handle];
+  const imgs = d && d.i.length ? d.i : (file ? [CDN + file] : []);
+  return {title, handle, created, price, available: !!available, image: file ? CDN + file : (imgs[0] || ''), images: imgs, order: i,
+    option: d ? d.o : '', body: d ? d.d : '', variants: d ? d.v.map(([id, t, ok, pr]) => ({id, title: t, available: !!ok, price: pr})) : null};
+});
 const BY_HANDLE = new Map(ALL.map(p => [p.handle, p]));
 const liveCache = new Map();
 
@@ -350,7 +403,8 @@ function liveFor(page){
   const pr = fetch(`${STORE}/collections/${page.handle}/products.json?limit=250`).then(r => r.ok ? r.json() : Promise.reject())
     .then(d => {
       let list = d.products.map((p, i) => ({title: p.title, handle: p.handle, created: (p.created_at || '').slice(0, 19), price: parseFloat(p.variants[0].price),
-        available: p.variants.some(v => v.available), image: p.images[0] ? p.images[0].src : '', images: p.images.map(m => m.src), order: i}));
+        available: p.variants.some(v => v.available), image: p.images[0] ? p.images[0].src : '', images: p.images.map(m => m.src), order: i,
+        option: (p.options && p.options[0] && p.options[0].name) || '', body: (p.body_html || '').trim(), variants: p.variants.map(v => ({id: v.id, title: v.title, available: v.available, price: parseFloat(v.price)}))}));
       if (page.order) { // keep the store's order for this collection; anything new goes last
         const rank = new Map(page.order.map((h, i) => [h, i]));
         list.sort((a, b) => (rank.has(a.handle) ? rank.get(a.handle) : 1e3 + a.order) - (rank.has(b.handle) ? rank.get(b.handle) : 1e3 + b.order));
@@ -368,7 +422,7 @@ const hdr = document.getElementById('hdr');
 const moreBtn = document.getElementById('moreBtn'), mega = document.getElementById('mega');
 document.getElementById('megaLinks').innerHTML = MORE.map(k => `<a href="#${k}">${PAGES[k].title}</a>`).join('');
 document.getElementById('megaFeat').innerHTML = FEATURED.map(h => BY_HANDLE.get(h)).filter(Boolean).map(p =>
-  `<a href="#best-selling" data-feature="${p.handle}"><div class="m"><img src="${sized(p.image, 400)}" alt="" loading="lazy"></div><p>${esc(p.title)}</p></a>`).join('');
+  `<a href="#p-${p.handle}" data-feature="${p.handle}"><div class="m"><img src="${sized(p.image, 400)}" alt="" loading="lazy"></div><p>${esc(p.title)}</p></a>`).join('');
 const setMega = open => { mega.classList.toggle('open', open); moreBtn.setAttribute('aria-expanded', open); };
 moreBtn.addEventListener('click', () => setMega(!mega.classList.contains('open')));
 hdr.addEventListener('mouseleave', () => setMega(false));
@@ -389,6 +443,84 @@ addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 10),
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin: '0px 0px -8% 0px'});
 const watch = root => root.querySelectorAll('.rv, .pc, .hero').forEach((el, i) => { if (el.classList.contains('pc')) el.style.transitionDelay = (i % 4) * 60 + 'ms'; io.observe(el); });
 watch(document);
+
+/* ======================= Product card (same as the store: opens the product page) ======================= */
+function cardHTML(p, k){
+  const url = '#p-' + p.handle;
+  return `<li class="pc" data-k="${k}">
+    <a class="pc-link" href="${url}" aria-label="${esc(p.title)}"></a>
+    <div class="pc-media">
+      ${p.image ? `<img src="${sized(p.image, 500)}" srcset="${sized(p.image, 360)} 360w, ${sized(p.image, 500)} 500w, ${sized(p.image, 720)} 720w, ${sized(p.image, 1000)} 1000w" sizes="(max-width:749px) 50vw, 25vw" alt="${esc(p.title)}" loading="lazy" decoding="async" width="500" height="500">` : ''}
+      ${p.available ? '' : '<span class="pc-badge">Sold out</span>'}
+      <a class="pc-add" href="${url}" aria-label="Choose ${esc(p.title)}">${bagIcon}</a>
+    </div>
+    <div class="pc-info"><p class="pc-title">${esc(p.title)}</p><p class="pc-price">${fmt(p.price)}</p></div>
+  </li>`;
+}
+
+/* ======================= Product page (layout measured from the store's product page) ======================= */
+const DETAILS = 'This product is crafted with quality materials to ensure durability and performance. Designed with your convenience in mind, it seamlessly fits into your everyday life.';
+const SHIPPING = ['We strive to process and ship all orders in a timely manner, working diligently to ensure that your items are on their way to you as soon as possible.',
+  'We are committed to ensuring a positive shopping experience for all our customers. If for any reason you wish to return an item, we invite you to reach out to our team for assistance, and we will evaluate every return request with care and consideration.'];
+function productPage(handle){
+  const f = document.createDocumentFragment();
+  const sec = document.createElement('section');
+  sec.className = 'pp';
+  f.appendChild(sec);
+  const rel = document.createElement('section');
+  rel.className = 'shop related';
+  rel.innerHTML = `<div class="shop-head"><h2 class="shop-title rv">Shop The Full Collection</h2></div><ul class="grid"></ul>`;
+  f.appendChild(rel);
+
+  let p = BY_HANDLE.get(handle), vIdx = 0, imgIdx = 0, qty = 1;
+  function draw(){
+    if (!p) { sec.innerHTML = `<p class="empty">This product could not be found. <a href="#shop">Back to all products</a></p>`; return; }
+    const vs = p.variants && p.variants.length ? p.variants : null;
+    if (vs && !vs[vIdx]) vIdx = 0;
+    if (vs && vIdx === 0 && !vs[0].available) { const firstOk = vs.findIndex(v => v.available); if (firstOk > 0) vIdx = firstOk; }
+    const v = vs ? vs[vIdx] : null, ok = v ? v.available : p.available, price = v ? v.price : p.price;
+    const imgs = p.images.length ? p.images : [p.image];
+    const showOpts = vs && !(vs.length === 1 && /default title/i.test(vs[0].title));
+    sec.innerHTML = `
+      <div class="pp-gallery">
+        <div class="pp-main" id="ppMain">${imgs.map((src, i) => `<img src="${sized(src, 1200)}" srcset="${sized(src, 600)} 600w, ${sized(src, 900)} 900w, ${sized(src, 1400)} 1400w" sizes="(max-width:749px) 100vw, 62vw" alt="${esc(p.title)}${imgs.length > 1 ? ' – image ' + (i + 1) : ''}" ${i ? 'loading="lazy"' : ''} data-i="${i}">`).join('')}</div>
+        ${imgs.length > 1 ? `<div class="pp-dots" aria-hidden="true">${imgs.map((_, i) => `<i class="${i === imgIdx ? 'on' : ''}"></i>`).join('')}</div>
+        <div class="pp-thumbs">${imgs.map((src, i) => `<button data-i="${i}" aria-label="Show image ${i + 1}" aria-pressed="${i === imgIdx}"><img src="${sized(src, 400)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}
+      </div>
+      <div class="pp-info">
+        <h1 class="pp-title">${esc(p.title)}</h1>
+        <p class="pp-price">${fmt(price)}</p>
+        ${showOpts ? `<fieldset class="pp-opts"><legend>${esc(p.option || 'Option')}</legend>${vs.map((x, i) => `<button type="button" data-v="${i}" aria-pressed="${i === vIdx}" class="${x.available ? '' : 'off'}">${esc(x.title)}</button>`).join('')}</fieldset>` : ''}
+        ${v ? `<div class="pp-buy">
+          <div class="qty" role="group" aria-label="Quantity"><button type="button" data-q="-1" aria-label="Decrease quantity">−</button><span aria-live="polite">${qty}</span><button type="button" data-q="1" aria-label="Increase quantity">+</button></div>
+          ${ok ? `<a class="pp-add" href="${STORE}/cart/add?id=${v.id}&quantity=${qty}">${bagIcon}<span>Add to cart</span></a>` : `<span class="pp-add off" aria-disabled="true">Sold out</span>`}
+        </div>
+        ${ok ? `<a class="pp-now" href="${STORE}/cart/${v.id}:${qty}">Buy it now</a>` : ''}` : `<a class="pp-add" href="${STORE}/products/${p.handle}">View on store</a>`}
+        <details class="pp-acc"><summary>Details<i aria-hidden="true"></i></summary>${p.body ? `<div class="pp-body">${p.body}</div>` : `<p>${DETAILS}</p>`}</details>
+        <details class="pp-acc"><summary>Shipping &amp; Returns<i aria-hidden="true"></i></summary><p>${SHIPPING[0]}</p><p>${SHIPPING[1]}</p></details>
+      </div>`;
+    const mainEl = sec.querySelector('#ppMain');
+    const goImg = i => { imgIdx = i; mainEl.scrollTo({left: mainEl.clientWidth * i, behavior: reduce ? 'auto' : 'smooth'});
+      sec.querySelectorAll('.pp-thumbs button').forEach((b, k) => b.setAttribute('aria-pressed', k === i));
+      sec.querySelectorAll('.pp-dots i').forEach((d, k) => d.classList.toggle('on', k === i)); };
+    mainEl.addEventListener('scroll', () => { const i = Math.round(mainEl.scrollLeft / mainEl.clientWidth); if (i !== imgIdx) { imgIdx = i; sec.querySelectorAll('.pp-dots i').forEach((d, k) => d.classList.toggle('on', k === i)); sec.querySelectorAll('.pp-thumbs button').forEach((b, k) => b.setAttribute('aria-pressed', k === i)); } }, {passive: true});
+    if (imgIdx) requestAnimationFrame(() => mainEl.scrollTo({left: mainEl.clientWidth * imgIdx}));
+    sec.querySelectorAll('.pp-thumbs button').forEach(b => b.addEventListener('click', () => goImg(+b.dataset.i)));
+    sec.querySelectorAll('.pp-opts button').forEach(b => b.addEventListener('click', () => { vIdx = +b.dataset.v; draw(); }));
+    sec.querySelectorAll('.qty button').forEach(b => b.addEventListener('click', () => { qty = Math.max(1, qty + +b.dataset.q); draw(); }));
+  }
+  draw();
+  document.title = (p ? p.title : 'Product') + ' – TAILORMADE';
+  const relGrid = rel.querySelector('.grid');
+  const fillRel = list => { relGrid.innerHTML = list.filter(x => x.handle !== handle).slice(0, 8).map(cardHTML).join(''); watch(relGrid); };
+  fillRel(snapshotFor(PAGES.shop));
+  liveFor(PAGES.shop).then(list => {
+    const live = list.find(x => x.handle === handle);
+    if (live) { p = live; draw(); document.title = p.title + ' – TAILORMADE'; }
+    fillRel(list);
+  }).catch(() => {});
+  return f;
+}
 
 /* ======================= Products block ======================= */
 function productsBlock(page, opts = {}){
@@ -431,18 +563,7 @@ function productsBlock(page, opts = {}){
     view = items.slice().sort(sorters[sel.value] || ((x, y) => x.order - y.order));
     count.textContent = items.length + (items.length === 1 ? ' item' : ' items');
     if (!view.length) { grid.innerHTML = '<li class="empty">No products here yet.</li>'; return; }
-    grid.innerHTML = view.map((p, k) => {
-      const url = STORE + '/products/' + p.handle;
-      return `<li class="pc" data-k="${k}">
-        <a class="pc-link" href="${url}" aria-label="${esc(p.title)}"></a>
-        <div class="pc-media">
-          ${p.image ? `<img src="${sized(p.image, 500)}" srcset="${sized(p.image, 360)} 360w, ${sized(p.image, 500)} 500w, ${sized(p.image, 720)} 720w, ${sized(p.image, 1000)} 1000w" sizes="(max-width:749px) 50vw, 25vw" alt="${esc(p.title)}" loading="lazy" decoding="async" width="500" height="500">` : ''}
-          ${p.available ? '' : '<span class="pc-badge">Sold out</span>'}
-          <a class="pc-add" href="${url}" target="_blank" rel="noopener" aria-label="Choose ${esc(p.title)}">${bagIcon}</a>
-        </div>
-        <div class="pc-info"><p class="pc-title">${esc(p.title)}</p><p class="pc-price">${fmt(p.price)}</p></div>
-      </li>`;
-    }).join('');
+    grid.innerHTML = view.map(cardHTML).join('');
     watch(grid);
   }
   sel.addEventListener('change', render);
@@ -450,12 +571,6 @@ function productsBlock(page, opts = {}){
     const b = e.target.closest('button[data-view]'); if (!b) return;
     grid.classList.toggle('zoom', b.dataset.view === 'zoom'); grid.classList.toggle('single', b.dataset.view === 'single');
     el.querySelectorAll('.shop-cols button').forEach(x => x.setAttribute('aria-pressed', x.dataset.view === b.dataset.view));
-  });
-  grid.addEventListener('click', e => {
-    const link = e.target.closest('.pc-link'); if (!link) return;
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
-    e.preventDefault();
-    const li = link.closest('.pc'); Viewer.open(view[+li.dataset.k], li);
   });
   render();
   liveFor(page).then(list => { items = list; render(); }).catch(() => {});
@@ -471,15 +586,12 @@ function homePage(){
   op.className = 'opening'; op.id = 'opening'; op.setAttribute('aria-label', 'TAILORMADE');
   op.innerHTML = `<canvas id="logoCanvas" aria-hidden="true"></canvas><h1 class="word" id="word" aria-label="TAILORMADE"></h1><div class="mono-slot" id="monoSlot" aria-hidden="true"></div><div class="cue" id="cue"><span>Scroll</span><i></i></div>`;
   f.appendChild(op);
-  const hero = document.createElement('section');
-  hero.className = 'hero'; hero.setAttribute('aria-label', 'TAILORMADE');
-  hero.innerHTML = `<img src="${sized(HERO_IMG, 2000)}" srcset="${sized(HERO_IMG, 900)} 900w, ${sized(HERO_IMG, 1400)} 1400w, ${sized(HERO_IMG, 2000)} 2000w" sizes="100vw" alt="Houndstooth wool and tan leather, close up"><p>Bespoke luxury from the enthusiasts, crafted for those who carry their standards.</p>`;
-  f.appendChild(hero);
   f.appendChild(productsBlock(PAGES.shop, {title: 'Products'}));
   return f;
 }
 function route(){
-  const key = (location.hash || '#home').slice(1);
+  const key = decodeURIComponent((location.hash || '#home').slice(1));
+  if (key.startsWith('p-')) return key;
   return key === 'home' || !PAGES[key] ? 'home' : key;
 }
 let current = null;
@@ -487,8 +599,9 @@ function show(key, instant){
   const go = () => {
     window.Logo?.stop();
     main.innerHTML = '';
-    main.appendChild(key === 'home' ? homePage() : productsBlock(PAGES[key]));
-    document.title = key === 'home' ? 'TAILORMADE' : `${PAGES[key].title} – TAILORMADE`;
+    const isProduct = key.startsWith('p-');
+    main.appendChild(key === 'home' ? homePage() : isProduct ? productPage(key.slice(2)) : productsBlock(PAGES[key]));
+    if (!isProduct) document.title = key === 'home' ? 'TAILORMADE' : `${PAGES[key].title} – TAILORMADE`;
     document.querySelectorAll('.nav a[data-route]').forEach(a => a.dataset.route === key ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
     window.__lenis ? window.__lenis.scrollTo(0, {immediate: true, force: true}) : scrollTo(0, 0);
     watch(main);
@@ -589,7 +702,7 @@ const Film = (() => {
     const op = document.getElementById('opening');
     // on the home opening the film is clear; everywhere else it sits behind a white wash
     const t = op ? Math.min(1, Math.max(0, scrollY / (op.offsetHeight * .7))) : 1;
-    veil.style.opacity = (.86 * t).toFixed(3);
+    veil.style.opacity = (.72 * t).toFixed(3);
     shade.style.opacity = (1 - t).toFixed(3);
     document.body.classList.toggle('on-film', t < .5);
   }
