@@ -1,0 +1,765 @@
+{
+  "theme": {
+    "name": "Updated copy of Tinker",
+    "theme_id": 202700193873,
+    "currency": "QAR",
+    "locale": "en",
+    "country": "QA",
+    "fonts_loaded": [
+      "Instrument Sans 400 normal",
+      "Instrument Sans 400 italic",
+      "Instrument Serif 400 normal"
+    ],
+    "font_vars": {},
+    "color_vars": {
+      "--color-background": "#ffffff",
+      "--color-background-rgb": "255 255 255",
+      "--color-foreground": "#000000",
+      "--color-foreground-rgb": "0 0 0",
+      "--color-border": "#000000",
+      "--color-border-rgb": "0 0 0",
+      "--palette-lightest": "#ffffff",
+      "--palette-lightest-rgb": "255 255 255",
+      "--palette-darkest": "#000000",
+      "--palette-darkest-rgb": "0 0 0",
+      "--color-primary-button-text": "rgb(0 0 0 / 1.0)",
+      "--color-primary-button-background": "rgb()",
+      "--color-primary-button-border": "rgb(0 0 0 / 1.0)",
+      "--color-primary-button-focus-outline": "rgb()",
+      "--color-primary-button-hover-text": "rgb(0 0 0 / 1.0)",
+      "--color-primary-button-hover-background": "",
+      "--color-primary-button-hover-border": "#262626",
+      "--color-secondary-button-text": "rgb(255 255 255 / 1.0)",
+      "--color-secondary-button-background": "rgb(0 0 0 / 1.0)",
+      "--color-secondary-button-border": "rgb(0 0 0 / 1.0)",
+      "--color-secondary-button-hover-text": "rgb(255 255 255 / 1.0)",
+      "--color-secondary-button-hover-background": "#262626",
+      "--color-secondary-button-hover-border": "#262626",
+      "--color-input-background": "rgb(255 255 255 / 1.0)",
+      "--color-input-text": "rgb(0 0 0 / 1.0)",
+      "--color-input-text-rgb": "0 0 0",
+      "--color-input-border": "rgb()",
+      "--color-variant-background": "rgb(255 255 255 / 1.0)",
+      "--color-variant-border": "rgb()",
+      "--color-variant-text": "rgb(0 0 0 / 1.0)",
+      "--color-variant-text-rgb": "0 0 0",
+      "--color-variant-hover-background": "#f2f2f2",
+      "--color-variant-hover-text": "rgb(0 0 0 / 1.0)",
+      "--color-variant-hover-border": "",
+      "--color-selected-variant-background": "rgb(0 0 0 / 1.0)",
+      "--color-selected-variant-border": "rgb(0 0 0 / 1.0)",
+      "--color-selected-variant-text": "rgb(255 255 255 / 1.0)",
+      "--color-selected-variant-text-rgb": "255 255 255",
+      "--color-selected-variant-hover-background": "#262626",
+      "--color-selected-variant-hover-text": "rgb(255 255 255 / 1.0)",
+      "--color-selected-variant-hover-border": "#262626",
+      "--input-disabled-background-color": "rgb(0 0 0 / 0.1)",
+      "--input-disabled-border-color": "rgb(0 0 0 / 0.05)",
+      "--input-disabled-text-color": "rgb(0 0 0 / 0.5)",
+      "--color-foreground-muted": "rgb(0 0 0 / 0.6)",
+      "--color-foreground-subdued": "rgb(0 0 0 / 0.8)",
+      "--color-drawer-shadow-rgb": "",
+      "--color-popover-shadow-rgb": "0 0 0"
+    },
+    "size_vars": {
+      "--narrow-page-width": "90rem",
+      "--normal-page-width": "120rem",
+      "--wide-page-width": "150rem",
+      "--color-border": "#000000",
+      "--color-border-rgb": "0 0 0",
+      "--color-primary-button-text": "rgb(0 0 0 / 1.0)",
+      "--color-primary-button-background": "rgb()",
+      "--color-primary-button-border": "rgb(0 0 0 / 1.0)",
+      "--color-primary-button-focus-outline": "rgb()",
+      "--color-primary-button-hover-text": "rgb(0 0 0 / 1.0)",
+      "--color-primary-button-hover-background": "",
+      "--color-primary-button-hover-border": "#262626",
+      "--color-secondary-button-text": "rgb(255 255 255 / 1.0)",
+      "--color-secondary-button-background": "rgb(0 0 0 / 1.0)",
+      "--color-secondary-button-border": "rgb(0 0 0 / 1.0)",
+      "--color-secondary-button-hover-text": "rgb(255 255 255 / 1.0)",
+      "--color-secondary-button-hover-background": "#262626",
+      "--color-secondary-button-hover-border": "#262626",
+      "--color-input-background": "rgb(255 255 255 / 1.0)",
+      "--color-input-text": "rgb(0 0 0 / 1.0)",
+      "--color-input-text-rgb": "0 0 0",
+      "--color-input-border": "rgb()",
+      "--color-variant-border": "rgb()",
+      "--color-variant-hover-border": "",
+      "--color-selected-variant-border": "rgb(0 0 0 / 1.0)",
+      "--color-selected-variant-hover-border": "#262626",
+      "--input-disabled-background-color": "rgb(0 0 0 / 0.1)",
+      "--input-disabled-border-color": "rgb(0 0 0 / 0.05)",
+      "--input-disabled-text-color": "rgb(0 0 0 / 0.5)"
+    },
+    "body": {
+      "fontFamily": "\"Instrument Sans\", sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStyle": "normal",
+      "lineHeight": "19.6px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "rgb(0, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)"
+    }
+  },
+  "header": {
+    "announcement": "WORLDWIDE SHIPPING AVAILABLE",
+    "announcement_link": "/collections/all",
+    "announcement_style": {
+      "fontFamily": "\"Instrument Sans\", sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStyle": "normal",
+      "lineHeight": "19.6px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "rgb(0, 0, 0)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "height": 0,
+    "logo_text": "Home",
+    "logo_style": {
+      "fontFamily": "\"Instrument Sans\", sans-serif",
+      "fontSize": "28px",
+      "fontWeight": "400",
+      "fontStyle": "normal",
+      "lineHeight": "38.8px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "rgb(0, 0, 0)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "menu": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Best Selling",
+        "href": "/collections/best-selling-products"
+      },
+      {
+        "text": "Shop",
+        "href": "/collections/all"
+      },
+      {
+        "text": "Watch Roll Collection",
+        "href": "/collections/watch-rolls-collection"
+      },
+      {
+        "text": "iPhone 18 Series",
+        "href": "/collections/iphone-18-series"
+      },
+      {
+        "text": "iPhone 17 Series",
+        "href": "/collections/iphone-17-series"
+      },
+      {
+        "text": "iPhone Air Series",
+        "href": "/collections/iphone-17-air"
+      },
+      {
+        "text": "iPhone 16 Series",
+        "href": "/collections/iphone-16-series"
+      },
+      {
+        "text": "iPhone 15 Series",
+        "href": "/collections/phone-case"
+      }
+    ],
+    "menu_link_style": {
+      "fontFamily": "\"Instrument Sans\", sans-serif",
+      "fontSize": "28px",
+      "fontWeight": "400",
+      "fontStyle": "normal",
+      "lineHeight": "38.8px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "rgb(0, 0, 0)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "icons": [
+      "Close",
+      "Back to main menu",
+      "Reset",
+      "Search",
+      "Cart"
+    ]
+  },
+  "home": {
+    "sections": [
+      {
+        "id": "shopify-section-sections--31113044918353__header_announcements_WbCTVz",
+        "type": "header_announcements",
+        "height": 44,
+        "text": "WORLDWIDE SHIPPING AVAILABLE\nWORLDWIDE SHIPPING AVAILABLE",
+        "images": [],
+        "links": [
+          {
+            "text": "WORLDWIDE SHIPPING AVAILABLE",
+            "href": "/collections/all"
+          }
+        ],
+        "headings": [],
+        "bg": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "color": "rgb(0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      },
+      {
+        "id": "shopify-section-sections--31113044918353__header_section",
+        "type": "header_section",
+        "height": 0,
+        "text": "TAILORMADE\nHome\nBest Selling\nShop\nWatch Roll Collection\niPhone 18 Series\niPhone 17 Series\niPhone Air Series\niPhone 16 Series\niPhone 15 Series\nQAR\nRegion and language selector",
+        "images": [
+          {
+            "src": "https://www.tailormadeint.co/cdn/shop/files/NEW_LOGO_WEBSITE_02.png?height=36&v=1778155662",
+            "alt": "TAILORMADE - Home"
+          },
+          {
+            "src": "https://www.tailormadeint.co/cdn/shop/files/NEW_LOGO_WEBSITE_02.png?height=36&v=1778155662",
+            "alt": "TAILORMADE - Home"
+          }
+        ],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Best Selling",
+            "href": "/collections/best-selling-products"
+          },
+          {
+            "text": "Shop",
+            "href": "/collections/all"
+          },
+          {
+            "text": "Watch Roll Collection",
+            "href": "/collections/watch-rolls-collection"
+          },
+          {
+            "text": "iPhone 18 Series",
+            "href": "/collections/iphone-18-series"
+          },
+          {
+            "text": "iPhone 17 Series",
+            "href": "/collections/iphone-17-series"
+          },
+          {
+            "text": "iPhone Air Series",
+            "href": "/collections/iphone-17-air"
+          },
+          {
+            "text": "iPhone 16 Series",
+            "href": "/collections/iphone-16-series"
+          },
+          {
+            "text": "iPhone 15 Series",
+            "href": "/collections/phone-case"
+          },
+          {
+            "text": "",
+            "href": "/"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Best Selling",
+            "href": "/collections/best-selling-products"
+          },
+          {
+            "text": "Shop",
+            "href": "/collections/all"
+          },
+          {
+            "text": "Watch Roll Collection",
+            "href": "/collections/watch-rolls-collection"
+          },
+          {
+            "text": "iPhone 18 Series",
+            "href": "/collections/iphone-18-series"
+          },
+          {
+            "text": "iPhone 17 Series",
+            "href": "/collections/iphone-17-series"
+          },
+          {
+            "text": "iPhone Air Series",
+            "href": "/collections/iphone-17-air"
+          },
+          {
+            "text": "iPhone 16 Series",
+            "href": "/collections/iphone-16-series"
+          },
+          {
+            "text": "iPhone 15 Series",
+            "href": "/collections/phone-case"
+          }
+        ],
+        "headings": [
+          {
+            "text": "TAILORMADE",
+            "style": {
+              "fontFamily": "\"Instrument Serif\", serif",
+              "fontSize": "65.448px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "lineHeight": "71.9928px",
+              "letterSpacing": "normal",
+              "textTransform": "none",
+              "color": "rgb(0, 0, 0)",
+              "backgroundColor": "rgba(0, 0, 0, 0)"
+            }
+          },
+          {
+            "text": "QAR",
+            "style": {
+              "fontFamily": "\"Instrument Serif\", serif",
+              "fontSize": "32px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "lineHeight": "35.2px",
+              "letterSpacing": "normal",
+              "textTransform": "none",
+              "color": "rgb(0, 0, 0)",
+              "backgroundColor": "rgba(0, 0, 0, 0)"
+            }
+          },
+          {
+            "text": "Country/Region",
+            "style": {
+              "fontFamily": "\"Instrument Serif\", serif",
+              "fontSize": "43.632px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "lineHeight": "47.9952px",
+              "letterSpacing": "normal",
+              "textTransform": "none",
+              "color": "rgb(0, 0, 0)",
+              "backgroundColor": "rgba(0, 0, 0, 0)"
+            }
+          },
+          {
+            "text": "Country/Region",
+            "style": {
+              "fontFamily": "\"Instrument Serif\", serif",
+              "fontSize": "43.632px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "lineHeight": "47.9952px",
+              "letterSpacing": "normal",
+              "textTransform": "none",
+              "color": "rgb(0, 0, 0)",
+              "backgroundColor": "rgba(0, 0, 0, 0)"
+            }
+          }
+        ],
+        "bg": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      },
+      {
+        "id": "shopify-section-sections--31113044918353__1790595285293fbfd3",
+        "type": "shopify-section-sections--31113044918353__1790595285293fbfd3",
+        "height": 0,
+        "text": "",
+        "images": [],
+        "links": [],
+        "headings": [],
+        "bg": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "color": "rgb(0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      },
+      {
+        "id": "shopify-section-template--31113044656209__hero_iLBwPd",
+        "type": "hero",
+        "height": 466,
+        "text": "Bespoke luxury from the enthusiasts, crafted for those who carry their standards.",
+        "images": [
+          {
+            "src": "https://www.tailormadeint.co/cdn/shop/files/IMG-3218.jpg?v=1780190011",
+            "alt": ""
+          }
+        ],
+        "links": [],
+        "headings": [],
+        "bg": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      },
+      {
+        "id": "shopify-section-template--31113044656209__media_with_content_LfPdEJ",
+        "type": "media_with_content",
+        "height": 50,
+        "text": "",
+        "images": [],
+        "links": [],
+        "headings": [],
+        "bg": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "color": "rgb(0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      },
+      {
+        "id": "shopify-section-sections--31113044885585__media_with_content_RqxiU3",
+        "type": "media_with_content",
+        "height": 232,
+        "text": "Join our Newsletter — Get Updates, Offers and Invites.\nEmail",
+        "images": [],
+        "links": [],
+        "headings": [
+          {
+            "text": "Join our Newsletter — Get Updates, Offers and Invites.",
+            "style": {
+              "fontFamily": "\"Instrument Serif\", serif",
+              "fontSize": "32px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "lineHeight": "35.2px",
+              "letterSpacing": "normal",
+              "textTransform": "none",
+              "color": "rgb(0, 0, 0)",
+              "backgroundColor": "rgba(0, 0, 0, 0)"
+            }
+          }
+        ],
+        "bg": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "color": "rgb(0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      },
+      {
+        "id": "shopify-section-sections--31113044885585__footer",
+        "type": "footer",
+        "height": 43,
+        "text": "",
+        "images": [],
+        "links": [
+          {
+            "text": "Instagram",
+            "href": "https://www.instagram.com/tailormadeint/"
+          }
+        ],
+        "headings": [
+          {
+            "text": "",
+            "style": {
+              "fontFamily": "\"Instrument Serif\", serif",
+              "fontSize": "32px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "lineHeight": "35.2px",
+              "letterSpacing": "normal",
+              "textTransform": "none",
+              "color": "rgb(0, 0, 0)",
+              "backgroundColor": "rgba(0, 0, 0, 0)"
+            }
+          }
+        ],
+        "bg": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "color": "rgb(0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      },
+      {
+        "id": "shopify-section-sections--31113044885585__utilities",
+        "type": "utilities",
+        "height": 54,
+        "text": "Terms and Policies",
+        "images": [],
+        "links": [
+          {
+            "text": "Privacy policy",
+            "href": "/policies/privacy-policy"
+          },
+          {
+            "text": "Refund policy",
+            "href": "/policies/refund-policy"
+          },
+          {
+            "text": "Terms of service",
+            "href": "/policies/terms-of-service"
+          }
+        ],
+        "headings": [],
+        "bg": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "color": "rgb(0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      },
+      {
+        "id": "shopify-section-cart-drawer-section",
+        "type": "shopify-section-cart-drawer-section",
+        "height": 0,
+        "text": "",
+        "images": [],
+        "links": [
+          {
+            "text": "Log in",
+            "href": "https://www.tailormadeint.co/customer_authentication/redirect?locale=en&region_country=QA"
+          },
+          {
+            "text": "Continue shopping",
+            "href": "/collections/all"
+          }
+        ],
+        "headings": [
+          {
+            "text": "Your cart is empty",
+            "style": {
+              "fontFamily": "\"Instrument Sans\", sans-serif",
+              "fontSize": "24px",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "lineHeight": "26.4px",
+              "letterSpacing": "normal",
+              "textTransform": "none",
+              "color": "rgb(0, 0, 0)",
+              "backgroundColor": "rgba(0, 0, 0, 0)"
+            }
+          }
+        ],
+        "bg": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      }
+    ],
+    "hero_image_full": "https://www.tailormadeint.co/cdn/shop/files/IMG-3218.jpg?v=1780190011",
+    "hero_caption_style": {
+      "fontFamily": "\"Instrument Sans\", sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStyle": "italic",
+      "lineHeight": "19.6px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "rgb(255, 255, 255)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "newsletter_form": [
+      {
+        "action": "/contact#contact_form",
+        "fields": [
+          "form_type=customer",
+          "utf8=✓",
+          "contact[email] [email] placeholder=\"Email address\""
+        ]
+      }
+    ]
+  },
+  "product_page": {
+    "example": "/products/iphone-18-hfc-burgundy-edition-ll",
+    "sections": [
+      {
+        "id": "main",
+        "text": "{\"@context\":\"http:\\/\\/schema.org\\/\",\"@id\":\"\\/products\\/iphone-18-hfc-burgundy-edition-ll#product\",\"@type\":\"ProductGroup\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Tailormade.\"},\"category\":\"Mobile Phone Cases\",\"description\":\"\",\"hasVariant\":[{\"@id\":\"\\/products\\/iphone-18-hfc-burgundy-edition-ll?variant=62824267022417#variant\",\"@type\":\"Product\",\"image\":\"https:\\/\\/www.tailormadeint.co\\/cdn\\/shop\\/files\\/17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648\\u0026width=1920\",\"mpn\":\"TM-PC-17P-BUR-"
+      },
+      {
+        "id": "product_list_zR9Cym",
+        "text": ".color-custom-template--31113044820049__product_list_zR9Cym,\n .color-custom-template--31113044820049__product_list_zR9Cym .text-block {\n /* Background */\n --color-background: #ffffff;\n --color-background-rgb: 255 255 255;\n\n /* Opacity values adjusted for background brightness */\n\n--opacity-5-15: 0.05; --opacity-10-25: 0.1; --opacity-35-55: 0.35; --opacity-40-60:\n0.4; --opacity-30-60: 0.3; --opacity-60: 0.6;\n\n /* Foreground / text — explicit or smart-contrasted */\n --color: #000000;\n --color-rgb:"
+      }
+    ],
+    "blocks_in_order": [
+      "div.sticky-add-to-cart__variant: 18 Pro",
+      "div.sticky-add-to-cart__price: QAR 325,00",
+      "span.price: QAR 325,00",
+      "h1.: iPhone 18 HFC | Burgundy (Edition ll)",
+      "variant-picker.variant-picker: Series\n\n 18 Pro\n\n 18 Pro Max\n\n {\"id\":62824267022417,\"title\":\"18 Pro\",\"option1\":\"",
+      "form.variant-picker__form: Series\n\n 18 Pro\n\n 18 Pro Max\n\n {\"id\":62824267022417,\"title\":\"18 Pro\",\"option1\":\"",
+      "fieldset.variant-option: Series\n\n 18 Pro\n\n 18 Pro Max",
+      "legend.: Series",
+      "label.variant-option__button-label: 18 Pro",
+      "span.variant-option__button-label__text: 18 Pro",
+      "svg.[object: ",
+      "label.variant-option__button-label: 18 Pro Max",
+      "span.variant-option__button-label__text: 18 Pro Max",
+      "span.buy-buttons-block: Decrease quantity\n\n Increase quantity\n\nSold out",
+      "div.quantity-selector-wrapper: Decrease quantity\n\n Increase quantity",
+      "quantity-selector-component.quantity-selector: Decrease quantity\n\n Increase quantity",
+      "button.button: Decrease quantity",
+      "button.button: Increase quantity",
+      "button.button: Sold out",
+      "summary.details__header: Details",
+      "summary.details__header: Shipping & Returns",
+      "button.button: Choose",
+      "span.price: QAR 240,00",
+      "button.button: Add"
+    ],
+    "gallery_images": 8
+  },
+  "collection_page": {
+    "example": "/collections/iphone-18-series",
+    "sections": [
+      {
+        "id": "section",
+        "text": ".color-custom-template--31113044623441__section,\n .color-custom-template--31113044623441__section .text-block {\n /* Background */\n --color-background: #ffffff;\n --color-background-rgb: 255 255 255;\n\n "
+      },
+      {
+        "id": "main",
+        "text": ".color-custom-template--31113044623441__main,\n .color-custom-template--31113044623441__main .text-block {\n /* Background */\n --color-background: #ffffff;\n --color-background-rgb: 255 255 255;\n\n /* Opa"
+      }
+    ],
+    "sort_options": [
+      "manual = Featured",
+      "most-relevant = Most relevant",
+      "best-selling = Best selling",
+      "title-ascending = Alphabetically, A-Z",
+      "title-descending = Alphabetically, Z-A",
+      "price-ascending = Price, low to high",
+      "price-descending = Price, high to low",
+      "created-ascending = Date, old to new",
+      "created-descending = Date, new to old",
+      "manual = Featured",
+      "most-relevant = Most relevant",
+      "best-selling = Best selling",
+      "title-ascending = Alphabetically, A-Z",
+      "title-descending = Alphabetically, Z-A",
+      "price-ascending = Price, low to high",
+      "price-descending = Price, high to low",
+      "created-ascending = Date, old to new",
+      "created-descending = Date, new to old"
+    ],
+    "default_sort": "best-selling",
+    "filters": [
+      "Sort\n Best selling",
+      "Column grid",
+      "Sort\n Best selling",
+      "Column grid"
+    ]
+  },
+  "policies": {
+    "privacy-policy": {
+      "url": "https://www.tailormadeint.co/policies/privacy-policy",
+      "title": "Privacy policy",
+      "text": "Privacy policy\n\n Introduction\nThis Privacy Policy describes how Tailormade (“we,” “our,” or “us”) collects, uses, discloses, and protects personal information obtained from users (“you” or “your”) of our website and services.\nBy accessing or using our website, you acknowledge that you have read, understood, and agreed to the terms of this Privacy Policy.\nInformation We Collect\nWe may collect and process the following categories of personal data:\n\nPersonal Identification InformationIncluding, but not limited to:\n\nFull nameContact numberEmail addressBilling and shipping address\n\nTransactional Information\n\nDetails of products purchasedOrder historyPayment confirmation details (processed via secure third-party payment providers; we do not store full payment card details)\n\nTechnical Information\n\nInternet Protocol (IP) addressBrowser type and versionDevice identifiersWebsite interaction data and analytics\n\nLawful Basis for Processing\n\nWe process your personal data on the following legal bases:\n\nPerformance of a contract (order processing and fulfillment)Compliance with legal obligationsLegitimate business interests (service improvement, fraud prevention)Your consent (for marketing communications, where applicable)\n\nUse of Personal Information\n\nYour personal data may be used for the following purposes:\n\nTo process, manage, and deliver ordersTo communicate with you regarding transactions or inquiriesTo provide customer service and after-sales supportTo improve our products, services, and user experienceTo send promotional communications, subject to your consent\n\nDisclosure of Information\n\nWe do not sell, trade, or otherwise transfer your personal data to third parties for marketing purposes.\nWe may disclose your information to:\n\nPayment processing providersLogistics and delivery partnersIT and service providers supporting our operationsRegulatory or legal authorities where required by law\n\nAll third parties are contractually obligated to maintain the confidentiality and security of your data.\nData Security\nWe implement appropriate technical and organizational measures to safeguard personal data against unauthorized access, loss, misuse, or alteration.\nNotwithstanding the above, no electronic transmission or storage system can be guaranteed to be completely secure.\nData Retention\nPersonal data will be retained only for as long as necessary to:\n\nFulfill the purposes outlined in this policyComply with legal and regulatory obligationsResolve disputes and enforce agreements8. Your Rights\n\nSubject to applicable laws, you have the right to:\n\nRequest access to your personal dataRequest rectification of inaccurate or incomplete dataRequest erasure of your personal dataObject to or restrict certain processing activitiesWithdraw consent for marketing communications at any time\n\nRequests may be submitted using the contact details below.\nCookies and Tracking Technologies\nOur website may utilize cookies and similar technologies to enhance functionality, analyze usage patterns, and improve user experience.\nYou may modify your browser settings to decline cookies; however, this may affect certain functionalities of the website.\nThird-Party Websites\nOur website may contain links to external websites. Tailormade is not responsible for the privacy practices or content of such third-party sites.\nAmendments to This Policy\nWe reserve the right to amend this Privacy Policy at our sole discretion. Any changes will be effective immediately upon publication on our website.\nGoverning Law\nThis Privacy Policy shall be governed by and construed in accordance with the laws of the State of Qatar.\nContact Information\nFor any questions, requests, or concerns regarding this Privacy Policy, please contact:\n\nTailormadeEmail: tm@growiseqatar.com"
+    },
+    "refund-policy": {
+      "url": "https://www.tailormadeint.co/policies/refund-policy",
+      "title": "Refund policy",
+      "text": "Refund policy\n\n We want you to be completely satisfied with your purchase. If for any reason you are not, please review our policy below:\nReturns & Exchanges:\nItems may be returned or exchanged within 3 days from the date of purchase, provided they are unused, undamaged, unwashed, and in their original condition. All original packaging, accessories, plastic and paper tags, certificates (if applicable), and the original invoice must be included. (delivery and fullfillment charges might be applied).\nRefund Process:\nApproved returns will be refunded via the original payment method. Please allow 7–14 business days for the refund to be processed, depending on your bank’s procedures.\nNon-Returnable Items:\nCustomized or discounted items are not eligible for return or exchange unless they have a verified manufacturing defect.\n\nLiability Disclaimer:\nWe are not responsible for damages caused by misuse or failure to follow product care or usage instructions.\nRight to Refuse:\nWe reserve the right to decline any return or exchange request that does not meet the above conditions.\nIf you have any questions or need assistance, please feel free to contact our customer service team."
+    },
+    "terms-of-service": {
+      "url": "https://www.tailormadeint.co/policies/terms-of-service",
+      "title": "Terms of service",
+      "text": "Terms of service\n\n Overview\nWelcome to Tailormade. These Terms of Service govern your use of our website and services. By accessing or purchasing from our store, you agree to be bound by these terms.\nIf you do not agree to all the terms, you may not access the website or use our services.\nEligibility\nBy using this site, you confirm that you are at least the age of majority in your country or have given consent for a minor dependent to use this site under your supervision.\nProducts & Services\nWe strive to present our products as accurately as possible. However:\n\nColors and details may vary slightly due to screen settingsAll product descriptions are subject to change without noticeWe reserve the right to discontinue any product at any time\n\nPricing & PaymentsAll prices are listed in QAR (unless stated otherwise)Prices are subject to change without prior noticeWe reserve the right to refuse or cancel any orderPayment must be completed at checkout via approved payment methods\n\nOrders & Acceptance\n\nOnce an order is placed:\n\nYou will receive a confirmation message/emailThis does not guarantee acceptance of your orderWe reserve the right to cancel orders due to stock, pricing errors, or suspicious activityShipping & DeliveryDelivery timelines are estimates and may varyTailormade is not responsible for delays caused by courier servicesRisk of loss transfers to the customer upon delivery\n\nReturns & ExchangesReturns/exchanges must comply with our Return PolicyItems must be unused, in original packagingCertain items (e.g., custom or tailored pieces) may not be eligibleIntellectual Property\n\nAll content on this site (logos, images, designs, text) is the property of Tailormade and may not be used without written permission.\nUser Conduct\nYou agree not to:\n\nUse the site for unlawful purposesTransmit harmful code or virusesAttempt to breach or disrupt the websiteLimitation of Liability\n\nTailormade shall not be liable for:\n\nIndirect or incidental damagesLosses resulting from misuse of productsDelays or interruptions beyond our controlPrivacy\n\nYour submission of personal information is governed by our Privacy Policy.\nModifications to Terms\nWe reserve the right to update or modify these Terms at any time. Changes will be effective immediately upon posting.\nGoverning Law\nThese Terms shall be governed by and interpreted in accordance with the laws of the State of Qatar.\nContact Information\n\nFor any inquiries, please contact us at:Email: tm@growiseqatar.comBrand: Tailormade"
+    }
+  },
+  "sitemap": {
+    "agentic_discovery": [
+      "https://www.tailormadeint.co/agents.md"
+    ],
+    "products_1": [
+      "https://www.tailormadeint.co/",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-case-premium-style-protection-copy-1",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-case-premium-style-protection-copy-2",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-cases-tan-edition-ll",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-cases-navy-edition-ll",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-cases-maroon-edition-ll",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-air-case-burgundy",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-air-case-navy",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-air-case-tan",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-air-case-grey",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-cases-burgundy-edition-ll",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-cases-navy-edition-ll",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-cases-tan-edition-ll",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-16-cases-burgundy-edition-ll",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-16-cases-navy-edition-ll",
+      "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-16-cases-tan-edition-ll",
+      "https://www.tailormadeint.co/products/pepita-houndstooth-fabric",
+      "https://www.tailormadeint.co/products/pepita-houndstooth-fabric-navy-green",
+      "https://www.tailormadeint.co/products/highland-watch-roll-tartan-edition",
+      "https://www.tailormadeint.co/products/iphone-17-alcantara-phone-cases",
+      "https://www.tailormadeint.co/products/iphone-17-full-alcantara-black",
+      "https://www.tailormadeint.co/products/iphone-17-tailormade-x-alosttraveler",
+      "https://www.tailormadeint.co/products/iphone-16-tailormade-x-alosttraveler",
+      "https://www.tailormadeint.co/products/iphone-15-tailormade-x-alosttraveler",
+      "https://www.tailormadeint.co/products/iphone-air-full-alcantara-black",
+      "https://www.tailormadeint.co/products/iphone-air-tailormade-x-alosttraveler",
+      "https://www.tailormadeint.co/products/iphone-17-full-alcantara-baby-blue",
+      "https://www.tailormadeint.co/products/full-pink-alcantara-iphone-air-series",
+      "https://www.tailormadeint.co/products/full-baby-blue-alcantara-iphone-air-series",
+      "https://www.tailormadeint.co/products/iphone-16-full-alcantara-baby-blue-copy",
+      "https://www.tailormadeint.co/products/iphone-16-full-alcantara-pink",
+      "https://www.tailormadeint.co/products/iphone-16-full-alcantara-black",
+      "https://www.tailormadeint.co/products/iphone-15-cases-houndstooth-fabric-grey-edition-ii",
+      "https://www.tailormadeint.co/products/iphone-16-cases-houndstooth-fabric-grey-edition-ii",
+      "https://www.tailormadeint.co/products/iphone-17-cases-houndstooth-fabric-grey-edition-ll",
+      "https://www.tailormadeint.co/products/iphone-17-cases-houndstooth-fabric-all-colors",
+      "https://www.tailormadeint.co/products/full-baby-blue-alcantara-iphone-18-series",
+      "https://www.tailormadeint.co/products/full-black-alcantara-iphone-18-series",
+      "https://www.tailormadeint.co/products/full-pink-alcantara-iphone-18-series",
+      "https://www.tailormadeint.co/products/iphone-18-hfc-navy-edition-ll",
+      "https://www.tailormadeint.co/products/iphone-18-hfc-burgundy-edition-ll",
+      "https://www.tailormadeint.co/products/tailormade-x-alosttraveler-iphone-18-series",
+      "https://www.tailormadeint.co/products/iphone-18-hfc-tan-edition-ii",
+      "https://www.tailormadeint.co/products/iphone-18-hfc-grey-edition-ll-copy"
+    ],
+    "pages_1": [
+      "https://www.tailormadeint.co/pages/we-are",
+      "https://www.tailormadeint.co/pages/data-sharing-opt-out",
+      "https://www.tailormadeint.co/pages/careers"
+    ],
+    "collections_1": [
+      "https://www.tailormadeint.co/collections/phone-case",
+      "https://www.tailormadeint.co/collections/iphone-17-series",
+      "https://www.tailormadeint.co/collections/iphone-16-series",
+      "https://www.tailormadeint.co/collections/iphone-17-air",
+      "https://www.tailormadeint.co/collections/watch-rolls-collection",
+      "https://www.tailormadeint.co/collections/iphone-18-series",
+      "https://www.tailormadeint.co/collections/tm-private-collection",
+      "https://www.tailormadeint.co/collections/best-selling-products"
+    ],
+    "blogs_1": [
+      "https://www.tailormadeint.co/blogs/news"
+    ]
+  },
+  "pages": [
+    {
+      "url": "https://www.tailormadeint.co/pages/we-are",
+      "title": "TAILORMADE",
+      "text": ".color-custom-template--31113044754513__main,\n .color-custom-template--31113044754513__main .text-block {\n /* Background */\n --color-background: #ffffff;\n --color-background-rgb: 255 255 255;\n\n /* Opacity values adjusted for background brightness */\n\n--opacity-5-15: 0.05; --opacity-10-25: 0.1; --opacity-35-55: 0.35; --opacity-40-60:\n0.4; --opacity-30-60: 0.3; --opacity-60: 0.6;\n\n /* Foreground / text — explicit or smart-contrasted */\n --color: #000000;\n --color-rgb: 0 0 0;\n --color-foreground: #000000;\n --color-foreground-rgb: 0 0 0;\n --color-foreground-muted: rgb(0 0 0 / var(--opacity-muted-text));\n --color-foreground-subdued: rgb(0 0 0 / var(--opacity-subdued-text));\n --color-border: var(--palette-darkest);\n --color-border-rgb: var(--palette-darkest-rgb);\n\n }\n\n .color-custom-template--31113044754513__main {\n /* Form-related tokens stay on .color-custom only — .text-block is a prose\n container (text/announcement/inline-text/blog-post-description/\n collection-link/price/sku) and never holds form inputs. */\n --input-disabled-background-color: rgb(0 0 0 / var(--opacity-10));\n --input-disabled-border-color: rgb(0 0 0 / var(--opacity-5));\n --input-disabled-text-color: rgb(0 0 0 / var(--opacity-50));\n --checkbox-border: 1px solid rgb(0 0 0 / var(--opacity-35-55));\n }\n\n .color-custom-template--31113044754513__main {\n color: var(--color, var(--color-foreground));\n background-color: var(--color-background);\n }\n\n TAILORMADE"
+    },
+    {
+      "url": "https://www.tailormadeint.co/pages/data-sharing-opt-out",
+      "title": "Your Privacy Choices",
+      "text": ".color-custom-template--31113044754513__main,\n .color-custom-template--31113044754513__main .text-block {\n /* Background */\n --color-background: #ffffff;\n --color-background-rgb: 255 255 255;\n\n /* Opacity values adjusted for background brightness */\n\n--opacity-5-15: 0.05; --opacity-10-25: 0.1; --opacity-35-55: 0.35; --opacity-40-60:\n0.4; --opacity-30-60: 0.3; --opacity-60: 0.6;\n\n /* Foreground / text — explicit or smart-contrasted */\n --color: #000000;\n --color-rgb: 0 0 0;\n --color-foreground: #000000;\n --color-foreground-rgb: 0 0 0;\n --color-foreground-muted: rgb(0 0 0 / var(--opacity-muted-text));\n --color-foreground-subdued: rgb(0 0 0 / var(--opacity-subdued-text));\n --color-border: var(--palette-darkest);\n --color-border-rgb: var(--palette-darkest-rgb);\n\n }\n\n .color-custom-template--31113044754513__main {\n /* Form-related tokens stay on .color-custom only — .text-block is a prose\n container (text/announcement/inline-text/blog-post-description/\n collection-link/price/sku) and never holds form inputs. */\n --input-disabled-background-color: rgb(0 0 0 / var(--opacity-10));\n --input-disabled-border-color: rgb(0 0 0 / var(--opacity-5));\n --input-disabled-text-color: rgb(0 0 0 / var(--opacity-50));\n --checkbox-border: 1px solid rgb(0 0 0 / var(--opacity-35-55));\n }\n\n .color-custom-template--31113044754513__main {\n color: var(--color, var(--color-foreground));\n background-color: var(--color-background);\n }\n\n Your Privacy Choices\n\n As described in our Privacy Policy, we collect personal information from your interactions with us and our website, including through cookies and similar technologies. We may also share this personal information with third parties, including advertising partners. We do this in order to show you ads on other websites that are more relevant to your interests and for other reasons outlined in our privacy policy. Sharing of personal information for targeted advertising based on your interaction on different websites may be considered \"sales\", \"sharing\", or \"targeted advertising\" under certain U.S. state privacy laws. Depending on where you live, you may have the right to opt out of these activities. If you would like to exercise this opt-out right, please follow the instructions below. If you visit our website with the Global Privacy Control opt-out preference signal enabled, depending on where you are, we will treat this as a request to opt-out of activity that may be considered a “sale” or “sharing” of personal information or other uses that may be considered targeted advertising for the device and browser you used to visit our website."
+    },
+    {
+      "url": "https://www.tailormadeint.co/pages/careers",
+      "title": "Careers",
+      "text": ".color-custom-template--31113044754513__main,\n .color-custom-template--31113044754513__main .text-block {\n /* Background */\n --color-background: #ffffff;\n --color-background-rgb: 255 255 255;\n\n /* Opacity values adjusted for background brightness */\n\n--opacity-5-15: 0.05; --opacity-10-25: 0.1; --opacity-35-55: 0.35; --opacity-40-60:\n0.4; --opacity-30-60: 0.3; --opacity-60: 0.6;\n\n /* Foreground / text — explicit or smart-contrasted */\n --color: #000000;\n --color-rgb: 0 0 0;\n --color-foreground: #000000;\n --color-foreground-rgb: 0 0 0;\n --color-foreground-muted: rgb(0 0 0 / var(--opacity-muted-text));\n --color-foreground-subdued: rgb(0 0 0 / var(--opacity-subdued-text));\n --color-border: var(--palette-darkest);\n --color-border-rgb: var(--palette-darkest-rgb);\n\n }\n\n .color-custom-template--31113044754513__main {\n /* Form-related tokens stay on .color-custom only — .text-block is a prose\n container (text/announcement/inline-text/blog-post-description/\n collection-link/price/sku) and never holds form inputs. */\n --input-disabled-background-color: rgb(0 0 0 / var(--opacity-10));\n --input-disabled-border-color: rgb(0 0 0 / var(--opacity-5));\n --input-disabled-text-color: rgb(0 0 0 / var(--opacity-50));\n --checkbox-border: 1px solid rgb(0 0 0 / var(--opacity-35-55));\n }\n\n .color-custom-template--31113044754513__main {\n color: var(--color, var(--color-foreground));\n background-color: var(--color-background);\n }\n\n Careers\n\n Send your CV and a brief introduction to our team. We look forward to connecting with passionate individuals who want to be part of the Tailormade journey. \nat tm@growiseqatar.com"
+    },
+    {
+      "url": "https://www.tailormadeint.co/blogs/news",
+      "title": "News",
+      "text": ".color-custom-template--31113044557905__main,\n .color-custom-template--31113044557905__main .text-block {\n /* Background */\n --color-background: #ffffff;\n --color-background-rgb: 255 255 255;\n\n /* Opacity values adjusted for background brightness */\n\n--opacity-5-15: 0.05; --opacity-10-25: 0.1; --opacity-35-55: 0.35; --opacity-40-60:\n0.4; --opacity-30-60: 0.3; --opacity-60: 0.6;\n\n /* Foreground / text — explicit or smart-contrasted */\n --color: #000000;\n --color-rgb: 0 0 0;\n --color-foreground: #000000;\n --color-foreground-rgb: 0 0 0;\n --color-foreground-muted: rgb(0 0 0 / var(--opacity-muted-text));\n --color-foreground-subdued: rgb(0 0 0 / var(--opacity-subdued-text));\n --color-border: var(--palette-darkest);\n --color-border-rgb: var(--palette-darkest-rgb);\n\n }\n\n .color-custom-template--31113044557905__main {\n /* Form-related tokens stay on .color-custom only — .text-block is a prose\n container (text/announcement/inline-text/blog-post-description/\n collection-link/price/sku) and never holds form inputs. */\n --input-disabled-background-color: rgb(0 0 0 / var(--opacity-10));\n --input-disabled-border-color: rgb(0 0 0 / var(--opacity-5));\n --input-disabled-text-color: rgb(0 0 0 / var(--opacity-50));\n --checkbox-border: 1px solid rgb(0 0 0 / var(--opacity-35-55));\n }\n\n .color-custom-template--31113044557905__main {\n color: var(--color, var(--color-foreground));\n background-color: var(--color-background);\n }\n\n News"
+    }
+  ]
+}
