@@ -120,6 +120,48 @@ h2 em{color:var(--gold)}
 @media (prefers-reduced-motion:reduce){
   .grain,.caret,.cue i{animation:none}
 }
+
+/* ---------- "Products" section: a copy of tailormadeint.co/collections/all (sizes measured from the store) ---------- */
+.shop{position:relative;z-index:4;background:#fff;color:#000;font-family:var(--sans);font-size:14px;line-height:1.4;
+  padding:96px max(40px,env(safe-area-inset-right,0px)) 80px max(40px,env(safe-area-inset-left,0px))}
+.shop *{box-sizing:border-box}
+.shop h2.shop-title{font-family:var(--serif);font-weight:400;font-size:65.45px;line-height:1.1;margin:0;color:#000;text-wrap:initial}
+.shop-bar{display:flex;align-items:center;justify-content:flex-end;gap:24px;margin:48px 0 26px;color:rgba(0,0,0,.8)}
+.shop-sort{position:relative;display:flex;align-items:center;gap:6px}
+.shop-sort label{color:#000}
+.shop-sort select{appearance:none;-webkit-appearance:none;position:absolute;inset:0;opacity:0;cursor:pointer;font:inherit;width:100%}
+.shop-sort .now{display:none}
+.shop-cols{display:flex;gap:4px}
+.shop-cols button{width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:4px;background:transparent;color:#000;cursor:pointer;padding:0}
+.shop-cols button[aria-pressed="true"]{background:rgba(0,0,0,.06)}
+.shop-cols .m{display:none}
+.shop-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.shop-grid.zoom{grid-template-columns:repeat(7,minmax(0,1fr))}
+.shop-grid.zoom .pc-info{display:none}
+.pc{position:relative;border-radius:10px;overflow:clip}
+.pc a.pc-link{position:absolute;inset:0;z-index:1}
+.pc-media{position:relative;aspect-ratio:1/1;background:#fff}
+.pc-media img{width:100%;height:100%;object-fit:cover;display:block}
+.pc-badge{position:absolute;top:8px;left:8px;z-index:2;background:#000;color:#fff;font-size:13px;line-height:1.4;padding:4px 10px;border-radius:40px;pointer-events:none}
+.pc-add{position:absolute;right:12.8px;bottom:12.8px;z-index:2;width:36px;height:36px;border-radius:50px;border:0;background:#fff;color:#000;display:grid;place-items:center;
+  box-shadow:0 1px 6px rgba(0,0,0,.12);opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;text-decoration:none}
+.pc-add svg{width:20px;height:20px}
+.pc:hover .pc-add,.pc-add:focus-visible{opacity:1;transform:none}
+.pc-info{padding:20px}
+.pc-title{margin:0;font-size:14px;font-weight:400;line-height:1.4;color:#000}
+.pc-price{margin:0;font-size:14px;line-height:1.4;color:#000}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:749px){
+  .shop{padding:72px 0 56px}
+  .shop h2.shop-title{font-size:48px;padding:0 max(16px,env(safe-area-inset-left,0px))}
+  .shop-bar{justify-content:space-between;margin:40px 0 18px;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+  .shop-count{display:none}
+  .shop-cols .d{display:none}.shop-cols .m{display:grid}
+  .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .shop-grid.single{grid-template-columns:1fr}
+  .pc-add{display:none}
+}
+.bar.hide{opacity:0!important;pointer-events:none}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -200,6 +242,104 @@ h2 em{color:var(--gold)}
     </div>
   </section>
 </main>
+
+<section class="shop" id="shop" aria-labelledby="shopTitle">
+  <h2 class="shop-title" id="shopTitle">Products</h2>
+  <div class="shop-bar">
+    <span class="shop-count" id="shopCount" role="status">43 items</span>
+    <div class="shop-sort">
+      <label for="shopSort">Sort</label>
+      <svg aria-hidden="true" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <select id="shopSort" name="sort_by">
+        <option value="manual">Featured</option>
+        <option value="most-relevant">Most relevant</option>
+        <option value="best-selling">Best selling</option>
+        <option value="title-ascending" selected>Alphabetically, A-Z</option>
+        <option value="title-descending">Alphabetically, Z-A</option>
+        <option value="price-ascending">Price, low to high</option>
+        <option value="price-descending">Price, high to low</option>
+        <option value="created-ascending">Date, old to new</option>
+        <option value="created-descending">Date, new to old</option>
+      </select>
+    </div>
+    <div class="shop-cols" role="group" aria-label="Column grid">
+      <button class="d" data-view="default" aria-pressed="true" aria-label="Default"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.5" y="1.5" width="5" height="5" rx="1.5"/><rect x="9.5" y="1.5" width="5" height="5" rx="1.5"/><rect x="1.5" y="9.5" width="5" height="5" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.5"/></svg></button>
+      <button class="d" data-view="zoom" aria-pressed="false" aria-label="Zoom out"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" opacity=".55"><circle cx="2.5" cy="2.5" r="1"/><circle cx="8" cy="2.5" r="1"/><circle cx="13.5" cy="2.5" r="1"/><circle cx="2.5" cy="8" r="1"/><circle cx="8" cy="8" r="1"/><circle cx="13.5" cy="8" r="1"/><circle cx="2.5" cy="13.5" r="1"/><circle cx="8" cy="13.5" r="1"/><circle cx="13.5" cy="13.5" r="1"/></svg></button>
+      <button class="m" data-view="single" aria-pressed="false" aria-label="Single"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3.5" y="1.5" width="9" height="13" rx="1.5"/></svg></button>
+      <button class="m" data-view="default" aria-pressed="true" aria-label="Default"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.5" y="1.5" width="5" height="5" rx="1.5"/><rect x="9.5" y="1.5" width="5" height="5" rx="1.5"/><rect x="1.5" y="9.5" width="5" height="5" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.5"/></svg></button>
+    </div>
+  </div>
+  <ul class="shop-grid" id="shopGrid"></ul>
+</section>
+
+<script>
+/* Products section: live from the store's /collections/all, with a snapshot (taken 2026-11-15) if the store can't be reached. */
+(() => {
+  const STORE = 'https://www.tailormadeint.co';
+  const CDN = 'https://cdn.shopify.com/s/files/1/0625/1098/9393/files/';
+  // [title, handle, created_at, price, available, variant count, image file]
+  const SNAPSHOT = [["Full Baby Blue Alcantara | iPhone 16 Series","iphone-16-full-alcantara-baby-blue-copy","2026-07-20T19:45:24",240,1,2,"B23E0D32-72C3-4D4B-9B73-4D8837A27921.jpg?v=1791099774"],["Full Baby Blue Alcantara | iPhone 17 Series","iphone-17-full-alcantara-baby-blue","2026-07-20T19:10:07",240,1,3,"IMG-3927.jpg?v=1791100496"],["Full Baby Blue Alcantara | iPhone 18 Series","full-baby-blue-alcantara-iphone-18-series","2026-10-06T14:42:25",240,1,2,"IMG-3927.jpg?v=1791100496"],["Full Baby Blue Alcantara | iPhone Air Series","full-baby-blue-alcantara-iphone-air-series","2026-07-20T19:16:39",240,1,1,"IMG-3929.jpg?v=1791098290"],["Full Black Alcantara | iPhone 16 Series","iphone-16-full-alcantara-black","2026-07-20T19:47:08",240,1,2,"EC31140C-30AD-4CB3-B351-7CB9DE78C243.jpg?v=1791099709"],["Full Black Alcantara | iPhone 17 Series","iphone-17-full-alcantara-black","2026-07-14T20:35:02",240,1,3,"4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632"],["Full Black Alcantara | iPhone 18 Series","full-black-alcantara-iphone-18-series","2026-10-06T14:46:46",240,1,2,"4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632"],["Full Black Alcantara | iPhone Air Series","iphone-air-full-alcantara-black","2026-07-19T10:50:19",240,1,1,"IMG-4827.png?v=1791098183"],["Full Pink Alcantara | iPhone 16 Series","iphone-16-full-alcantara-pink","2026-07-20T19:46:40",240,1,2,"IMG-3925.jpg?v=1791099742"],["Full Pink Alcantara | iPhone 17 Series","iphone-17-alcantara-phone-cases","2026-07-14T20:20:54",240,1,3,"12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100"],["Full Pink Alcantara | iPhone 18 Series","full-pink-alcantara-iphone-18-series","2026-10-06T14:47:46",240,1,2,"12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100"],["Full Pink Alcantara | iPhone Air Series","full-pink-alcantara-iphone-air-series","2026-07-20T19:15:58",240,1,1,"IMG-3924.jpg?v=1791098321"],["Grey Tartan Check | Beige & Black","highland-watch-roll-tartan-edition","2026-05-05T15:44:26",820,1,1,"3.2_10ee5926-3276-4fb0-8900-a8a597ec44d3.jpg?v=1777985050"],["iPhone 15 HFC | Burgundy (Edition ll)","houndstooth-fabric-iphone-15-cases-burgundy-edition-ll","2026-04-30T13:35:31",325,1,2,"15_pro_max_02_b5048119-7b55-4e25-80f2-b0df4b34e33e.jpg?v=1791282236"],["iPhone 15 HFC | Grey","houndstooth-fabric-iphone-15-case-premium-style-protection-copy-2","2025-02-06T14:13:47",300,1,2,"Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802"],["iPhone 15 HFC | Grey (Edition II)","iphone-15-cases-houndstooth-fabric-grey-edition-ii","2026-07-20T19:51:03",325,1,2,"IMG-3921.jpg?v=1791099671"],["iPhone 15 HFC | Navy (Edition II)","houndstooth-fabric-iphone-15-cases-navy-edition-ll","2026-04-30T13:48:51",325,1,2,"15_pro_max_01_b2d77a26-eb38-4dd7-b458-e163b92a10fa.jpg?v=1791282209"],["iPhone 15 HFC | Tan (Edition II)","houndstooth-fabric-iphone-15-cases-tan-edition-ll","2026-04-30T13:52:50",325,1,2,"15_pro_max_03_20d31e75-6406-4318-8e1b-17d1cc5e0c69.jpg?v=1791282176"],["iPhone 16 HFC | Burgundy (Edition II)","houndstooth-fabric-iphone-16-cases-burgundy-edition-ll","2026-04-30T14:02:57",325,1,2,"16_pro_max_02_1a0984ac-b17c-4cba-9cf5-5922148f029d.jpg?v=1791100069"],["iPhone 16 HFC | Grey","houndstooth-fabric-iphone-15-case-premium-style-protection-copy-1","2025-02-06T14:13:38",300,1,2,"Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802"],["iPhone 16 HFC | Grey (Edition II)","iphone-16-cases-houndstooth-fabric-grey-edition-ii","2026-07-22T11:58:30",325,1,2,"IMG-3921.jpg?v=1791099671"],["iPhone 16 HFC | Navy (Edition II)","houndstooth-fabric-iphone-16-cases-navy-edition-ll","2026-04-30T14:05:31",325,1,2,"16_pro_max_01_a22f3f71-f6c2-4dd7-a17d-03870876bd3f.jpg?v=1791100022"],["iPhone 16 HFC | Tan (Edition II)","houndstooth-fabric-iphone-16-cases-tan-edition-ll","2026-04-30T14:08:05",325,1,2,"16_pro_max_03_1c7a2370-a516-4a8e-b406-9defabbcfaaa.jpg?v=1791099918"],["iPhone 17 HFC | 4 Colors","iphone-17-cases-houndstooth-fabric-all-colors","2026-07-23T20:02:50",325,1,4,"46577F38-8BBD-4D38-8A0C-78A2665767A0.jpg?v=1791098833"],["iPhone 17 HFC | Burgundy (Edition ll)","houndstooth-fabric-iphone-17-cases-maroon-edition-ll","2026-04-30T11:23:28",325,0,2,"17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648"],["iPhone 17 HFC | Grey (Edition ll)","iphone-17-cases-houndstooth-fabric-grey-edition-ll","2026-07-22T13:03:19",325,0,2,"IMG-3938.png?v=1791098558"],["iPhone 17 HFC | Navy (Edition ll)","houndstooth-fabric-iphone-17-cases-navy-edition-ll","2026-04-30T11:18:24",325,0,2,"17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935"],["iPhone 17 HFC | Tan (Edition II)","houndstooth-fabric-iphone-17-cases-tan-edition-ll","2026-04-30T11:09:43",325,0,2,"17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068"],["iPhone 18 HFC | Burgundy (Edition ll)","iphone-18-hfc-burgundy-edition-ll","2026-10-06T14:50:30",325,0,2,"17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648"],["iPhone 18 HFC | Grey (Edition ll)","iphone-18-hfc-grey-edition-ll-copy","2026-11-03T15:36:29",325,0,2,"IMG-3938.png?v=1791098558"],["iPhone 18 HFC | Navy (Edition ll)","iphone-18-hfc-navy-edition-ll","2026-10-06T14:49:15",325,0,2,"17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935"],["iPhone 18 HFC | Tan (Edition II)","iphone-18-hfc-tan-edition-ii","2026-10-06T22:07:50",325,0,2,"17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068"],["iPhone Air HFC | Burgundy (Edition II)","houndstooth-fabric-iphone-17-air-case-burgundy","2026-04-30T11:47:27",325,1,1,"IMG-5039.png?v=1792185675"],["iPhone Air HFC | Grey (Edition II)","houndstooth-fabric-iphone-17-air-case-grey","2026-04-30T12:37:27",325,1,1,"17air04.2.jpg?v=1791282046"],["iPhone Air HFC | Navy (Edition ll)","houndstooth-fabric-iphone-17-air-case-navy","2026-04-30T11:50:46",325,1,1,"17air01.jpg?v=1791098435"],["iPhone Air HFC | Tan (Edition ll)","houndstooth-fabric-iphone-17-air-case-tan","2026-04-30T12:07:40",325,1,1,"17air03.jpg?v=1791098394"],["Pepita Houndstooth | Black & White","pepita-houndstooth-fabric","2026-05-05T15:30:36",820,1,1,"1.2.jpg?v=1777982566"],["Pepita Houndstooth | Navy & Green","pepita-houndstooth-fabric-navy-green","2026-05-05T15:42:50",820,1,1,"2.2_312f2f9e-34fd-4a96-806f-f792e68dc217.jpg?v=1777984939"],["TAILORMADE X ALOSTTRAVELER | iPhone 15 Series","iphone-15-tailormade-x-alosttraveler","2026-07-14T23:25:17",325,1,2,"IMG-0675.png?v=1791282320"],["TAILORMADE X ALOSTTRAVELER | iPhone 16 Series","iphone-16-tailormade-x-alosttraveler","2026-07-14T23:21:49",325,1,2,"BFDF1180-CE0F-44EA-A6CF-8803D71196F4.png?v=1791099876"],["TAILORMADE X ALOSTTRAVELER | iPhone 17 Series","iphone-17-tailormade-x-alosttraveler","2026-07-14T20:41:55",325,1,3,"IMG-0673.png?v=1791099401"],["TAILORMADE X ALOSTTRAVELER | iPhone 18 Series","tailormade-x-alosttraveler-iphone-18-series","2026-10-06T14:51:49",325,1,2,"IMG-0673.png?v=1791099401"],["TAILORMADE X ALOSTTRAVELER | iPhone Air Series","iphone-air-tailormade-x-alosttraveler","2026-07-19T11:04:13",325,1,1,"A4489F84-D27C-4284-A4CF-D9E40CAFA17F.png?v=1791098250"]];
+
+  let items = SNAPSHOT.map(([title, handle, created, price, available, variants, file], i) =>
+    ({title, handle, created, price, available: !!available, variants, image: file ? CDN + file : '', order: i}));
+
+  const grid = document.getElementById('shopGrid');
+  const sortSel = document.getElementById('shopSort');
+  const fmt = n => 'QAR ' + Number(n).toFixed(2).replace('.', ',');
+  const esc = s => s.replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  const bagIcon = '<svg aria-hidden="true" viewBox="0 0 20 20" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M16.608 9.421V6.906H3.392v8.016c0 .567.224 1.112.624 1.513.4.402.941.627 1.506.627H8.63M8.818 3h2.333c.618 0 1.212.247 1.649.686a2.35 2.35 0 0 1 .683 1.658v1.562H6.486V5.344c0-.622.246-1.218.683-1.658A2.33 2.33 0 0 1 8.82 3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.2" d="M14.608 12.563v5m2.5-2.5h-5"/></svg>';
+  const img = (src, w) => src + (src.includes('?') ? '&' : '?') + 'width=' + w;
+
+  function sorted(){
+    const v = sortSel.value, a = items.slice();
+    const by = {
+      'title-ascending': (x, y) => x.title.localeCompare(y.title, 'en', {sensitivity: 'base'}),
+      'title-descending': (x, y) => y.title.localeCompare(x.title, 'en', {sensitivity: 'base'}),
+      'price-ascending': (x, y) => x.price - y.price || x.order - y.order,
+      'price-descending': (x, y) => y.price - x.price || x.order - y.order,
+      'created-ascending': (x, y) => x.created.localeCompare(y.created),
+      'created-descending': (x, y) => y.created.localeCompare(x.created)
+    }[v] || ((x, y) => x.order - y.order);
+    return a.sort(by);
+  }
+  function render(){
+    document.getElementById('shopCount').textContent = items.length + ' items';
+    grid.innerHTML = sorted().map(p => {
+      const url = STORE + '/products/' + p.handle;
+      return `<li class="pc">
+        <a class="pc-link" href="${url}" aria-label="${esc(p.title)}"></a>
+        <div class="pc-media">
+          ${p.image ? `<img src="${img(p.image, 500)}" srcset="${img(p.image, 360)} 360w, ${img(p.image, 500)} 500w, ${img(p.image, 720)} 720w, ${img(p.image, 1000)} 1000w" sizes="(max-width:749px) 50vw, 25vw" alt="${esc(p.title)}" loading="lazy" decoding="async" width="500" height="500">` : ''}
+          ${p.available ? '' : '<span class="pc-badge">Sold out</span>'}
+          <a class="pc-add" href="${url}" aria-label="Choose ${esc(p.title)}">${bagIcon}</a>
+        </div>
+        <div class="pc-info"><p class="pc-title">${esc(p.title)}</p><p class="pc-price">${fmt(p.price)}</p></div>
+      </li>`;
+    }).join('');
+  }
+  sortSel.addEventListener('change', render);
+  document.querySelector('.shop-cols').addEventListener('click', e => {
+    const b = e.target.closest('button[data-view]'); if (!b) return;
+    const view = b.dataset.view;
+    grid.classList.toggle('zoom', view === 'zoom');
+    grid.classList.toggle('single', view === 'single');
+    document.querySelectorAll('.shop-cols button').forEach(x => x.setAttribute('aria-pressed', x.dataset.view === view));
+  });
+  render();
+
+  // Live data: same products, prices and stock as the store right now
+  fetch(STORE + '/collections/all/products.json?limit=250').then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+    if (!d.products || !d.products.length) return;
+    items = d.products.map((p, i) => ({title: p.title, handle: p.handle, created: (p.created_at || '').slice(0, 19), price: parseFloat(p.variants[0].price),
+      available: p.variants.some(v => v.available), variants: p.variants.length, image: p.images[0] ? p.images[0].src : '', order: i}));
+    render();
+  }).catch(() => {});
+
+  // the dark header would vanish on the white section, so tuck it away there
+  const bar = document.getElementById('bar');
+  new IntersectionObserver(([e]) => bar.classList.toggle('hide', e.isIntersecting), {rootMargin: '0px 0px -92% 0px'}).observe(document.getElementById('shop'));
+})();
+</script>
 
 <script type="module">
 import * as THREE from 'three';
