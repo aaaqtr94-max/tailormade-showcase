@@ -10,11 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 /* Layout: one fixed WebGL stage; transparent story sections scroll over it and drive the 3D with GSAP. */
+/* Palette: the store's own — white page, black type, soft greys (matches the Products section). */
 :root{
-  --bg:#0b0a09; --ink:#f3efe8; --muted:#a39d93; --line:rgba(243,239,232,.16); --gold:#c8a26b;
+  --bg:#ffffff; --ink:#000000; --muted:rgba(0,0,0,.6); --line:rgba(0,0,0,.12); --gold:#000000; --soft:#f4f4f4;
   --serif:'Instrument Serif',Georgia,serif; --sans:'Instrument Sans',system-ui,sans-serif;
   --gx:max(20px,env(safe-area-inset-left,0px)); --gxr:max(20px,env(safe-area-inset-right,0px));
-  color-scheme:dark;
+  color-scheme:light;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
@@ -22,8 +23,8 @@ body{overflow-x:hidden}
 a{color:inherit}
 :focus-visible{outline:1px solid var(--gold);outline-offset:4px}
 #gl{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0}
-.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.65))}
-.grain{position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:.07;
+.vignette{display:none}
+.grain{position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:.025;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation:grain 1.2s steps(5) infinite}
 @keyframes grain{20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}}
@@ -48,10 +49,10 @@ section{position:relative;padding-left:var(--gx);padding-right:var(--gxr)}
 .mono{width:min(58vw,330px);height:auto;overflow:visible}
 .mono path.pen{fill:none;stroke:#fff;stroke-linecap:butt;stroke-dasharray:1 1;stroke-dashoffset:1}
 .cue{position:absolute;left:0;right:0;bottom:calc(26px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center;gap:10px;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);opacity:0}
-.cue i{width:1px;height:42px;background:linear-gradient(var(--gold),transparent);animation:cue 2s ease-in-out infinite;transform-origin:top}
+.cue i{width:1px;height:42px;background:linear-gradient(var(--ink),transparent);animation:cue 2s ease-in-out infinite;transform-origin:top}
 @keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
-.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
 h2{font-family:var(--serif);font-weight:400;font-size:clamp(46px,7.4vw,112px);line-height:.9;text-wrap:balance;margin:.2em 0 .25em}
 h2 em{color:var(--gold)}
 .lede{color:var(--muted);font-size:clamp(15px,1.3vw,18px);line-height:1.6;max-width:30em}
@@ -76,23 +77,23 @@ h2 em{color:var(--gold)}
 
 .s3{height:200vh}
 .s3 .stick{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:flex-end}
-.panel{width:min(400px,100%);padding:28px;border:1px solid var(--line);border-radius:4px;background:rgba(11,10,9,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.panel{width:min(400px,100%);padding:28px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .panel h3{font-family:var(--serif);font-weight:400;font-size:clamp(40px,4.2vw,58px);line-height:.92;margin:.2em 0 .15em}
 .panel h3 em{color:var(--gold)}
 .panel .meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:14px 0 20px;font-size:14px;color:var(--muted)}
 .panel .meta b{font-weight:500;font-size:18px;color:var(--ink);font-variant-numeric:tabular-nums}
 .tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:3px 9px}
 .sw{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-bottom:22px}
-.sw button{aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.25);cursor:pointer;position:relative;overflow:hidden;transition:transform .3s;background:none;padding:0}
+.sw button{aspect-ratio:1;border-radius:50%;border:1px solid rgba(0,0,0,.18);cursor:pointer;position:relative;overflow:hidden;transition:transform .3s;background:none;padding:0}
 .sw button:hover{transform:scale(1.12)}
 .sw button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--ink)}
 .sw svg{position:absolute;inset:0;width:100%;height:100%}
 .models{display:flex;gap:8px;margin-bottom:22px}
 .models button{flex:1;min-height:42px;border-radius:99px;border:1px solid var(--line);background:none;color:var(--ink);font:inherit;font-size:12px;letter-spacing:.06em;cursor:pointer}
-.models button[aria-pressed="true"]{background:var(--ink);color:#111}
-.btn{display:flex;align-items:center;justify-content:center;min-height:50px;border-radius:99px;background:var(--ink);color:#111;text-decoration:none;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;transition:transform .3s}
+.models button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.btn{display:flex;align-items:center;justify-content:center;min-height:50px;border-radius:99px;background:var(--ink);color:#fff;text-decoration:none;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;transition:transform .3s}
 .btn:hover{transform:translateY(-2px)}
-.btn.off{background:rgba(255,255,255,.12);color:var(--muted)}
+.btn.off{background:var(--soft);color:var(--muted)}
 
 .s4{height:130vh}
 .s4 .stick{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding-bottom:calc(12vh + env(safe-area-inset-bottom,0px))}
@@ -161,7 +162,34 @@ h2 em{color:var(--gold)}
   .shop-grid.single{grid-template-columns:1fr}
   .pc-add{display:none}
 }
-.bar.hide{opacity:0!important;pointer-events:none}
+/* Product viewer: the picture grows out of its card, on the same page */
+.lb{position:fixed;inset:0;z-index:50;display:none;font-family:var(--sans);color:#000}
+.lb.open{display:block}
+.lb-bg{position:absolute;inset:0;background:#fff;opacity:0;transition:opacity .45s ease}
+.lb.show .lb-bg{opacity:1}
+.lb-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  padding:calc(64px + env(safe-area-inset-top,0px)) max(72px,env(safe-area-inset-right,0px)) calc(108px + env(safe-area-inset-bottom,0px)) max(72px,env(safe-area-inset-left,0px))}
+.lb-img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;cursor:zoom-in;transition:transform .45s cubic-bezier(.2,.7,.2,1);will-change:transform;user-select:none;-webkit-user-drag:none}
+.lb.zoomed .lb-img{cursor:zoom-out}
+.lb-fly{position:fixed;z-index:51;object-fit:cover;pointer-events:none}
+.lb-close,.lb-nav{position:absolute;z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;color:#000;display:grid;place-items:center;cursor:pointer;opacity:0;transition:opacity .35s .15s}
+.lb.show .lb-close,.lb.show .lb-nav{opacity:1}
+.lb-close{top:calc(16px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+.lb-nav{top:50%;margin-top:-22px}
+.lb-prev{left:max(16px,env(safe-area-inset-left,0px))}.lb-next{right:max(16px,env(safe-area-inset-right,0px))}
+.lb-nav[hidden]{display:none}
+.lb-info{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px max(24px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px));opacity:0;transform:translateY(10px);transition:opacity .4s .2s,transform .5s .2s}
+.lb.show .lb-info{opacity:1;transform:none}
+.lb-info p{margin:0;font-size:14px;line-height:1.4}
+.lb-dots{font-size:12px;color:rgba(0,0,0,.55);margin-top:2px}
+.lb-shop{flex:0 0 auto;display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:99px;background:#000;color:#fff;text-decoration:none;font-size:13px}
+.lb-shop.off{background:#f1f1f1;color:rgba(0,0,0,.6)}
+@media (max-width:749px){
+  .lb-stage{padding:calc(70px + env(safe-area-inset-top,0px)) 12px calc(120px + env(safe-area-inset-bottom,0px))}
+  .lb-nav{top:auto;bottom:calc(84px + env(safe-area-inset-bottom,0px));margin:0}
+  .lb-info{flex-direction:column;align-items:flex-start}
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -198,7 +226,7 @@ h2 em{color:var(--gold)}
           </g>
         </mask>
       </defs>
-      <path id="monoPath" mask="url(#monoMask)" fill="#f3efe8"/>
+      <path id="monoPath" mask="url(#monoMask)" fill="#000"/>
     </svg>
     <div class="cue" id="cue"><span>Scroll</span><i></i></div>
   </section>
@@ -208,15 +236,6 @@ h2 em{color:var(--gold)}
       <p class="eyebrow reveal">iPhone 18 Series</p>
       <h2 class="reveal">Carry your <em>standards.</em></h2>
       <p class="lede reveal">Alcantara and houndstooth, cut for the iPhone 18 Pro and Pro Max.</p>
-    </div>
-  </section>
-
-  <section class="s2" aria-label="Materials">
-    <div class="stick">
-      <div class="head" data-at="0.12"><p class="eyebrow">The details</p><h2>Look closer.</h2></div>
-      <div class="call c1" data-at="0.2"><i></i><div>Houndstooth top<small>The signature pattern of the HFC line.</small></div></div>
-      <div class="call c2" data-at="0.45"><i></i><div>Camera surround<small>A raised frame around the lenses.</small></div></div>
-      <div class="call c3" data-at="0.7"><i></i><div>Alcantara body<small>Soft to the touch, sure in the hand.</small></div></div>
     </div>
   </section>
 
@@ -272,6 +291,18 @@ h2 em{color:var(--gold)}
   <ul class="shop-grid" id="shopGrid"></ul>
 </section>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Product image" aria-hidden="true">
+  <div class="lb-bg" data-close></div>
+  <div class="lb-stage" data-close><img class="lb-img" id="lbImg" alt=""></div>
+  <button class="lb-close" data-close aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 2L4 7l5 5"/></svg></button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next image"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 2l5 5-5 5"/></svg></button>
+  <div class="lb-info">
+    <div><p id="lbTitle"></p><p id="lbPrice"></p><p class="lb-dots" id="lbDots"></p></div>
+    <a class="lb-shop" id="lbShop" href="#" target="_blank" rel="noopener">View on store</a>
+  </div>
+</div>
+
 <script>
 /* Products section: live from the store's /collections/all, with a snapshot (taken 2026-11-15) if the store can't be reached. */
 (() => {
@@ -281,7 +312,8 @@ h2 em{color:var(--gold)}
   const SNAPSHOT = [["Full Baby Blue Alcantara | iPhone 16 Series","iphone-16-full-alcantara-baby-blue-copy","2026-07-20T19:45:24",240,1,2,"B23E0D32-72C3-4D4B-9B73-4D8837A27921.jpg?v=1791099774"],["Full Baby Blue Alcantara | iPhone 17 Series","iphone-17-full-alcantara-baby-blue","2026-07-20T19:10:07",240,1,3,"IMG-3927.jpg?v=1791100496"],["Full Baby Blue Alcantara | iPhone 18 Series","full-baby-blue-alcantara-iphone-18-series","2026-10-06T14:42:25",240,1,2,"IMG-3927.jpg?v=1791100496"],["Full Baby Blue Alcantara | iPhone Air Series","full-baby-blue-alcantara-iphone-air-series","2026-07-20T19:16:39",240,1,1,"IMG-3929.jpg?v=1791098290"],["Full Black Alcantara | iPhone 16 Series","iphone-16-full-alcantara-black","2026-07-20T19:47:08",240,1,2,"EC31140C-30AD-4CB3-B351-7CB9DE78C243.jpg?v=1791099709"],["Full Black Alcantara | iPhone 17 Series","iphone-17-full-alcantara-black","2026-07-14T20:35:02",240,1,3,"4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632"],["Full Black Alcantara | iPhone 18 Series","full-black-alcantara-iphone-18-series","2026-10-06T14:46:46",240,1,2,"4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632"],["Full Black Alcantara | iPhone Air Series","iphone-air-full-alcantara-black","2026-07-19T10:50:19",240,1,1,"IMG-4827.png?v=1791098183"],["Full Pink Alcantara | iPhone 16 Series","iphone-16-full-alcantara-pink","2026-07-20T19:46:40",240,1,2,"IMG-3925.jpg?v=1791099742"],["Full Pink Alcantara | iPhone 17 Series","iphone-17-alcantara-phone-cases","2026-07-14T20:20:54",240,1,3,"12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100"],["Full Pink Alcantara | iPhone 18 Series","full-pink-alcantara-iphone-18-series","2026-10-06T14:47:46",240,1,2,"12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100"],["Full Pink Alcantara | iPhone Air Series","full-pink-alcantara-iphone-air-series","2026-07-20T19:15:58",240,1,1,"IMG-3924.jpg?v=1791098321"],["Grey Tartan Check | Beige & Black","highland-watch-roll-tartan-edition","2026-05-05T15:44:26",820,1,1,"3.2_10ee5926-3276-4fb0-8900-a8a597ec44d3.jpg?v=1777985050"],["iPhone 15 HFC | Burgundy (Edition ll)","houndstooth-fabric-iphone-15-cases-burgundy-edition-ll","2026-04-30T13:35:31",325,1,2,"15_pro_max_02_b5048119-7b55-4e25-80f2-b0df4b34e33e.jpg?v=1791282236"],["iPhone 15 HFC | Grey","houndstooth-fabric-iphone-15-case-premium-style-protection-copy-2","2025-02-06T14:13:47",300,1,2,"Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802"],["iPhone 15 HFC | Grey (Edition II)","iphone-15-cases-houndstooth-fabric-grey-edition-ii","2026-07-20T19:51:03",325,1,2,"IMG-3921.jpg?v=1791099671"],["iPhone 15 HFC | Navy (Edition II)","houndstooth-fabric-iphone-15-cases-navy-edition-ll","2026-04-30T13:48:51",325,1,2,"15_pro_max_01_b2d77a26-eb38-4dd7-b458-e163b92a10fa.jpg?v=1791282209"],["iPhone 15 HFC | Tan (Edition II)","houndstooth-fabric-iphone-15-cases-tan-edition-ll","2026-04-30T13:52:50",325,1,2,"15_pro_max_03_20d31e75-6406-4318-8e1b-17d1cc5e0c69.jpg?v=1791282176"],["iPhone 16 HFC | Burgundy (Edition II)","houndstooth-fabric-iphone-16-cases-burgundy-edition-ll","2026-04-30T14:02:57",325,1,2,"16_pro_max_02_1a0984ac-b17c-4cba-9cf5-5922148f029d.jpg?v=1791100069"],["iPhone 16 HFC | Grey","houndstooth-fabric-iphone-15-case-premium-style-protection-copy-1","2025-02-06T14:13:38",300,1,2,"Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802"],["iPhone 16 HFC | Grey (Edition II)","iphone-16-cases-houndstooth-fabric-grey-edition-ii","2026-07-22T11:58:30",325,1,2,"IMG-3921.jpg?v=1791099671"],["iPhone 16 HFC | Navy (Edition II)","houndstooth-fabric-iphone-16-cases-navy-edition-ll","2026-04-30T14:05:31",325,1,2,"16_pro_max_01_a22f3f71-f6c2-4dd7-a17d-03870876bd3f.jpg?v=1791100022"],["iPhone 16 HFC | Tan (Edition II)","houndstooth-fabric-iphone-16-cases-tan-edition-ll","2026-04-30T14:08:05",325,1,2,"16_pro_max_03_1c7a2370-a516-4a8e-b406-9defabbcfaaa.jpg?v=1791099918"],["iPhone 17 HFC | 4 Colors","iphone-17-cases-houndstooth-fabric-all-colors","2026-07-23T20:02:50",325,1,4,"46577F38-8BBD-4D38-8A0C-78A2665767A0.jpg?v=1791098833"],["iPhone 17 HFC | Burgundy (Edition ll)","houndstooth-fabric-iphone-17-cases-maroon-edition-ll","2026-04-30T11:23:28",325,0,2,"17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648"],["iPhone 17 HFC | Grey (Edition ll)","iphone-17-cases-houndstooth-fabric-grey-edition-ll","2026-07-22T13:03:19",325,0,2,"IMG-3938.png?v=1791098558"],["iPhone 17 HFC | Navy (Edition ll)","houndstooth-fabric-iphone-17-cases-navy-edition-ll","2026-04-30T11:18:24",325,0,2,"17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935"],["iPhone 17 HFC | Tan (Edition II)","houndstooth-fabric-iphone-17-cases-tan-edition-ll","2026-04-30T11:09:43",325,0,2,"17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068"],["iPhone 18 HFC | Burgundy (Edition ll)","iphone-18-hfc-burgundy-edition-ll","2026-10-06T14:50:30",325,0,2,"17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648"],["iPhone 18 HFC | Grey (Edition ll)","iphone-18-hfc-grey-edition-ll-copy","2026-11-03T15:36:29",325,0,2,"IMG-3938.png?v=1791098558"],["iPhone 18 HFC | Navy (Edition ll)","iphone-18-hfc-navy-edition-ll","2026-10-06T14:49:15",325,0,2,"17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935"],["iPhone 18 HFC | Tan (Edition II)","iphone-18-hfc-tan-edition-ii","2026-10-06T22:07:50",325,0,2,"17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068"],["iPhone Air HFC | Burgundy (Edition II)","houndstooth-fabric-iphone-17-air-case-burgundy","2026-04-30T11:47:27",325,1,1,"IMG-5039.png?v=1792185675"],["iPhone Air HFC | Grey (Edition II)","houndstooth-fabric-iphone-17-air-case-grey","2026-04-30T12:37:27",325,1,1,"17air04.2.jpg?v=1791282046"],["iPhone Air HFC | Navy (Edition ll)","houndstooth-fabric-iphone-17-air-case-navy","2026-04-30T11:50:46",325,1,1,"17air01.jpg?v=1791098435"],["iPhone Air HFC | Tan (Edition ll)","houndstooth-fabric-iphone-17-air-case-tan","2026-04-30T12:07:40",325,1,1,"17air03.jpg?v=1791098394"],["Pepita Houndstooth | Black & White","pepita-houndstooth-fabric","2026-05-05T15:30:36",820,1,1,"1.2.jpg?v=1777982566"],["Pepita Houndstooth | Navy & Green","pepita-houndstooth-fabric-navy-green","2026-05-05T15:42:50",820,1,1,"2.2_312f2f9e-34fd-4a96-806f-f792e68dc217.jpg?v=1777984939"],["TAILORMADE X ALOSTTRAVELER | iPhone 15 Series","iphone-15-tailormade-x-alosttraveler","2026-07-14T23:25:17",325,1,2,"IMG-0675.png?v=1791282320"],["TAILORMADE X ALOSTTRAVELER | iPhone 16 Series","iphone-16-tailormade-x-alosttraveler","2026-07-14T23:21:49",325,1,2,"BFDF1180-CE0F-44EA-A6CF-8803D71196F4.png?v=1791099876"],["TAILORMADE X ALOSTTRAVELER | iPhone 17 Series","iphone-17-tailormade-x-alosttraveler","2026-07-14T20:41:55",325,1,3,"IMG-0673.png?v=1791099401"],["TAILORMADE X ALOSTTRAVELER | iPhone 18 Series","tailormade-x-alosttraveler-iphone-18-series","2026-10-06T14:51:49",325,1,2,"IMG-0673.png?v=1791099401"],["TAILORMADE X ALOSTTRAVELER | iPhone Air Series","iphone-air-tailormade-x-alosttraveler","2026-07-19T11:04:13",325,1,1,"A4489F84-D27C-4284-A4CF-D9E40CAFA17F.png?v=1791098250"]];
 
   let items = SNAPSHOT.map(([title, handle, created, price, available, variants, file], i) =>
-    ({title, handle, created, price, available: !!available, variants, image: file ? CDN + file : '', order: i}));
+    ({title, handle, created, price, available: !!available, variants, image: file ? CDN + file : '', images: file ? [CDN + file] : [], order: i}));
+  let view = [];
 
   const grid = document.getElementById('shopGrid');
   const sortSel = document.getElementById('shopSort');
@@ -304,9 +336,10 @@ h2 em{color:var(--gold)}
   }
   function render(){
     document.getElementById('shopCount').textContent = items.length + ' items';
-    grid.innerHTML = sorted().map(p => {
+    view = sorted();
+    grid.innerHTML = view.map((p, k) => {
       const url = STORE + '/products/' + p.handle;
-      return `<li class="pc">
+      return `<li class="pc" data-k="${k}">
         <a class="pc-link" href="${url}" aria-label="${esc(p.title)}"></a>
         <div class="pc-media">
           ${p.image ? `<img src="${img(p.image, 500)}" srcset="${img(p.image, 360)} 360w, ${img(p.image, 500)} 500w, ${img(p.image, 720)} 720w, ${img(p.image, 1000)} 1000w" sizes="(max-width:749px) 50vw, 25vw" alt="${esc(p.title)}" loading="lazy" decoding="async" width="500" height="500">` : ''}
@@ -331,13 +364,102 @@ h2 em{color:var(--gold)}
   fetch(STORE + '/collections/all/products.json?limit=250').then(r => r.ok ? r.json() : Promise.reject()).then(d => {
     if (!d.products || !d.products.length) return;
     items = d.products.map((p, i) => ({title: p.title, handle: p.handle, created: (p.created_at || '').slice(0, 19), price: parseFloat(p.variants[0].price),
-      available: p.variants.some(v => v.available), variants: p.variants.length, image: p.images[0] ? p.images[0].src : '', order: i}));
+      available: p.variants.some(v => v.available), variants: p.variants.length, image: p.images[0] ? p.images[0].src : '',
+      images: p.images.map(m => m.src), order: i}));
     render();
   }).catch(() => {});
 
-  // the dark header would vanish on the white section, so tuck it away there
-  const bar = document.getElementById('bar');
-  new IntersectionObserver(([e]) => bar.classList.toggle('hide', e.isIntersecting), {rootMargin: '0px 0px -92% 0px'}).observe(document.getElementById('shop'));
+  /* ---- Viewer: clicking a product enlarges its picture here instead of leaving the page ---- */
+  const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), stage = lb.querySelector('.lb-stage');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ease = 'cubic-bezier(.2,.7,.2,1)';
+  let cur = null, idx = 0, fromCard = null, busy = false;
+
+  function fitRect(ratio){
+    const r = stage.getBoundingClientRect(), s = getComputedStyle(stage);
+    const pl = parseFloat(s.paddingLeft), pr = parseFloat(s.paddingRight), pt = parseFloat(s.paddingTop), pb = parseFloat(s.paddingBottom);
+    const aw = r.width - pl - pr, ah = r.height - pt - pb;
+    let w = aw, h = aw / ratio; if (h > ah) { h = ah; w = ah * ratio; }
+    return {left: r.left + pl + (aw - w) / 2, top: r.top + pt + (ah - h) / 2, width: w, height: h};
+  }
+  const px = o => ({left: o.left + 'px', top: o.top + 'px', width: o.width + 'px', height: o.height + 'px'});
+  function flyBetween(src, a, b, done){
+    const f = document.createElement('img'); f.className = 'lb-fly'; f.src = src; f.alt = '';
+    Object.assign(f.style, px(a)); document.body.appendChild(f);
+    if (reduce) { f.remove(); return done(); }
+    f.animate([px(a), px(b)], {duration: 560, easing: ease, fill: 'forwards'}).onfinish = () => { done(); requestAnimationFrame(() => f.remove()); };
+  }
+  function showInfo(){
+    document.getElementById('lbTitle').textContent = cur.title;
+    document.getElementById('lbPrice').textContent = fmt(cur.price) + (cur.available ? '' : ' · Sold out');
+    const n = cur.images.length;
+    document.getElementById('lbDots').textContent = n > 1 ? `${idx + 1} / ${n}` : '';
+    document.getElementById('lbPrev').hidden = document.getElementById('lbNext').hidden = n < 2;
+    const shop = document.getElementById('lbShop');
+    shop.href = STORE + '/products/' + cur.handle;
+    shop.textContent = cur.available ? 'View on store' : 'Sold out · View on store';
+    shop.classList.toggle('off', !cur.available);
+  }
+  function setImage(i, instant){
+    idx = (i + cur.images.length) % cur.images.length;
+    const src = img(cur.images[idx], 1600);
+    lb.classList.remove('zoomed'); lbImg.style.transform = '';
+    if (instant) { lbImg.src = src; showInfo(); return; }
+    lbImg.animate([{opacity: 1}, {opacity: 0}], {duration: 160, fill: 'forwards'}).onfinish = () => {
+      lbImg.src = src; showInfo();
+      lbImg.decode().catch(() => {}).then(() => lbImg.animate([{opacity: 0}, {opacity: 1}], {duration: 220, fill: 'forwards'}));
+    };
+  }
+  function openViewer(k){
+    if (busy || !view[k] || !view[k].images.length) return;
+    busy = true; cur = view[k]; fromCard = grid.querySelector(`[data-k="${k}"]`);
+    const thumb = fromCard.querySelector('.pc-media img');
+    const a = thumb.getBoundingClientRect(), ratio = thumb.naturalWidth / thumb.naturalHeight || 1;
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+    window.__lenis?.stop(); document.documentElement.style.overflow = 'hidden';
+    lbImg.style.opacity = 0; setImage(0, true);
+    requestAnimationFrame(() => lb.classList.add('show'));
+    thumb.style.visibility = 'hidden';
+    flyBetween(thumb.currentSrc || thumb.src, a, fitRect(ratio), () => {
+      lbImg.decode().catch(() => {}).then(() => { lbImg.style.opacity = 1; busy = false; lb.querySelector('.lb-close').focus({preventScroll: true}); });
+    });
+  }
+  function closeViewer(){
+    if (busy || !lb.classList.contains('open')) return;
+    busy = true;
+    const thumb = fromCard && fromCard.querySelector('.pc-media img');
+    const a = lbImg.getBoundingClientRect(), b = thumb ? thumb.getBoundingClientRect() : null;
+    const visible = b && b.bottom > 0 && b.top < innerHeight && idx === 0;
+    lb.classList.remove('show', 'zoomed'); lbImg.style.opacity = 0; lbImg.style.transform = '';
+    const finish = () => {
+      lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+      if (thumb) thumb.style.visibility = '';
+      window.__lenis?.start(); document.documentElement.style.overflow = '';
+      busy = false; fromCard?.querySelector('.pc-link')?.focus({preventScroll: true});
+    };
+    if (visible) flyBetween(lbImg.currentSrc || lbImg.src, a, b, finish);
+    else setTimeout(finish, reduce ? 0 : 420);
+  }
+  grid.addEventListener('click', e => {
+    const link = e.target.closest('.pc-link'); if (!link) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // still opens the store page in a new tab
+    e.preventDefault();
+    openViewer(+link.closest('.pc').dataset.k);
+  });
+  lb.addEventListener('click', e => { if (e.target === lbImg) return; if (e.target.closest('[data-close]') && !e.target.closest('.lb-shop')) closeViewer(); });
+  document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); setImage(idx - 1); });
+  document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); setImage(idx + 1); });
+  // click the big picture to zoom further in; move the pointer to look around
+  const aim = e => { const r = lbImg.getBoundingClientRect(); lbImg.style.transformOrigin = `${(e.clientX - r.left) / r.width * 100}% ${(e.clientY - r.top) / r.height * 100}%`; };
+  lbImg.addEventListener('click', e => { e.stopPropagation(); aim(e); const z = lb.classList.toggle('zoomed'); lbImg.style.transform = z ? 'scale(2.2)' : ''; });
+  lbImg.addEventListener('pointermove', e => { if (lb.classList.contains('zoomed')) aim(e); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeViewer();
+    if (e.key === 'ArrowRight' && cur.images.length > 1) setImage(idx + 1);
+    if (e.key === 'ArrowLeft' && cur.images.length > 1) setImage(idx - 1);
+  });
+
 })();
 </script>
 
@@ -375,8 +497,8 @@ renderer.toneMappingExposure = 1.05;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#0b0a09');
-scene.fog = new THREE.Fog('#0b0a09', 10, 22);
+scene.background = new THREE.Color('#ffffff');
+scene.fog = new THREE.Fog('#ffffff', 12, 24);
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
 scene.environmentIntensity = 0.55;
@@ -586,7 +708,8 @@ const svgData = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><
 const tmShapes = SVGLoader.createShapes(svgData.paths[0]);
 const tmGeo = new THREE.ExtrudeGeometry(tmShapes, {depth: 70, bevelEnabled: true, bevelThickness: 12, bevelSize: 6, bevelSegments: 12, curveSegments: 64});
 tmGeo.center(); tmGeo.rotateX(Math.PI);
-const tmMat = new THREE.MeshPhysicalMaterial({color: '#fff3dc', metalness: 1, roughness: .14, clearcoat: .8, clearcoatRoughness: .1, envMapIntensity: 3.4, transparent: true, opacity: 0});
+// black polished metal: reads like the store's black type on the white page
+const tmMat = new THREE.MeshPhysicalMaterial({color: '#2a2a2c', metalness: 1, roughness: .2, clearcoat: 1, clearcoatRoughness: .08, envMapIntensity: 1.6, transparent: true, opacity: 0});
 const tmLight = new THREE.PointLight('#fff2dc', 40, 14); tmLight.position.set(1.8, 1.6, 4); scene.add(tmLight);
 const tmLight2 = new THREE.PointLight('#c8a26b', 22, 12); tmLight2.position.set(-2.2, -.8, 3); scene.add(tmLight2);
 const tm = new THREE.Mesh(tmGeo, tmMat);
@@ -598,10 +721,11 @@ for (let i = 0; i < N; i++) { pos[i * 3] = (Math.random() - .5) * 16; pos[i * 3 
 const dustGeo = new THREE.BufferGeometry();
 dustGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
 const dot = (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'); const r = g.createRadialGradient(32, 32, 0, 32, 32, 32); r.addColorStop(0, 'rgba(255,240,210,1)'); r.addColorStop(1, 'rgba(255,240,210,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c); })();
-const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({size: .05, map: dot, color: '#e6c48f', transparent: true, opacity: .55, depthWrite: false, blending: THREE.AdditiveBlending}));
+const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({size: .035, map: dot, color: '#000000', transparent: true, opacity: .18, depthWrite: false}));
 scene.add(dust);
-const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'); const r = g.createRadialGradient(128, 128, 0, 128, 128, 128); r.addColorStop(0, 'rgba(200,162,107,.5)'); r.addColorStop(1, 'rgba(200,162,107,0)'); g.fillStyle = r; g.fillRect(0, 0, 256, 256); return new THREE.CanvasTexture(c); })();
-const floor = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), new THREE.MeshBasicMaterial({map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0}));
+const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'); const r = g.createRadialGradient(128, 128, 0, 128, 128, 128); r.addColorStop(0, 'rgba(0,0,0,.28)'); r.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = r; g.fillRect(0, 0, 256, 256); return new THREE.CanvasTexture(c); })();
+// soft contact shadow under the case (like a product shot on white)
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), new THREE.MeshBasicMaterial({map: glowTex, transparent: true, depthWrite: false, opacity: 0}));
 floor.rotation.x = -Math.PI / 2; floor.position.set(0, -2.1, -1.4); scene.add(floor); // behind the case, never over it
 
 /* ---------------- State driven by GSAP ---------------- */
@@ -731,22 +855,16 @@ function story(){
   tl.to(st, {tmY: 2.4, tmScale: .55, tmScroll: 0, duration: 1}, 0)
     .to(st, {caseY: () => (m() ? 1.15 : 0), caseX: () => (m() ? 0 : 1.35), caseRotY: -.42, glow: .32, duration: 1.2}, 0)
     .to('#cue', {opacity: 0, duration: .2}, 0)
-  // details: turn the case, push in on the camera surround, then pull back
-    .to(st, {caseX: 0, caseRotY: .9, caseY: () => (m() ? -.1 : -.5), caseScale: .84, duration: 1}, 1.6)
-    .to(st, {camZ: () => (m() ? 6.4 : 5.4), camY: .95, lookY: .95, caseRotY: -.25, caseRotX: .04, duration: 1}, 2.6)
-    .to(st, {camZ: 9, camY: 0, lookY: 0, caseRotY: .35, caseRotX: .14, caseScale: 1, duration: 1}, 3.6)
-  // configurator: case steps aside for the panel
-    .to(st, {caseX: () => (m() ? 0 : -1.25), caseY: () => (m() ? 1.55 : 0), caseScale: () => (m() ? .78 : 1), caseRotY: -.3, duration: 1}, 4.4)
-    .to({}, {duration: 1.2}, 5.4)
-  // finale: logo returns above the case
-    .to(st, {caseX: 0, caseY: -7, caseRotY: 1.6, glow: 0, duration: 1}, 6.6)
-    .to(st, {tmScroll: 1, tmY: () => (m() ? .9 : .75), tmScale: () => (m() ? 1.05 : .95), duration: 1}, 6.9);
+  // configurator: the case glides across (turning once) to make room for the panel
+    .to(st, {caseX: () => (m() ? 0 : -1.25), caseY: () => (m() ? 1.55 : 0), caseScale: () => (m() ? .78 : 1), caseRotY: () => -.3 + Math.PI * 2, duration: 1.1}, 1.5)
+    .to({}, {duration: 1}, 2.6)
+  // finale: the case drops away and the logo returns
+    .to(st, {caseX: 0, caseY: -7, glow: 0, duration: 1}, 3.7)
+    .to(st, {tmScroll: 1, tmY: () => (m() ? 1.45 : 1.4), tmScale: () => (m() ? .95 : .78), duration: 1}, 4.0);
 
   gsap.utils.toArray('.s1 .reveal, .s4 .reveal').forEach(el => gsap.to(el, {opacity: 1, y: 0, duration: 1, ease: 'power3.out',
     scrollTrigger: {trigger: el.closest('section'), start: 'top 55%', toggleActions: 'play none none reverse'}}));
   gsap.to('#panel', {opacity: 1, y: 0, duration: .9, ease: 'power3.out', scrollTrigger: {trigger: '.s3', start: 'top 30%', end: 'bottom 70%', toggleActions: 'play reverse play reverse'}});
-  document.querySelectorAll('.call, .s2 .head').forEach(el => ScrollTrigger.create({trigger: '.s2', start: () => `top+=${innerHeight * 2.2 * +el.dataset.at * .75} top`, end: 'bottom 60%',
-    onToggle: s => el.classList.toggle('on', s.isActive)}));
 }
 
 /* ---------------- Boot ---------------- */
