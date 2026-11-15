@@ -1,0 +1,410 @@
+<title>Tailormade Case Showcase</title>
+<style>:root{color-scheme:dark}html,body{background:#0d0c0b}body{min-height:100%}.tms-close{top:calc(16px + env(safe-area-inset-top,0px))!important;right:calc(16px + env(safe-area-inset-right,0px))!important}</style><!-- ===== TAILORMADE SHOWCASE: paste everything from here to "END" into a Shopify "Custom Liquid" section ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+.tms,.tms-detail,.tms-flyer{--bg:#0d0c0b;--ink:#f3efe8;--muted:#a39d93;--line:rgba(243,239,232,.14);--accent:#c8a26b;
+  --serif:'Instrument Serif',Georgia,serif;--sans:'Instrument Sans',system-ui,sans-serif;--ease:cubic-bezier(.7,0,.2,1);
+  color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.4;text-align:left;-webkit-font-smoothing:antialiased}
+.tms{position:relative;background:var(--bg);overflow:hidden}
+.tms *,.tms-detail *{box-sizing:border-box;margin:0;padding:0}
+.tms button,.tms-detail button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;letter-spacing:inherit;text-transform:none}
+.tms a,.tms-detail a{color:inherit}
+.tms :focus-visible,.tms-detail :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+.tms-wrap{transition:transform 1.1s var(--ease),filter 1.1s var(--ease)}
+.tms.diving .tms-wrap{transform:scale(1.1);filter:blur(10px) brightness(.3)}
+.tms-hero{padding:clamp(40px,8vh,80px) 16px 0;text-align:center}
+.tms-eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.tms-h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,8vw,104px);line-height:.95;margin:.16em 0 .22em;color:var(--ink)}
+.tms-tag{font-style:italic;color:var(--muted);font-size:15px;max-width:440px;margin:0 auto;line-height:1.5}
+.tms-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:clamp(12px,2vw,30px);padding:clamp(60px,11vh,110px) clamp(16px,3vw,40px) 20px}
+.tms-stage::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(255,255,255,.035),transparent 70%);border-top:1px solid var(--line);pointer-events:none}
+.tms-card{position:relative;width:clamp(100px,9vw,140px);flex:0 0 auto;text-align:center;z-index:1;display:flex;flex-direction:column;align-items:center}
+.tms-spot{position:absolute;left:50%;top:36%;width:260%;aspect-ratio:1;transform:translate(-50%,-50%) scale(.55);background:radial-gradient(closest-side,var(--glow),transparent 72%);opacity:0;transition:opacity .6s,transform .9s var(--ease);pointer-events:none;z-index:-1}
+.tms-case{display:block;width:100%;height:auto;transition:transform .7s var(--ease),filter .7s;filter:drop-shadow(0 24px 24px rgba(0,0,0,.55)) brightness(.8) saturate(.85)}
+.tms-refl{display:flex;align-items:flex-end;width:100%;height:46px;overflow:hidden;opacity:.14;transform:scaleY(-1);-webkit-mask-image:linear-gradient(to top,#000,transparent 75%);mask-image:linear-gradient(to top,#000,transparent 75%);transition:opacity .6s;pointer-events:none}
+.tms-refl svg{width:100%;height:auto;flex:0 0 auto;display:block}
+.tms-meta{margin-top:8px;transition:opacity .5s;display:block;min-height:64px}
+.tms-meta b{display:block;font-weight:400;font-size:12px;letter-spacing:.02em;line-height:1.35}
+.tms-meta i{display:block;font-style:normal;font-size:11px;color:var(--muted);margin-top:3px}
+.tms-badge{display:inline-block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:2px 8px;margin-top:6px;color:var(--muted)}
+.tms-stage.has-lit .tms-card:not(.lit) .tms-case{filter:drop-shadow(0 24px 24px rgba(0,0,0,.55)) brightness(.42) saturate(.6)}
+.tms-stage.has-lit .tms-card:not(.lit) .tms-meta{opacity:.35}
+.tms-card.lit .tms-case{transform:translateY(-14px);filter:drop-shadow(0 36px 36px rgba(0,0,0,.6)) drop-shadow(0 0 24px var(--glow)) brightness(1.05) saturate(1)}
+.tms-card.lit .tms-spot{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.tms-card.lit .tms-refl{opacity:.22}
+.tms-hint{text-align:center;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);padding:12px 16px 44px}
+.tms-hint .t{display:none}
+
+.tms-detail{position:fixed;inset:0;z-index:2147483000;visibility:hidden;pointer-events:none;overflow-y:auto;color:var(--ink);font-family:var(--sans)}
+.tms-detail.open{visibility:visible;pointer-events:auto}
+.tms-dbg{position:fixed;inset:0;background:radial-gradient(110% 80% at 30% 45%,var(--tint) 0%,#0a0908 68%);opacity:0;transition:opacity 1s var(--ease)}
+.tms-detail.open .tms-dbg{opacity:1}
+.tms-close{position:fixed;top:16px;right:16px;z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid var(--line)!important;display:grid;place-items:center;opacity:0;transition:opacity .5s,background .3s}
+.tms-close:hover{background:rgba(255,255,255,.08)}
+.tms-detail.ready .tms-close{opacity:1}
+.tms-grid{position:relative;min-height:100%;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:4vw;padding:clamp(16px,5vw,80px);max-width:1280px;margin:0 auto}
+.tms-visual{position:relative;display:grid;place-items:center;min-height:80vh}
+.tms-visual::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,var(--glow),transparent 70%);opacity:0;transform:scale(.6);transition:opacity 1s,transform 1.2s var(--ease)}
+.tms-detail.ready .tms-visual::before{opacity:.9;transform:none}
+.tms-slot{position:relative;width:min(32vh,290px);aspect-ratio:220/440;perspective:1100px}
+.tms-slot.hidden{visibility:hidden}
+.tms-float{width:100%;height:100%;animation:tmsFloat 6s ease-in-out infinite}
+.tms-float svg{width:100%;height:100%;display:block;filter:drop-shadow(0 50px 45px rgba(0,0,0,.6));transition:transform .5s ease-out,opacity .35s}
+.tms-float svg.swap{opacity:0}
+@keyframes tmsFloat{50%{transform:translateY(-12px)}}
+.tms-lens{position:absolute;right:4%;bottom:10%;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transform:scale(.6);transition:opacity .7s var(--ease) .35s,transform .7s var(--ease) .35s}
+.tms-detail.ready .tms-lens{opacity:1;transform:none}
+.tms-orb{width:clamp(96px,12vw,150px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:1px solid rgba(255,255,255,.35);box-shadow:0 20px 40px rgba(0,0,0,.5)}
+.tms-orb svg{width:100%;height:100%;display:block}
+.tms-lens span{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.tms-info>*{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .7s var(--ease)}
+.tms-detail.ready .tms-info>*{opacity:1;transform:none}
+.tms-detail.ready .tms-info>*:nth-child(2){transition-delay:.06s}
+.tms-detail.ready .tms-info>*:nth-child(3){transition-delay:.12s}
+.tms-detail.ready .tms-info>*:nth-child(4){transition-delay:.18s}
+.tms-detail.ready .tms-info>*:nth-child(5){transition-delay:.24s}
+.tms-detail.ready .tms-info>*:nth-child(6){transition-delay:.3s}
+.tms-detail.ready .tms-info>*:nth-child(7){transition-delay:.36s}
+.tms-detail.ready .tms-info>*:nth-child(8){transition-delay:.42s}
+.tms-info .fade{transition:opacity .3s}
+.tms-info .fade.out{opacity:0}
+.tms-h2{font-family:var(--serif);font-weight:400;font-size:clamp(48px,6.4vw,88px);line-height:.92;margin:.18em 0 .12em;color:var(--ink)}
+.tms-h2 em{color:var(--accent)}
+.tms-ed{color:var(--muted);font-size:14px;letter-spacing:.04em}
+.tms-price{font-size:20px;margin:20px 0 18px;letter-spacing:.03em}
+.tms-price small{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-left:10px;border:1px solid var(--line);border-radius:99px;padding:3px 9px;vertical-align:middle}
+.tms-mat{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.tms-mat li{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:6px 12px}
+.tms-lbl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.tms-models{display:flex;gap:8px;margin-bottom:22px}
+.tms-models button{min-height:40px;padding:0 16px;border-radius:99px;border:1px solid var(--line)!important;font-size:12px;letter-spacing:.06em}
+.tms-models button[aria-pressed="true"]{background:var(--ink);color:#111}
+.tms-models button.oos{color:var(--muted);text-decoration:line-through}
+.tms-models button[aria-pressed="true"].oos{color:#555}
+.tms-sw{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.tms-sw button{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.25)!important;position:relative;overflow:hidden;transition:transform .3s}
+.tms-sw button:hover{transform:scale(1.1)}
+.tms-sw button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--ink)}
+.tms-sw button svg{position:absolute;inset:0;width:100%;height:100%}
+.tms-cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.tms-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 28px;border-radius:99px;background:var(--ink)!important;color:#111!important;font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:500;transition:transform .3s}
+.tms-btn:hover{transform:translateY(-2px)}
+.tms-btn.ghost{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+.tms-btn[aria-disabled="true"]{background:rgba(255,255,255,.12)!important;color:var(--muted)!important;pointer-events:none}
+.tms-nav{display:flex;align-items:center;gap:16px;margin-top:34px;font-size:12px;letter-spacing:.2em;color:var(--muted)}
+.tms-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line)!important;display:grid;place-items:center}
+.tms-nav button:hover{background:rgba(255,255,255,.08)}
+.tms-flyer{position:fixed;z-index:2147483001;pointer-events:none;will-change:transform}
+.tms-flyer svg{width:100%;height:100%;display:block;filter:drop-shadow(0 40px 40px rgba(0,0,0,.6))}
+
+@media (max-width:1100px){
+  .tms-stage{justify-content:flex-start;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding-inline:calc(50% - 75px);gap:24px;scrollbar-width:none}
+  .tms-stage::-webkit-scrollbar{display:none}
+  .tms-card{width:150px;scroll-snap-align:center}
+  .tms-hint .m{display:none}.tms-hint .t{display:inline}
+}
+@media (max-width:760px){
+  .tms-grid{grid-template-columns:1fr;gap:0;padding:64px 16px 40px}
+  .tms-visual{min-height:50vh}
+  .tms-slot{width:min(24vh,190px)}
+  .tms-lens{right:0;bottom:4%}
+  .tms-orb{width:84px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tms *,.tms *::before,.tms *::after{animation:none!important;transition-duration:.01ms!important}
+}
+</style>
+
+<section class="tms" id="tms" aria-label="iPhone 18 Series showcase">
+  <div class="tms-wrap">
+    <div class="tms-hero">
+      <p class="tms-eyebrow">The Collection</p>
+      <h2 class="tms-h1">iPhone 18 Series</h2>
+      <p class="tms-tag">Bespoke luxury from the enthusiasts, crafted for those who carry their standards.</p>
+    </div>
+    <div class="tms-stage" id="tmsStage" role="list"></div>
+    <p class="tms-hint"><span class="m">Hover to light &nbsp;·&nbsp; Click to step inside</span><span class="t">Swipe to browse &nbsp;·&nbsp; Tap to step inside</span></p>
+  </div>
+
+  <div class="tms-detail" id="tmsDetail" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tmsTitle">
+    <div class="tms-dbg"></div>
+    <button class="tms-close" id="tmsClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
+    <div class="tms-grid">
+      <div class="tms-visual" id="tmsVisual">
+        <div class="tms-slot hidden" id="tmsSlot"><div class="tms-float" id="tmsFloat"></div></div>
+        <div class="tms-lens" aria-hidden="true"><div class="tms-orb" id="tmsOrb"></div><span id="tmsOrbLbl"></span></div>
+      </div>
+      <div class="tms-info">
+        <p class="tms-eyebrow">iPhone 18 Series</p>
+        <h3 class="tms-h2 fade" id="tmsTitle"></h3>
+        <p class="tms-ed fade" id="tmsEd"></p>
+        <p class="tms-price fade" id="tmsPrice"></p>
+        <ul class="tms-mat fade" id="tmsMat"></ul>
+        <div><p class="tms-lbl">Model</p><div class="tms-models" id="tmsModels"></div></div>
+        <div><p class="tms-lbl">Colour</p><div class="tms-sw" id="tmsSw"></div></div>
+        <div>
+          <div class="tms-cta" id="tmsCta"></div>
+          <div class="tms-nav">
+            <button id="tmsPrev" aria-label="Previous case"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 2L4 7l5 5"/></svg></button>
+            <span id="tmsCount"></span>
+            <button id="tmsNext" aria-label="Next case"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 2l5 5-5 5"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+/* ---------- Store settings ---------- */
+const STORE = 'https://www.tailormadeint.co';
+const COLLECTION = 'iphone-18-series';
+const ON_SITE = /(^|\.)tailormadeint\.co$/.test(location.hostname);
+
+/* Look of each case, matched by product handle. New products get a colour guessed from their title. */
+const LOOKS = {
+  'iphone-18-hfc-burgundy-edition-ll':           {color:'#5b1c26', glow:'rgba(190,60,80,.5)',   tint:'rgba(120,30,45,.55)'},
+  'full-black-alcantara-iphone-18-series':       {color:'#1e1e20', glow:'rgba(210,200,180,.32)',tint:'rgba(70,66,60,.55)'},
+  'iphone-18-hfc-navy-edition-ll':               {color:'#1c2a4e', glow:'rgba(70,110,210,.5)',  tint:'rgba(30,50,110,.55)'},
+  'full-pink-alcantara-iphone-18-series':        {color:'#e8c6c9', glow:'rgba(240,175,185,.5)', tint:'rgba(150,90,100,.5)', light:true},
+  'tailormade-x-alosttraveler-iphone-18-series': {color:'#efc12f', glow:'rgba(245,200,60,.5)',  tint:'rgba(150,115,20,.5)', light:true},
+  'iphone-18-hfc-grey-edition-ll-copy':          {color:'#5d5e61', glow:'rgba(200,205,215,.38)',tint:'rgba(80,84,92,.55)'},
+  'iphone-18-hfc-tan-edition-ii':                {color:'#9a3c22', glow:'rgba(220,110,60,.5)',  tint:'rgba(130,55,25,.55)'},
+  'full-baby-blue-alcantara-iphone-18-series':   {color:'#3c9fd6', glow:'rgba(90,180,240,.5)',  tint:'rgba(30,100,150,.55)'}
+};
+const GUESS = [['burgundy','#5b1c26'],['navy','#1c2a4e'],['black','#1e1e20'],['pink','#e8c6c9',1],['yellow','#efc12f',1],['grey','#5d5e61'],['gray','#5d5e61'],['tan','#9a3c22'],['blue','#3c9fd6'],['green','#2f4a3a'],['white','#ece9e4',1],['brown','#5a3a28']];
+
+/* Snapshot of the collection, used until (or unless) live data loads */
+let PRODUCTS = [
+  ['iphone-18-hfc-burgundy-edition-ll','iPhone 18 HFC | Burgundy (Edition II)',325,[[62824267022417,'18 Pro',0],[62824267055185,'18 Pro Max',0]],1],
+  ['full-black-alcantara-iphone-18-series','Full Black Alcantara | iPhone 18 Series',240,[[62824257978449,'18 Pro',1],[62824258011217,'18 Pro Max',1]],0],
+  ['iphone-18-hfc-navy-edition-ll','iPhone 18 HFC | Navy (Edition II)',325,[[62824258994257,'18 Pro',0],[62824259027025,'18 Pro Max',0]],1],
+  ['full-pink-alcantara-iphone-18-series','Full Pink Alcantara | iPhone 18 Series',240,[[62824258437201,'18 Pro',1],[62824258469969,'18 Pro Max',1]],0],
+  ['tailormade-x-alosttraveler-iphone-18-series','TAILORMADE X ALOSTTRAVELER | iPhone 18 Series',325,[[62824278327377,'18 Pro',1],[62824278360145,'18 Pro Max',1]],1],
+  ['iphone-18-hfc-grey-edition-ll-copy','iPhone 18 HFC | Grey (Edition II)',325,[[63392286015569,'18 Pro',0],[63392286048337,'18 Pro Max',0]],1],
+  ['iphone-18-hfc-tan-edition-ii','iPhone 18 HFC | Tan (Edition II)',325,[[62827181965393,'18 Pro',0],[62827181998161,'18 Pro Max',0]],1],
+  ['full-baby-blue-alcantara-iphone-18-series','Full Baby Blue Alcantara | iPhone 18 Series',240,[[62824256929873,'18 Pro',1],[62824256962641,'18 Pro Max',1]],0]
+].map(([handle,title,price,v,hfc]) => build(handle,title,price,v.map(([id,t,a]) => ({id,title:t,available:!!a})),!!hfc));
+
+function build(handle, title, price, variants, hfc){
+  const t = title.toLowerCase();
+  let look = LOOKS[handle];
+  if (!look) { const g = GUESS.find(([k]) => t.includes(k)) || ['', '#3a3632']; look = {color:g[1], light:!!g[2], glow:'rgba(210,200,180,.4)', tint:'rgba(70,66,60,.55)'}; }
+  const isHfc = hfc || /hfc|x\s/i.test(title);
+  const clean = title.replace(/\s*\|\s*iPhone 18 Series/i,'').replace(/Edition ll/i,'Edition II');
+  let t1, t2, ed;
+  const m = clean.match(/HFC\s*\|\s*(\w[\w\s]*?)\s*\((.+)\)/i);
+  if (m) { t1 = 'HFC'; t2 = m[1]; ed = m[2]; }
+  else if (/^full\s/i.test(clean)) { const w = clean.replace(/\s*Alcantara/i,''); t1 = w; t2 = 'Alcantara'; ed = 'iPhone 18 Series'; }
+  else if (/\sx\s/i.test(clean)) { const [a,b] = clean.split(/\s+x\s+/i); t1 = a.charAt(0)+a.slice(1).toLowerCase(); t2 = '× ' + b.charAt(0)+b.slice(1).toLowerCase(); ed = 'Collaboration'; }
+  else { t1 = clean; t2 = ''; ed = 'iPhone 18 Series'; }
+  return {handle, title:clean, price, variants, type:isHfc ? 'hfc' : 'full', t1, t2, edition:ed, ...look,
+          material:isHfc ? ['Houndstooth top','Alcantara body'] : ['Alcantara']};
+}
+const soldOut = p => !p.variants.some(v => v.available);
+const fmt = n => 'QAR ' + Number(n).toFixed(2).replace('.', ',');
+const HOUND = '<rect width="8" height="8" fill="#efece6"/><path d="M0 0h4v4H0zM4 4h4v4H4zM4 2l2-2h2L4 4zM0 6l2-2h2L0 8z" fill="#1b1b1b"/>';
+
+function noise(id, light, f){
+  const c = light ? 0 : 1;
+  return `<filter id="${id}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="${f}" numOctaves="2" seed="7" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 ${c} 0 0 0 0 ${c} 0 0 0 0 ${c} 1.3 0 0 0 -.5"/></filter>`;
+}
+function caseSVG(p, u){
+  const h = p.type === 'hfc', logo = p.light ? 'rgba(0,0,0,.25)' : 'rgba(255,255,255,.24)', btn = p.light ? 'rgba(0,0,0,.25)' : '#121214';
+  return `<svg viewBox="0 0 220 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${p.title}"><defs>
+<clipPath id="b${u}"><rect x="8" y="6" width="204" height="428" rx="40"/></clipPath>
+<pattern id="h${u}" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="scale(.95)">${HOUND}</pattern>${noise('n'+u, p.light, .85)}
+<linearGradient id="g${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".38"/></linearGradient>
+<linearGradient id="e${u}" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".4"/><stop offset=".07" stop-color="#000" stop-opacity="0"/><stop offset=".93" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></linearGradient>
+<linearGradient id="m${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f5f7"/><stop offset=".5" stop-color="#a9adb3"/><stop offset="1" stop-color="#e2e4e8"/></linearGradient></defs>
+<rect x="208" y="118" width="6" height="52" rx="3" fill="${btn}"/><rect x="6" y="104" width="6" height="30" rx="3" fill="${btn}"/><rect x="6" y="146" width="6" height="44" rx="3" fill="${btn}"/>
+<g clip-path="url(#b${u})"><rect width="220" height="440" fill="${p.color}"/><rect width="220" height="440" filter="url(#n${u})" opacity="${p.light ? .28 : .45}"/>
+${h ? `<rect width="220" height="124" fill="url(#h${u})"/><rect y="123" width="220" height="2.5" fill="rgba(0,0,0,.4)"/>` : ''}
+<rect width="220" height="440" fill="url(#g${u})"/><rect width="220" height="440" fill="url(#e${u})"/></g>
+<rect x="8.5" y="6.5" width="203" height="427" rx="39.5" fill="none" stroke="rgba(255,255,255,.14)"/>
+<rect x="24" y="22" width="172" height="86" rx="25" fill="${h ? `url(#m${u})` : '#111113'}"/><rect x="31" y="29" width="158" height="72" rx="19" fill="#0a0a0b"/>
+<text x="110" y="408" text-anchor="middle" font-family="Instrument Sans,Arial,sans-serif" font-size="7.5" letter-spacing="2.6" fill="${logo}">TAILORMADE</text></svg>`;
+}
+function lensSVG(p, u){
+  if (p.type === 'hfc') return `<svg viewBox="0 0 100 100"><defs><pattern id="lh${u}" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="scale(3.2) rotate(-8)">${HOUND}</pattern><radialGradient id="lv${u}"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient></defs><rect width="100" height="100" fill="url(#lh${u})"/><rect width="100" height="100" fill="url(#lv${u})"/></svg>`;
+  return `<svg viewBox="0 0 100 100"><defs>${noise('ln'+u, p.light, .55)}<radialGradient id="lv${u}" cx=".35" cy=".3"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient></defs><rect width="100" height="100" fill="${p.color}"/><rect width="100" height="100" filter="url(#ln${u})" opacity="${p.light ? .4 : .6}"/><rect width="100" height="100" fill="url(#lv${u})"/></svg>`;
+}
+function swatchSVG(p, k){
+  if (p.type === 'hfc') return `<svg viewBox="0 0 32 32"><defs><pattern id="sw${k}" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="scale(.7)">${HOUND}</pattern></defs><rect width="32" height="12" fill="url(#sw${k})"/><rect y="12" width="32" height="20" fill="${p.color}"/></svg>`;
+  return `<svg viewBox="0 0 32 32"><rect width="32" height="32" fill="${p.color}"/></svg>`;
+}
+
+/* ---------- Elements ---------- */
+const root = document.getElementById('tms');
+const stage = document.getElementById('tmsStage');
+const detail = document.getElementById('tmsDetail');
+const slot = document.getElementById('tmsSlot');
+const flt = document.getElementById('tmsFloat');
+const $ = id => document.getElementById(id);
+document.body.appendChild(detail);  /* keep the overlay above the theme's header */
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const noHover = matchMedia('(hover: none)').matches;
+let cards = [], current = 0, model = 0, busy = false, io = null;
+
+function renderStage(){
+  stage.innerHTML = '';
+  PRODUCTS.forEach((p, i) => {
+    const b = document.createElement('button');
+    b.className = 'tms-card';
+    b.setAttribute('role', 'listitem');
+    b.style.setProperty('--glow', p.glow);
+    b.setAttribute('aria-label', `${p.title}, ${fmt(p.price)}${soldOut(p) ? ', sold out' : ''}`);
+    b.innerHTML = `<span class="tms-spot"></span>${caseSVG(p, 'c' + i).replace('<svg', '<svg class="tms-case"')}
+      <span class="tms-refl" aria-hidden="true">${caseSVG(p, 'r' + i)}</span>
+      <span class="tms-meta"><b>${p.t1}${p.t2 ? ' ' + p.t2.replace('× ', '× ') : ''}</b><i>${fmt(p.price)}</i>${soldOut(p) ? '<span class="tms-badge">Sold out</span>' : ''}</span>`;
+    b.addEventListener('pointerenter', () => { if (!noHover) setLit(i); });
+    b.addEventListener('focus', () => setLit(i));
+    b.addEventListener('click', () => openDetail(i));
+    stage.appendChild(b);
+  });
+  cards = [...stage.children];
+  if (io) io.disconnect();
+  if (noHover || matchMedia('(max-width:1100px)').matches) {
+    io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setLit(cards.indexOf(e.target)); }), {root: stage, threshold: .75});
+    cards.forEach(c => io.observe(c));
+  }
+}
+stage.addEventListener('pointerleave', () => { if (!noHover) setLit(-1); });
+function setLit(i){ cards.forEach((c, k) => c.classList.toggle('lit', k === i)); stage.classList.toggle('has-lit', i >= 0); }
+
+/* ---------- Detail ---------- */
+function fill(i, animate){
+  const p = PRODUCTS[i];
+  if (i !== current || model >= p.variants.length) model = Math.max(0, p.variants.findIndex(v => v.available));
+  current = i;
+  detail.style.setProperty('--tint', p.tint);
+  detail.style.setProperty('--glow', p.glow);
+  const apply = () => {
+    $('tmsTitle').innerHTML = `${p.t1}${p.t2 ? `<br><em>${p.t2}</em>` : ''}`;
+    $('tmsEd').textContent = p.edition;
+    $('tmsMat').innerHTML = p.material.map(m => `<li>${m}</li>`).join('');
+    $('tmsOrb').innerHTML = lensSVG(p, 'l' + i);
+    $('tmsOrbLbl').textContent = p.type === 'hfc' ? 'Houndstooth' : 'Alcantara';
+    $('tmsSw').innerHTML = PRODUCTS.map((q, k) => `<button aria-label="${q.title}" aria-pressed="${k === i}" data-k="${k}">${swatchSVG(q, k)}</button>`).join('');
+    $('tmsCount').textContent = `${String(i + 1).padStart(2, '0')} / ${String(PRODUCTS.length).padStart(2, '0')}`;
+    flt.innerHTML = caseSVG(p, 'd' + i);
+    fillModel();
+  };
+  if (!animate) return apply();
+  const fades = detail.querySelectorAll('.tms-info .fade'), svg = flt.querySelector('svg');
+  fades.forEach(f => f.classList.add('out')); if (svg) svg.classList.add('swap');
+  setTimeout(() => {
+    apply();
+    const n = flt.querySelector('svg'); n.classList.add('swap');
+    requestAnimationFrame(() => requestAnimationFrame(() => { n.classList.remove('swap'); fades.forEach(f => f.classList.remove('out')); }));
+  }, 320);
+}
+function fillModel(){
+  const p = PRODUCTS[current], v = p.variants[model];
+  $('tmsModels').innerHTML = p.variants.map((x, k) => `<button data-m="${k}" aria-pressed="${k === model}" class="${x.available ? '' : 'oos'}">${x.title}</button>`).join('');
+  $('tmsPrice').innerHTML = fmt(p.price) + (v.available ? '' : '<small>Sold out</small>');
+  const url = `${STORE}/products/${p.handle}?variant=${v.id}`;
+  $('tmsCta').innerHTML = v.available
+    ? `<a class="tms-btn" href="${url}" data-add="${v.id}">Add to bag</a><a class="tms-btn ghost" href="${url}">Details</a>`
+    : `<span class="tms-btn" aria-disabled="true">Sold out</span><a class="tms-btn ghost" href="${url}">View product</a>`;
+}
+
+const center = (a, b) => ({dx: a.left + a.width / 2 - (b.left + b.width / 2), dy: a.top + a.height / 2 - (b.top + b.height / 2), s: a.width / b.width});
+function flyer(p, r){
+  const f = document.createElement('div');
+  f.className = 'tms-flyer';
+  Object.assign(f.style, {left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px'});
+  f.innerHTML = caseSVG(p, 'f' + Date.now());
+  document.body.appendChild(f);
+  return f;
+}
+function openDetail(i){
+  if (busy) return; busy = true;
+  fill(i, false);
+  const el = cards[i].querySelector('.tms-case'), r0 = el.getBoundingClientRect();
+  detail.classList.add('open'); detail.setAttribute('aria-hidden', 'false'); detail.scrollTop = 0;
+  root.classList.add('diving'); document.documentElement.style.overflow = 'hidden';
+  slot.classList.add('hidden');
+  const r1 = slot.getBoundingClientRect();
+  const done = () => { slot.classList.remove('hidden'); detail.classList.add('ready'); el.style.visibility = ''; busy = false; $('tmsClose').focus({preventScroll: true}); };
+  if (reduced) return done();
+  const f = flyer(PRODUCTS[i], r1); el.style.visibility = 'hidden';
+  const {dx, dy, s} = center(r0, r1);
+  f.animate([
+    {transform: `perspective(1200px) translate(${dx}px,${dy}px) scale(${s})`},
+    {transform: `perspective(1200px) translate(${dx * .3}px,${dy * .3 - 30}px) scale(${(s + 1) / 2 * 1.08}) rotateY(-26deg) rotateZ(-3deg)`, offset: .55},
+    {transform: 'perspective(1200px) translate(0,0) scale(1) rotateY(0) rotateZ(0)'}
+  ], {duration: 1150, easing: 'cubic-bezier(.65,0,.25,1)', fill: 'forwards'}).onfinish = () => { f.remove(); done(); };
+}
+function closeDetail(){
+  if (busy || !detail.classList.contains('open')) return; busy = true;
+  const i = current, card = cards[i], el = card.querySelector('.tms-case'), bg = detail.querySelector('.tms-dbg');
+  const r1 = slot.getBoundingClientRect();
+  detail.classList.remove('ready'); root.classList.remove('diving');
+  const finish = () => {
+    detail.classList.remove('open'); detail.setAttribute('aria-hidden', 'true');
+    el.style.visibility = ''; bg.style.opacity = ''; document.documentElement.style.overflow = '';
+    busy = false; card.focus({preventScroll: true});
+  };
+  stage.scrollTo({left: card.offsetLeft - stage.clientWidth / 2 + card.offsetWidth / 2});
+  if (reduced) return finish();
+  const r0 = el.getBoundingClientRect(), f = flyer(PRODUCTS[i], r1);
+  slot.classList.add('hidden'); el.style.visibility = 'hidden'; bg.style.opacity = '0';
+  const {dx, dy, s} = center(r0, r1);
+  f.animate([
+    {transform: 'perspective(1200px) translate(0,0) scale(1)'},
+    {transform: `perspective(1200px) translate(${dx * .6}px,${dy * .6 - 20}px) scale(${(s + 1) / 2}) rotateY(18deg)`, offset: .5},
+    {transform: `perspective(1200px) translate(${dx}px,${dy}px) scale(${s})`}
+  ], {duration: 950, easing: 'cubic-bezier(.65,0,.25,1)', fill: 'forwards'}).onfinish = () => { f.remove(); finish(); };
+}
+const go = d => { if (!busy) fill((current + d + PRODUCTS.length) % PRODUCTS.length, !reduced); };
+$('tmsClose').addEventListener('click', closeDetail);
+$('tmsPrev').addEventListener('click', () => go(-1));
+$('tmsNext').addEventListener('click', () => go(1));
+$('tmsSw').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (b && +b.dataset.k !== current && !busy) fill(+b.dataset.k, !reduced); });
+$('tmsModels').addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (b) { model = +b.dataset.m; fillModel(); } });
+$('tmsCta').addEventListener('click', async e => {
+  const a = e.target.closest('[data-add]');
+  if (!a || !ON_SITE) return;            /* off the store: the link opens the product page */
+  e.preventDefault();
+  a.textContent = 'Adding…';
+  try {
+    const r = await fetch('/cart/add.js', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({items: [{id: +a.dataset.add, quantity: 1}]})});
+    if (!r.ok) throw 0;
+    location.href = '/cart';
+  } catch { location.href = a.href; }
+});
+document.addEventListener('keydown', e => {
+  if (!detail.classList.contains('open')) return;
+  if (e.key === 'Escape') closeDetail();
+  if (e.key === 'ArrowRight') go(1);
+  if (e.key === 'ArrowLeft') go(-1);
+  if (e.key === 'Tab') {
+    const f = [...detail.querySelectorAll('button,a[href]')];
+    if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+    else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+  }
+});
+const vis = $('tmsVisual');
+vis.addEventListener('pointermove', e => {
+  const svg = flt.querySelector('svg'); if (!svg || reduced) return;
+  const r = vis.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+  svg.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 14}deg)`;
+});
+vis.addEventListener('pointerleave', () => { const svg = flt.querySelector('svg'); if (svg) svg.style.transform = ''; });
+
+renderStage();
+
+/* On the live store: refresh products, prices and stock from Shopify */
+if (ON_SITE) {
+  fetch(`/collections/${COLLECTION}/products.json?limit=50`).then(r => r.json()).then(d => {
+    if (!d.products || !d.products.length) return;
+    PRODUCTS = d.products.map(p => build(p.handle, p.title, parseFloat(p.variants[0].price),
+      p.variants.map(v => ({id: v.id, title: v.title, available: v.available})), (p.tags || []).includes('HFC')));
+    if (!detail.classList.contains('open')) renderStage();
+  }).catch(() => {});
+}
+})();
+</script>
+<!-- ===== END TAILORMADE SHOWCASE ===== -->

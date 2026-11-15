@@ -1,0 +1,5 @@
+# Netlify publishes the "deploy" folder. The build step copies the latest
+# index.html into it, so only index.html needs editing.
+[build]
+  command = "mkdir -p deploy && cp index.html deploy/index.html"
+  publish = "deploy"
