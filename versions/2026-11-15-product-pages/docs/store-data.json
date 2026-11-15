@@ -1,0 +1,3008 @@
+{
+  "fetched_at": "2026-11-15T16:15:09.830Z",
+  "store": "https://www.tailormadeint.co",
+  "collections": [
+    {
+      "handle": "all",
+      "title": "Products",
+      "description": "",
+      "product_handles": [
+        "iphone-16-full-alcantara-baby-blue-copy",
+        "iphone-17-full-alcantara-baby-blue",
+        "full-baby-blue-alcantara-iphone-18-series",
+        "full-baby-blue-alcantara-iphone-air-series",
+        "iphone-16-full-alcantara-black",
+        "iphone-17-full-alcantara-black",
+        "full-black-alcantara-iphone-18-series",
+        "iphone-air-full-alcantara-black",
+        "iphone-16-full-alcantara-pink",
+        "iphone-17-alcantara-phone-cases",
+        "full-pink-alcantara-iphone-18-series",
+        "full-pink-alcantara-iphone-air-series",
+        "highland-watch-roll-tartan-edition",
+        "houndstooth-fabric-iphone-15-cases-burgundy-edition-ll",
+        "houndstooth-fabric-iphone-15-case-premium-style-protection-copy-2",
+        "iphone-15-cases-houndstooth-fabric-grey-edition-ii",
+        "houndstooth-fabric-iphone-15-cases-navy-edition-ll",
+        "houndstooth-fabric-iphone-15-cases-tan-edition-ll",
+        "houndstooth-fabric-iphone-16-cases-burgundy-edition-ll",
+        "houndstooth-fabric-iphone-15-case-premium-style-protection-copy-1",
+        "iphone-16-cases-houndstooth-fabric-grey-edition-ii",
+        "houndstooth-fabric-iphone-16-cases-navy-edition-ll",
+        "houndstooth-fabric-iphone-16-cases-tan-edition-ll",
+        "iphone-17-cases-houndstooth-fabric-all-colors",
+        "houndstooth-fabric-iphone-17-cases-maroon-edition-ll",
+        "iphone-17-cases-houndstooth-fabric-grey-edition-ll",
+        "houndstooth-fabric-iphone-17-cases-navy-edition-ll",
+        "houndstooth-fabric-iphone-17-cases-tan-edition-ll",
+        "iphone-18-hfc-burgundy-edition-ll",
+        "iphone-18-hfc-grey-edition-ll-copy",
+        "iphone-18-hfc-navy-edition-ll",
+        "iphone-18-hfc-tan-edition-ii",
+        "houndstooth-fabric-iphone-17-air-case-burgundy",
+        "houndstooth-fabric-iphone-17-air-case-grey",
+        "houndstooth-fabric-iphone-17-air-case-navy",
+        "houndstooth-fabric-iphone-17-air-case-tan",
+        "pepita-houndstooth-fabric",
+        "pepita-houndstooth-fabric-navy-green",
+        "iphone-15-tailormade-x-alosttraveler",
+        "iphone-16-tailormade-x-alosttraveler",
+        "iphone-17-tailormade-x-alosttraveler",
+        "tailormade-x-alosttraveler-iphone-18-series",
+        "iphone-air-tailormade-x-alosttraveler"
+      ]
+    },
+    {
+      "handle": "best-selling-products",
+      "title": "Best Selling",
+      "description": "",
+      "published_at": "2026-10-29T13:55:33+03:00",
+      "image": null,
+      "product_handles": [
+        "iphone-17-tailormade-x-alosttraveler",
+        "pepita-houndstooth-fabric",
+        "iphone-18-hfc-tan-edition-ii",
+        "iphone-18-hfc-burgundy-edition-ll",
+        "iphone-18-hfc-navy-edition-ll"
+      ]
+    },
+    {
+      "handle": "phone-case",
+      "title": "iPhone 15 Series",
+      "description": "",
+      "published_at": "2025-02-05T15:34:22+03:00",
+      "image": "https://cdn.shopify.com/s/files/1/0625/1098/9393/collections/Untitled-2.jpg?v=1777715565",
+      "product_handles": [
+        "houndstooth-fabric-iphone-15-case-premium-style-protection-copy-2",
+        "houndstooth-fabric-iphone-15-cases-tan-edition-ll",
+        "houndstooth-fabric-iphone-15-cases-navy-edition-ll",
+        "houndstooth-fabric-iphone-15-cases-burgundy-edition-ll",
+        "iphone-15-cases-houndstooth-fabric-grey-edition-ii",
+        "iphone-15-tailormade-x-alosttraveler"
+      ]
+    },
+    {
+      "handle": "iphone-16-series",
+      "title": "iPhone 16 Series",
+      "description": "",
+      "published_at": "2026-02-18T10:47:56+03:00",
+      "image": "https://cdn.shopify.com/s/files/1/0625/1098/9393/collections/Untitled-2_1_23c123ea-751d-484b-ba31-9ff93a445adb.jpg?v=1777715532",
+      "product_handles": [
+        "houndstooth-fabric-iphone-15-case-premium-style-protection-copy-1",
+        "houndstooth-fabric-iphone-16-cases-tan-edition-ll",
+        "houndstooth-fabric-iphone-16-cases-navy-edition-ll",
+        "houndstooth-fabric-iphone-16-cases-burgundy-edition-ll",
+        "iphone-16-cases-houndstooth-fabric-grey-edition-ii",
+        "iphone-16-tailormade-x-alosttraveler",
+        "iphone-16-full-alcantara-black",
+        "iphone-16-full-alcantara-pink",
+        "iphone-16-full-alcantara-baby-blue-copy"
+      ]
+    },
+    {
+      "handle": "iphone-17-series",
+      "title": "iPhone 17 Series",
+      "description": "",
+      "published_at": "2026-02-07T17:40:21+03:00",
+      "image": "https://cdn.shopify.com/s/files/1/0625/1098/9393/collections/Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71_02.jpg?v=1777715473",
+      "product_handles": [
+        "houndstooth-fabric-iphone-17-cases-navy-edition-ll",
+        "houndstooth-fabric-iphone-17-cases-maroon-edition-ll",
+        "houndstooth-fabric-iphone-17-cases-tan-edition-ll",
+        "iphone-17-cases-houndstooth-fabric-grey-edition-ll",
+        "iphone-17-tailormade-x-alosttraveler",
+        "iphone-17-full-alcantara-black",
+        "iphone-17-alcantara-phone-cases",
+        "iphone-17-full-alcantara-baby-blue",
+        "iphone-17-cases-houndstooth-fabric-all-colors"
+      ]
+    },
+    {
+      "handle": "iphone-18-series",
+      "title": "iPhone 18 Series",
+      "description": "",
+      "published_at": "2026-10-06T14:43:13+03:00",
+      "image": "https://cdn.shopify.com/s/files/1/0625/1098/9393/collections/Untitled-2_02_61790068-40e0-441a-8eef-a0d0affd2541.jpg?v=1791286994",
+      "product_handles": [
+        "iphone-18-hfc-burgundy-edition-ll",
+        "full-black-alcantara-iphone-18-series",
+        "iphone-18-hfc-navy-edition-ll",
+        "tailormade-x-alosttraveler-iphone-18-series",
+        "full-pink-alcantara-iphone-18-series",
+        "iphone-18-hfc-grey-edition-ll-copy",
+        "iphone-18-hfc-tan-edition-ii",
+        "full-baby-blue-alcantara-iphone-18-series"
+      ]
+    },
+    {
+      "handle": "iphone-17-air",
+      "title": "iPhone Air Series",
+      "description": "",
+      "published_at": "2026-05-02T12:43:35+03:00",
+      "image": "https://cdn.shopify.com/s/files/1/0625/1098/9393/collections/17air04.2.jpg?v=1777715014",
+      "product_handles": [
+        "houndstooth-fabric-iphone-17-air-case-grey",
+        "houndstooth-fabric-iphone-17-air-case-navy",
+        "houndstooth-fabric-iphone-17-air-case-burgundy",
+        "houndstooth-fabric-iphone-17-air-case-tan",
+        "iphone-air-full-alcantara-black",
+        "iphone-air-tailormade-x-alosttraveler",
+        "full-baby-blue-alcantara-iphone-air-series",
+        "full-pink-alcantara-iphone-air-series"
+      ]
+    },
+    {
+      "handle": "tm-private-collection",
+      "title": "TM Private Collection",
+      "description": "",
+      "published_at": "2026-10-18T12:33:42+03:00",
+      "image": null,
+      "product_handles": []
+    },
+    {
+      "handle": "watch-rolls-collection",
+      "title": "Watch Roll Collection",
+      "description": "A refined collection of handcrafted watch rolls designed for collectors who value style. Featuring carefully selected heritage fabrics paired with premium leather accents.\n\nAvailable in multiple fabric patterns and color combinations, every watch roll is lined with a soft interior and thoughtfully constructed to keep your watches protected on the move.\n\nTimeless craftsmanship. Everyday practicality. Designed for the modern collector.",
+      "published_at": "2026-05-31T13:00:25+03:00",
+      "image": "https://cdn.shopify.com/s/files/1/0625/1098/9393/collections/B1A038B9-68DB-4AFB-BEAB-854ECEAD8BB1.jpg?v=1780481975",
+      "product_handles": [
+        "pepita-houndstooth-fabric",
+        "highland-watch-roll-tartan-edition",
+        "pepita-houndstooth-fabric-navy-green"
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": 15923333365841,
+      "title": "Full Baby Blue Alcantara | iPhone 16 Series",
+      "handle": "iphone-16-full-alcantara-baby-blue-copy",
+      "url": "https://www.tailormadeint.co/products/iphone-16-full-alcantara-baby-blue-copy",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-20T19:45:24+03:00",
+      "published_at": "2026-07-23T19:14:46+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "16 Pro",
+            "16 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59845708251217,
+          "title": "16 Pro",
+          "sku": "TM-PC-16P-FA-FBB-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59845708283985,
+          "title": "16 Pro Max",
+          "sku": "TM-PC-16PM-FA-FBB-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/B23E0D32-72C3-4D4B-9B73-4D8837A27921.jpg?v=1791099774",
+          "width": 908,
+          "height": 908,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-16-series"
+      ]
+    },
+    {
+      "id": 15923324125265,
+      "title": "Full Baby Blue Alcantara | iPhone 17 Series",
+      "handle": "iphone-17-full-alcantara-baby-blue",
+      "url": "https://www.tailormadeint.co/products/iphone-17-full-alcantara-baby-blue",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-20T19:10:07+03:00",
+      "published_at": "2026-07-23T19:14:35+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "17 Pro",
+            "17 Pro Max",
+            "iPhone 17"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59845682790481,
+          "title": "17 Pro",
+          "sku": "TM-PC-17P-FA-FBB-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "17 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59845682823249,
+          "title": "17 Pro Max",
+          "sku": "TM-PC-17PM-FA-FBB-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "17 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59845682856017,
+          "title": "iPhone 17",
+          "sku": "TM-PC-17-FA-FBB-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "iPhone 17",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3927.jpg?v=1791100496",
+          "width": 1024,
+          "height": 1024,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-series"
+      ]
+    },
+    {
+      "id": 16350523850833,
+      "title": "Full Baby Blue Alcantara | iPhone 18 Series",
+      "handle": "full-baby-blue-alcantara-iphone-18-series",
+      "url": "https://www.tailormadeint.co/products/full-baby-blue-alcantara-iphone-18-series",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-10-06T14:42:25+03:00",
+      "published_at": "2026-10-06T14:46:04+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "18 Pro",
+            "18 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 62824256929873,
+          "title": "18 Pro",
+          "sku": "TM-PC-17P-FA-FBB-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "18 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 62824256962641,
+          "title": "18 Pro Max",
+          "sku": "TM-PC-17PM-FA-FBB-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "18 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3927.jpg?v=1791100496",
+          "width": 1024,
+          "height": 1024,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-18-series"
+      ]
+    },
+    {
+      "id": 15923324911697,
+      "title": "Full Baby Blue Alcantara | iPhone Air Series",
+      "handle": "full-baby-blue-alcantara-iphone-air-series",
+      "url": "https://www.tailormadeint.co/products/full-baby-blue-alcantara-iphone-air-series",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-20T19:16:39+03:00",
+      "published_at": "2026-07-23T19:16:03+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59845684199505,
+          "title": "Default Title",
+          "sku": "TM-PC-AIR-FA-FBB-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3929.jpg?v=1791098290",
+          "width": 908,
+          "height": 908,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-air"
+      ]
+    },
+    {
+      "id": 15923333955665,
+      "title": "Full Black Alcantara | iPhone 16 Series",
+      "handle": "iphone-16-full-alcantara-black",
+      "url": "https://www.tailormadeint.co/products/iphone-16-full-alcantara-black",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-20T19:47:08+03:00",
+      "published_at": "2026-07-23T19:19:30+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "16 Pro",
+            "16 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59845709430865,
+          "title": "16 Pro",
+          "sku": "TM-PC-16P-FA-FBLACK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59845709463633,
+          "title": "16 Pro Max",
+          "sku": "TM-PC-16PM-FA-FBLACK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/EC31140C-30AD-4CB3-B351-7CB9DE78C243.jpg?v=1791099709",
+          "width": 908,
+          "height": 908,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-16-series"
+      ]
+    },
+    {
+      "id": 15908367171665,
+      "title": "Full Black Alcantara | iPhone 17 Series",
+      "handle": "iphone-17-full-alcantara-black",
+      "url": "https://www.tailormadeint.co/products/iphone-17-full-alcantara-black",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-14T20:35:02+03:00",
+      "published_at": "2026-07-23T19:20:29+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "17 Pro",
+            "17 Pro Max",
+            "iPhone 17"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59805896736849,
+          "title": "17 Pro",
+          "sku": "TM-PC-17P-FA-FBLACK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "17 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59805896769617,
+          "title": "17 Pro Max",
+          "sku": "TM-PC-17PM-FA-FBLACK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "17 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59805896802385,
+          "title": "iPhone 17",
+          "sku": "TM-PC-17-FA-FBLACK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "iPhone 17",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632",
+          "width": 1024,
+          "height": 1024,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-series"
+      ]
+    },
+    {
+      "id": 16350524244049,
+      "title": "Full Black Alcantara | iPhone 18 Series",
+      "handle": "full-black-alcantara-iphone-18-series",
+      "url": "https://www.tailormadeint.co/products/full-black-alcantara-iphone-18-series",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-10-06T14:46:46+03:00",
+      "published_at": "2026-10-06T14:46:46+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "18 Pro",
+            "18 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 62824257978449,
+          "title": "18 Pro",
+          "sku": "TM-PC-17P-FA-FBLACK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "18 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 62824258011217,
+          "title": "18 Pro Max",
+          "sku": "TM-PC-17PM-FA-FBLACK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "18 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/4D39B6EC-BD4C-4148-8078-C2FD500A0C81.jpg?v=1791100632",
+          "width": 1024,
+          "height": 1024,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-18-series"
+      ]
+    },
+    {
+      "id": 15922512265297,
+      "title": "Full Black Alcantara | iPhone Air Series",
+      "handle": "iphone-air-full-alcantara-black",
+      "url": "https://www.tailormadeint.co/products/iphone-air-full-alcantara-black",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-19T10:50:19+03:00",
+      "published_at": "2026-07-23T10:49:47+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59841856438353,
+          "title": "Default Title",
+          "sku": "TM-PC-AIR-FA-FBLACK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-4827.png?v=1791098183",
+          "width": 851,
+          "height": 852,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-air"
+      ]
+    },
+    {
+      "id": 15923333759057,
+      "title": "Full Pink Alcantara | iPhone 16 Series",
+      "handle": "iphone-16-full-alcantara-pink",
+      "url": "https://www.tailormadeint.co/products/iphone-16-full-alcantara-pink",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-20T19:46:40+03:00",
+      "published_at": "2026-07-23T19:10:45+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "16 Pro",
+            "16 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59845709201489,
+          "title": "16 Pro",
+          "sku": "TM-PC-16P-FA-FPINK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59845709234257,
+          "title": "16 Pro Max",
+          "sku": "TM-PC-16PM-FA-FPINK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3925.jpg?v=1791099742",
+          "width": 908,
+          "height": 908,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-16-series"
+      ]
+    },
+    {
+      "id": 15908326703185,
+      "title": "Full Pink Alcantara | iPhone 17 Series",
+      "handle": "iphone-17-alcantara-phone-cases",
+      "url": "https://www.tailormadeint.co/products/iphone-17-alcantara-phone-cases",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-14T20:20:54+03:00",
+      "published_at": "2026-07-23T19:09:18+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "17 Pro",
+            "17 Pro Max",
+            "iPhone 17"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59805817765969,
+          "title": "17 Pro",
+          "sku": "TM-PC-17P-FA-FPINK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "17 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59805817798737,
+          "title": "17 Pro Max",
+          "sku": "TM-PC-17PM-FA-FPINK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "17 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 60076965331025,
+          "title": "iPhone 17",
+          "sku": "TM-PC-17-FA-FPINK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "iPhone 17",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100",
+          "width": 1024,
+          "height": 1024,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-series"
+      ]
+    },
+    {
+      "id": 16350524407889,
+      "title": "Full Pink Alcantara | iPhone 18 Series",
+      "handle": "full-pink-alcantara-iphone-18-series",
+      "url": "https://www.tailormadeint.co/products/full-pink-alcantara-iphone-18-series",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-10-06T14:47:46+03:00",
+      "published_at": "2026-10-06T14:47:46+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "18 Pro",
+            "18 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 62824258437201,
+          "title": "18 Pro",
+          "sku": "TM-PC-17P-FA-FPINK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "18 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 62824258469969,
+          "title": "18 Pro Max",
+          "sku": "TM-PC-17PM-FA-FPINK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "18 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/12C52CD7-1716-4FAE-BF49-F576FB913C3A.jpg?v=1791101100",
+          "width": 1024,
+          "height": 1024,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-18-series"
+      ]
+    },
+    {
+      "id": 15923324813393,
+      "title": "Full Pink Alcantara | iPhone Air Series",
+      "handle": "full-pink-alcantara-iphone-air-series",
+      "url": "https://www.tailormadeint.co/products/full-pink-alcantara-iphone-air-series",
+      "vendor": "Tailormade",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-20T19:15:58+03:00",
+      "published_at": "2026-07-23T19:08:52+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59845684068433,
+          "title": "Default Title",
+          "sku": "TM-PC-AIR-FA-FPINK-02",
+          "price": "240.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3924.jpg?v=1791098321",
+          "width": 899,
+          "height": 899,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-air"
+      ]
+    },
+    {
+      "id": 15789944766545,
+      "title": "Grey Tartan Check | Beige & Black",
+      "handle": "highland-watch-roll-tartan-edition",
+      "url": "https://www.tailormadeint.co/products/highland-watch-roll-tartan-edition",
+      "vendor": "Tailormade. ",
+      "product_type": "watch roll",
+      "tags": [],
+      "created_at": "2026-05-05T15:44:26+03:00",
+      "published_at": "2026-06-03T12:50:49+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "The Grey Tartan Check Fabric & Grey Leather Watch Roll blends classic tartan fabric with refined grey leather accents. Designed to hold up to three watches, it features a soft charcoal suede lining, cushioned compartments, and an embroidered “TM” monogram for secure and stylish storage on the go.\n\nPlease note that layout variations may differ from the version shown in the product images.",
+      "description_html": "<p>The Grey Tartan Check Fabric &amp; Grey Leather Watch Roll blends classic tartan fabric with refined grey leather accents. Designed to hold up to three watches, it features a soft charcoal suede lining, cushioned compartments, and an embroidered “TM” monogram for secure and stylish storage on the go.</p>\n<p>Please note that layout variations may differ from the version shown in the product images.<br></p>",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59464804401233,
+          "title": "Default Title",
+          "sku": "TM-WR-26-GREY-01",
+          "price": "820.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 1110,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/3.2_10ee5926-3276-4fb0-8900-a8a597ec44d3.jpg?v=1777985050",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/3_6fc82afe-adbc-400a-9aaf-6b460a5ce7d3.jpg?v=1777985049",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 2
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/3.4.jpg?v=1777985049",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 3
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/3.3.jpg?v=1777985049",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 4
+        }
+      ],
+      "collections": [
+        "watch-rolls-collection"
+      ]
+    },
+    {
+      "id": 15780864950353,
+      "title": "iPhone 15 HFC | Burgundy (Edition ll)",
+      "handle": "houndstooth-fabric-iphone-15-cases-burgundy-edition-ll",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-cases-burgundy-edition-ll",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T13:35:31+03:00",
+      "published_at": "2026-05-02T12:45:20+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "15 Pro",
+            "15 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59442665619537,
+          "title": "15 Pro",
+          "sku": "TM-PC-15P-BUR-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59442665652305,
+          "title": "15 Pro Max",
+          "sku": "TM-PC-15PM-BUR-01",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/15_pro_max_02_b5048119-7b55-4e25-80f2-b0df4b34e33e.jpg?v=1791282236",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "phone-case"
+      ]
+    },
+    {
+      "id": 7724961366097,
+      "title": "iPhone 15 HFC | Grey",
+      "handle": "houndstooth-fabric-iphone-15-case-premium-style-protection-copy-2",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-case-premium-style-protection-copy-2",
+      "vendor": "Tailormade.",
+      "product_type": "",
+      "tags": [
+        "phone case",
+        "tailormade"
+      ],
+      "created_at": "2025-02-06T14:13:47+03:00",
+      "published_at": "2026-01-27T17:45:03+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "15 Pro",
+            "15 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59020405014609,
+          "title": "15 Pro",
+          "sku": "TM-PC-15P-GRY-01",
+          "price": "300.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59020405047377,
+          "title": "15 Pro Max",
+          "sku": "TM-PC-15PM-GRY-01",
+          "price": "300.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "15 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802",
+          "width": 1013,
+          "height": 1013,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "phone-case"
+      ]
+    },
+    {
+      "id": 15923335364689,
+      "title": "iPhone 15 HFC | Grey (Edition II)",
+      "handle": "iphone-15-cases-houndstooth-fabric-grey-edition-ii",
+      "url": "https://www.tailormadeint.co/products/iphone-15-cases-houndstooth-fabric-grey-edition-ii",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [
+        "phone case",
+        "tailormade"
+      ],
+      "created_at": "2026-07-20T19:51:03+03:00",
+      "published_at": "2026-07-23T19:04:16+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "15 Pro",
+            "15 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59845712052305,
+          "title": "15 Pro",
+          "sku": "TM-PC-15P-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59845712085073,
+          "title": "15 Pro Max",
+          "sku": "TM-PC-15PM-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3921.jpg?v=1791099671",
+          "width": 908,
+          "height": 908,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "phone-case"
+      ]
+    },
+    {
+      "id": 15780879269969,
+      "title": "iPhone 15 HFC | Navy (Edition II)",
+      "handle": "houndstooth-fabric-iphone-15-cases-navy-edition-ll",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-cases-navy-edition-ll",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T13:48:51+03:00",
+      "published_at": "2026-05-02T12:45:07+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "15 Pro",
+            "15 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59442697338961,
+          "title": "15 Pro",
+          "sku": "TM-PC-15P-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59442697371729,
+          "title": "15 Pro Max",
+          "sku": "TM-PC-15PM-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/15_pro_max_01_b2d77a26-eb38-4dd7-b458-e163b92a10fa.jpg?v=1791282209",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "phone-case"
+      ]
+    },
+    {
+      "id": 15780882972753,
+      "title": "iPhone 15 HFC | Tan (Edition II)",
+      "handle": "houndstooth-fabric-iphone-15-cases-tan-edition-ll",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-cases-tan-edition-ll",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T13:52:50+03:00",
+      "published_at": "2026-05-02T12:44:58+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "<p><br></p>",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "15 Pro",
+            "15 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59442703532113,
+          "title": "15 Pro",
+          "sku": "TM-PC-15P-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59442703564881,
+          "title": "15 Pro Max",
+          "sku": "TM-PC-15PM-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/15_pro_max_03_20d31e75-6406-4318-8e1b-17d1cc5e0c69.jpg?v=1791282176",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "phone-case"
+      ]
+    },
+    {
+      "id": 15780892344401,
+      "title": "iPhone 16 HFC | Burgundy (Edition II)",
+      "handle": "houndstooth-fabric-iphone-16-cases-burgundy-edition-ll",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-16-cases-burgundy-edition-ll",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T14:02:57+03:00",
+      "published_at": "2026-05-02T12:44:50+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "16 Pro",
+            "16 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59442717327441,
+          "title": "16 Pro",
+          "sku": "TM-PC-16P-BUR-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59442717360209,
+          "title": "16 Pro Max",
+          "sku": "TM-PC-16PM-BUR-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/16_pro_max_02_1a0984ac-b17c-4cba-9cf5-5922148f029d.jpg?v=1791100069",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-16-series"
+      ]
+    },
+    {
+      "id": 7724961333329,
+      "title": "iPhone 16 HFC | Grey",
+      "handle": "houndstooth-fabric-iphone-15-case-premium-style-protection-copy-1",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-15-case-premium-style-protection-copy-1",
+      "vendor": "Tailormade.",
+      "product_type": "",
+      "tags": [
+        "phone case",
+        "tailormade"
+      ],
+      "created_at": "2025-02-06T14:13:38+03:00",
+      "published_at": "2026-02-18T10:45:30+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "16 Pro",
+            "16 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59104379830353,
+          "title": "16 Pro",
+          "sku": "TM-PC-16P-GRY-01",
+          "price": "300.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59104379863121,
+          "title": "16 Pro Max",
+          "sku": "TM-PC-16PM-GRY-01",
+          "price": "300.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "16 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/Untitled-2_3b14181e-00f5-4189-99d1-94b8561a2c71.jpg?v=1791282802",
+          "width": 1013,
+          "height": 1013,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-16-series"
+      ]
+    },
+    {
+      "id": 15924533821521,
+      "title": "iPhone 16 HFC | Grey (Edition II)",
+      "handle": "iphone-16-cases-houndstooth-fabric-grey-edition-ii",
+      "url": "https://www.tailormadeint.co/products/iphone-16-cases-houndstooth-fabric-grey-edition-ii",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [
+        "phone case",
+        "tailormade"
+      ],
+      "created_at": "2026-07-22T11:58:30+03:00",
+      "published_at": "2026-07-23T19:04:27+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "16 Pro",
+            "16 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59850581901393,
+          "title": "16 Pro",
+          "sku": "TM-PC-16P-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59850581934161,
+          "title": "16 Pro Max",
+          "sku": "TM-PC-16PM-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3921.jpg?v=1791099671",
+          "width": 908,
+          "height": 908,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-16-series"
+      ]
+    },
+    {
+      "id": 15780894244945,
+      "title": "iPhone 16 HFC | Navy (Edition II)",
+      "handle": "houndstooth-fabric-iphone-16-cases-navy-edition-ll",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-16-cases-navy-edition-ll",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T14:05:31+03:00",
+      "published_at": "2026-05-02T12:44:20+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "16 Pro",
+            "16 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59442721357905,
+          "title": "16 Pro",
+          "sku": "TM-PC-16P-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59442721390673,
+          "title": "16 Pro Max",
+          "sku": "TM-PC-16PM-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/16_pro_max_01_a22f3f71-f6c2-4dd7-a17d-03870876bd3f.jpg?v=1791100022",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-16-series"
+      ]
+    },
+    {
+      "id": 15780897030225,
+      "title": "iPhone 16 HFC | Tan (Edition II)",
+      "handle": "houndstooth-fabric-iphone-16-cases-tan-edition-ll",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-16-cases-tan-edition-ll",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T14:08:05+03:00",
+      "published_at": "2026-05-02T12:44:12+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "<p> </p>\n<p> </p>",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "16 Pro",
+            "16 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59442724798545,
+          "title": "16 Pro",
+          "sku": "TM-PC-16P-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59442724831313,
+          "title": "16 Pro Max",
+          "sku": "TM-PC-16PM-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/16_pro_max_03_1c7a2370-a516-4a8e-b406-9defabbcfaaa.jpg?v=1791099918",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-16-series"
+      ]
+    },
+    {
+      "id": 15926761062481,
+      "title": "iPhone 17 HFC | 4 Colors",
+      "handle": "iphone-17-cases-houndstooth-fabric-all-colors",
+      "url": "https://www.tailormadeint.co/products/iphone-17-cases-houndstooth-fabric-all-colors",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-23T20:02:50+03:00",
+      "published_at": "2026-07-24T02:06:06+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "Navy",
+            "Tan",
+            "Grey",
+            "Burgundy"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59856328228945,
+          "title": "Navy",
+          "sku": "TM-PC-17-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Navy",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59856328261713,
+          "title": "Tan",
+          "sku": "TM-PC-17-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Tan",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59856328294481,
+          "title": "Grey",
+          "sku": "TM-PC-17-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Grey",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 60012075090001,
+          "title": "Burgundy",
+          "sku": "TM-PC-17-BUR-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Burgundy",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/46577F38-8BBD-4D38-8A0C-78A2665767A0.jpg?v=1791098833",
+          "width": 908,
+          "height": 908,
+          "alt": "",
+          "position": 1
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-4047.jpg?v=1793270660",
+          "width": 908,
+          "height": 908,
+          "alt": "",
+          "position": 2
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/0F148EDF-63F7-4014-BA65-1418D455ABB6.jpg?v=1785751109",
+          "width": 908,
+          "height": 1600,
+          "alt": "",
+          "position": 3
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/82070042-DDFB-4725-A89D-4BF55DD895D7.jpg?v=1786216515",
+          "width": 632,
+          "height": 1086,
+          "alt": "",
+          "position": 4
+        }
+      ],
+      "collections": [
+        "iphone-17-series"
+      ]
+    },
+    {
+      "id": 15780580065361,
+      "title": "iPhone 17 HFC | Burgundy (Edition ll)",
+      "handle": "houndstooth-fabric-iphone-17-cases-maroon-edition-ll",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-cases-maroon-edition-ll",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T11:23:28+03:00",
+      "published_at": "2026-10-27T11:31:59+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "17 Pro",
+            "17 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59441238900817,
+          "title": "17 Pro",
+          "sku": "TM-PC-17P-BUR-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "17 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59441238933585,
+          "title": "17 Pro Max",
+          "sku": "TM-PC-17PM-BUR-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "17 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-series"
+      ]
+    },
+    {
+      "id": 15924555415633,
+      "title": "iPhone 17 HFC | Grey (Edition ll)",
+      "handle": "iphone-17-cases-houndstooth-fabric-grey-edition-ll",
+      "url": "https://www.tailormadeint.co/products/iphone-17-cases-houndstooth-fabric-grey-edition-ll",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-22T13:03:19+03:00",
+      "published_at": "2026-10-27T11:32:10+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "17 Pro",
+            "17 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59850632396881,
+          "title": "17 Pro",
+          "sku": "TM-PC-17P-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "17 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59850632429649,
+          "title": "17 Pro Max",
+          "sku": "TM-PC-17PM-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "17 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3938.png?v=1791098558",
+          "width": 1127,
+          "height": 1128,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-series"
+      ]
+    },
+    {
+      "id": 15780575150161,
+      "title": "iPhone 17 HFC | Navy (Edition ll)",
+      "handle": "houndstooth-fabric-iphone-17-cases-navy-edition-ll",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-cases-navy-edition-ll",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T11:18:24+03:00",
+      "published_at": "2026-10-27T11:32:19+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "17 Pro",
+            "17 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59441223467089,
+          "title": "17 Pro",
+          "sku": "TM-PC-17P-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "17 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59441223499857,
+          "title": "17 Pro Max",
+          "sku": "TM-PC-17PM-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "17 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-series"
+      ]
+    },
+    {
+      "id": 15780565352529,
+      "title": "iPhone 17 HFC | Tan (Edition II)",
+      "handle": "houndstooth-fabric-iphone-17-cases-tan-edition-ll",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-cases-tan-edition-ll",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T11:09:43+03:00",
+      "published_at": "2026-10-27T11:32:31+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "17 Pro",
+            "17 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59441194172497,
+          "title": "17 Pro",
+          "sku": "TM-PC-17P-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "17 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59441194205265,
+          "title": "17 Pro Max",
+          "sku": "TM-PC-17PM-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "17 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068",
+          "width": 874,
+          "height": 874,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-series"
+      ]
+    },
+    {
+      "id": 16350526111825,
+      "title": "iPhone 18 HFC | Burgundy (Edition ll)",
+      "handle": "iphone-18-hfc-burgundy-edition-ll",
+      "url": "https://www.tailormadeint.co/products/iphone-18-hfc-burgundy-edition-ll",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [
+        "HFC"
+      ],
+      "created_at": "2026-10-06T14:50:30+03:00",
+      "published_at": "2026-10-27T11:32:47+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "18 Pro",
+            "18 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 62824267022417,
+          "title": "18 Pro",
+          "sku": "TM-PC-17P-BUR-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "18 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 62824267055185,
+          "title": "18 Pro Max",
+          "sku": "TM-PC-17PM-BUR-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "18 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_02_2fd5b0ae-c9b6-4dce-b922-12cae1757a86.jpg?v=1791098648",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "best-selling-products",
+        "iphone-18-series"
+      ]
+    },
+    {
+      "id": 16429904298065,
+      "title": "iPhone 18 HFC | Grey (Edition ll)",
+      "handle": "iphone-18-hfc-grey-edition-ll-copy",
+      "url": "https://www.tailormadeint.co/products/iphone-18-hfc-grey-edition-ll-copy",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-11-03T15:36:29+03:00",
+      "published_at": "2026-11-03T15:36:29+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "18 Pro",
+            "18 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 63392286015569,
+          "title": "18 Pro",
+          "sku": "TM-PC-17P-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "18 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 63392286048337,
+          "title": "18 Pro Max",
+          "sku": "TM-PC-17PM-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "18 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-3938.png?v=1791098558",
+          "width": 1127,
+          "height": 1128,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-18-series"
+      ]
+    },
+    {
+      "id": 16350524637265,
+      "title": "iPhone 18 HFC | Navy (Edition ll)",
+      "handle": "iphone-18-hfc-navy-edition-ll",
+      "url": "https://www.tailormadeint.co/products/iphone-18-hfc-navy-edition-ll",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-10-06T14:49:15+03:00",
+      "published_at": "2026-10-27T11:32:56+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "18 Pro",
+            "18 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 62824258994257,
+          "title": "18 Pro",
+          "sku": "TM-PC-17P-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "18 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 62824259027025,
+          "title": "18 Pro Max",
+          "sku": "TM-PC-17PM-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "18 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_01_e4e15cb4-cda9-4b14-b2e0-7b37b7e44f0e.jpg?v=1791098935",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "best-selling-products",
+        "iphone-18-series"
+      ]
+    },
+    {
+      "id": 16351230328913,
+      "title": "iPhone 18 HFC | Tan (Edition II)",
+      "handle": "iphone-18-hfc-tan-edition-ii",
+      "url": "https://www.tailormadeint.co/products/iphone-18-hfc-tan-edition-ii",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [
+        "HFC"
+      ],
+      "created_at": "2026-10-06T22:07:50+03:00",
+      "published_at": "2026-10-27T11:33:06+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "18 Pro",
+            "18 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 62827181965393,
+          "title": "18 Pro",
+          "sku": "TM-PC-17P-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "18 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 62827181998161,
+          "title": "18 Pro Max",
+          "sku": "TM-PC-17PM-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": false,
+          "option1": "18 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17_pro_max_03_59d7e22e-d9e6-4877-9c60-76d35a0d5f4f.jpg?v=1793090068",
+          "width": 874,
+          "height": 874,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "best-selling-products",
+        "iphone-18-series"
+      ]
+    },
+    {
+      "id": 15780610375761,
+      "title": "iPhone Air HFC | Burgundy (Edition II)",
+      "handle": "houndstooth-fabric-iphone-17-air-case-burgundy",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-air-case-burgundy",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T11:47:27+03:00",
+      "published_at": "2026-05-02T12:46:03+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59441347067985,
+          "title": "Default Title",
+          "sku": "TM-PC-AIR-BUR-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-5039.png?v=1792185675",
+          "width": 933,
+          "height": 933,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-air"
+      ]
+    },
+    {
+      "id": 15780744200273,
+      "title": "iPhone Air HFC | Grey (Edition II)",
+      "handle": "houndstooth-fabric-iphone-17-air-case-grey",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-air-case-grey",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T12:37:27+03:00",
+      "published_at": "2026-05-02T12:45:32+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59442010783825,
+          "title": "Default Title",
+          "sku": "TM-PC-AIR-GRY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17air04.2.jpg?v=1791282046",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-air"
+      ]
+    },
+    {
+      "id": 15780618633297,
+      "title": "iPhone Air HFC | Navy (Edition ll)",
+      "handle": "houndstooth-fabric-iphone-17-air-case-navy",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-air-case-navy",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T11:50:46+03:00",
+      "published_at": "2026-05-02T12:45:53+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59441395335249,
+          "title": "Default Title",
+          "sku": "TM-PC-AIR-NVY-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17air01.jpg?v=1791098435",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-air"
+      ]
+    },
+    {
+      "id": 15780655005777,
+      "title": "iPhone Air HFC | Tan (Edition ll)",
+      "handle": "houndstooth-fabric-iphone-17-air-case-tan",
+      "url": "https://www.tailormadeint.co/products/houndstooth-fabric-iphone-17-air-case-tan",
+      "vendor": "Tailormade. ",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-04-30T12:07:40+03:00",
+      "published_at": "2026-05-02T12:45:42+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59441600528465,
+          "title": "Default Title",
+          "sku": "TM-PC-AIR-TAN-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/17air03.jpg?v=1791098394",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-air"
+      ]
+    },
+    {
+      "id": 15789918453841,
+      "title": "Pepita Houndstooth | Black & White",
+      "handle": "pepita-houndstooth-fabric",
+      "url": "https://www.tailormadeint.co/products/pepita-houndstooth-fabric",
+      "vendor": "Tailormade. ",
+      "product_type": "watch roll",
+      "tags": [
+        "WATCH ROLL"
+      ],
+      "created_at": "2026-05-05T15:30:36+03:00",
+      "published_at": "2026-06-03T12:52:09+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "Meet your new travel essential — the Pepita Houndstooth Fabric (Black & White) & Tan Leather Watch Roll. Designed to hold up to three watches, it features a timeless black-and-white houndstooth exterior with refined cognac leather accents.\n\nInside, a soft terracotta suede lining and padded cushions keep your timepieces protected and secure, while gold-tone snap closures ensure everything stays in place.\n\nPerfect for travel or display, the Pepita Houndstooth Fabric is crafted for those who appreciate thoughtful detail.",
+      "description_html": "<div class=\"desc-text\">\n<p data-start=\"69\" data-end=\"260\">Meet your new travel essential — <strong>the Pepita Houndstooth Fabric (Black &amp; White) &amp; Tan Leather Watch Roll</strong>. Designed to hold up to three watches, it features a timeless black-and-white houndstooth exterior with refined cognac leather accents.</p>\n<p data-start=\"262\" data-end=\"427\">Inside, a soft terracotta suede lining and padded cushions keep your timepieces protected and secure, while gold-tone snap closures ensure everything stays in place.</p>\n<p data-start=\"429\" data-end=\"526\">Perfect for travel or display, the Pepita Houndstooth Fabric is crafted for those who appreciate thoughtful detail.</p>\n</div>",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59464771666001,
+          "title": "Default Title",
+          "sku": "TM-WR-WHITE-01",
+          "price": "820.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 1110,
+          "requires_shipping": true,
+          "taxable": false
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/1.2.jpg?v=1777982566",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/1_dd4a80d8-920e-4b5b-a225-bc1898733fda.jpg?v=1780480670",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 2
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/1.4.jpg?v=1777982566",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 3
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/1.3.jpg?v=1777982566",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 4
+        }
+      ],
+      "collections": [
+        "best-selling-products",
+        "watch-rolls-collection"
+      ]
+    },
+    {
+      "id": 15789939228753,
+      "title": "Pepita Houndstooth | Navy & Green",
+      "handle": "pepita-houndstooth-fabric-navy-green",
+      "url": "https://www.tailormadeint.co/products/pepita-houndstooth-fabric-navy-green",
+      "vendor": "Tailormade. ",
+      "product_type": "watch roll",
+      "tags": [
+        "WATCH ROLL"
+      ],
+      "created_at": "2026-05-05T15:42:50+03:00",
+      "published_at": "2026-06-03T12:51:43+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "The Pepita Houndstooth Fabric (Navy & Green) & Green Leather Watch Roll pairs classic houndstooth tweed with green leather accents. Designed for up to three watches, it features a soft suede lining, cushioned compartments, and an embossed “TM” monogram.",
+      "description_html": "<p>The Pepita Houndstooth Fabric (Navy &amp; Green) &amp; Green Leather Watch Roll pairs classic houndstooth tweed with green leather accents. Designed for up to three watches, it features a soft suede lining, cushioned compartments, and an embossed “TM” monogram.<br></p>",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59464798371921,
+          "title": "Default Title",
+          "sku": "TM-WR-GREEN-01",
+          "price": "820.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 1110,
+          "requires_shipping": true,
+          "taxable": false
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/2.2_312f2f9e-34fd-4a96-806f-f792e68dc217.jpg?v=1777984939",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 1
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/2_986e8eb7-cae1-4efe-b493-eaf161367a60.jpg?v=1777984939",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 2
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/2.4.jpg?v=1777984952",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 3
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/2.3.jpg?v=1777984939",
+          "width": 1080,
+          "height": 1080,
+          "alt": "",
+          "position": 4
+        }
+      ],
+      "collections": [
+        "watch-rolls-collection"
+      ]
+    },
+    {
+      "id": 15908909088849,
+      "title": "TAILORMADE X ALOSTTRAVELER | iPhone 15 Series",
+      "handle": "iphone-15-tailormade-x-alosttraveler",
+      "url": "https://www.tailormadeint.co/products/iphone-15-tailormade-x-alosttraveler",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-14T23:25:17+03:00",
+      "published_at": "2026-08-20T19:58:23+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "15 Pro",
+            "15 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59807065669713,
+          "title": "15 Pro",
+          "sku": "TM-PC-15P-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59807065702481,
+          "title": "15 Pro Max",
+          "sku": "TM-PC-15PM-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "15 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-0675.png?v=1791282320",
+          "width": 1440,
+          "height": 1440,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "phone-case"
+      ]
+    },
+    {
+      "id": 15908896342097,
+      "title": "TAILORMADE X ALOSTTRAVELER | iPhone 16 Series",
+      "handle": "iphone-16-tailormade-x-alosttraveler",
+      "url": "https://www.tailormadeint.co/products/iphone-16-tailormade-x-alosttraveler",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-14T23:21:49+03:00",
+      "published_at": "2026-08-20T19:58:12+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "16 Pro",
+            "16 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59807024513105,
+          "title": "16 Pro",
+          "sku": "TM-PC-16P-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59807024545873,
+          "title": "16 Pro Max",
+          "sku": "TM-PC-16PM-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "16 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/BFDF1180-CE0F-44EA-A6CF-8803D71196F4.png?v=1791099876",
+          "width": 1600,
+          "height": 1600,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-16-series"
+      ]
+    },
+    {
+      "id": 15908386373713,
+      "title": "TAILORMADE X ALOSTTRAVELER | iPhone 17 Series",
+      "handle": "iphone-17-tailormade-x-alosttraveler",
+      "url": "https://www.tailormadeint.co/products/iphone-17-tailormade-x-alosttraveler",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-14T20:41:55+03:00",
+      "published_at": "2026-08-20T19:58:40+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "17 Pro",
+            "17 Pro Max",
+            "iPhone 17"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59805941825617,
+          "title": "17 Pro",
+          "sku": "TM-PC-17P-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "17 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59805941858385,
+          "title": "17 Pro Max",
+          "sku": "TM-PC-17PM-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "17 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 59841861582929,
+          "title": "iPhone 17",
+          "sku": "TM-PC-17-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "iPhone 17",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-0673.png?v=1791099401",
+          "width": 1600,
+          "height": 1600,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "best-selling-products",
+        "iphone-17-series"
+      ]
+    },
+    {
+      "id": 16350527357009,
+      "title": "TAILORMADE X ALOSTTRAVELER | iPhone 18 Series",
+      "handle": "tailormade-x-alosttraveler-iphone-18-series",
+      "url": "https://www.tailormadeint.co/products/tailormade-x-alosttraveler-iphone-18-series",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [
+        "HFC"
+      ],
+      "created_at": "2026-10-06T14:51:49+03:00",
+      "published_at": "2026-10-06T14:51:49+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Series",
+          "values": [
+            "18 Pro",
+            "18 Pro Max"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 62824278327377,
+          "title": "18 Pro",
+          "sku": "TM-PC-17P-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "18 Pro",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        },
+        {
+          "id": 62824278360145,
+          "title": "18 Pro Max",
+          "sku": "TM-PC-17PM-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "18 Pro Max",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/IMG-0673.png?v=1791099401",
+          "width": 1600,
+          "height": 1600,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-18-series"
+      ]
+    },
+    {
+      "id": 15922512789585,
+      "title": "TAILORMADE X ALOSTTRAVELER | iPhone Air Series",
+      "handle": "iphone-air-tailormade-x-alosttraveler",
+      "url": "https://www.tailormadeint.co/products/iphone-air-tailormade-x-alosttraveler",
+      "vendor": "Tailormade.",
+      "product_type": "Phone Case",
+      "tags": [],
+      "created_at": "2026-07-19T11:04:13+03:00",
+      "published_at": "2026-08-20T19:58:49+03:00",
+      "updated_at": "2026-11-15T17:27:09+03:00",
+      "description_text": "",
+      "description_html": "",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": 59841858404433,
+          "title": "Default Title",
+          "sku": "TM-PC-AIR-YEL-AT-02",
+          "price": "325.00",
+          "compare_at_price": null,
+          "available": true,
+          "option1": "Default Title",
+          "option2": null,
+          "option3": null,
+          "grams": 300,
+          "requires_shipping": true,
+          "taxable": true
+        }
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0625/1098/9393/files/A4489F84-D27C-4284-A4CF-D9E40CAFA17F.png?v=1791098250",
+          "width": 1600,
+          "height": 1600,
+          "alt": "",
+          "position": 1
+        }
+      ],
+      "collections": [
+        "iphone-17-air"
+      ]
+    }
+  ]
+}
