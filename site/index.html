@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>TAILORMADE</title>
 <meta name="description" content="Bespoke luxury from the enthusiasts, crafted for those who carry their standards.">
+<meta name="build" content="dev">
+<script>
+/* Phones keep an old copy of the page; if a newer one is published, load it (publish-pages.ps1 stamps the build). */
+(function(){
+  var b = document.querySelector('meta[name=build]').content;
+  if (b === 'dev' || !window.fetch) return;
+  fetch(location.pathname + '?nc=' + Date.now(), {cache: 'no-store'}).then(function(r){ return r.text(); }).then(function(t){
+    var m = t.match(/<meta name="build" content="([^"]+)"/);
+    if (!m || m[1] === b) return;
+    var u = new URL(location.href);
+    if (u.searchParams.get('v') === m[1]) return;
+    u.searchParams.set('v', m[1]);
+    location.replace(u.href);
+  }).catch(function(){});
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">

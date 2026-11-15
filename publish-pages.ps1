@@ -7,7 +7,10 @@ $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $MyInvocation.MyCommand.Path
 $site = Join-Path $env:TEMP ("tm-pages-" + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force (Join-Path $site 'showcase'), (Join-Path $site 'experience') | Out-Null
-Copy-Item (Join-Path $repo 'site\index.html') (Join-Path $site 'index.html')
+$stamp = (Get-Date).ToString('yyyyMMddHHmmss')
+$page = [IO.File]::ReadAllText((Join-Path $repo 'site\index.html'), [Text.Encoding]::UTF8)
+$page = $page.Replace('<meta name="build" content="dev">', '<meta name="build" content="' + $stamp + '">')
+[IO.File]::WriteAllText((Join-Path $site 'index.html'), $page, (New-Object Text.UTF8Encoding $false))
 Copy-Item (Join-Path $repo 'experience\index.html') (Join-Path $site 'experience\index.html')
 Copy-Item (Join-Path $repo 'index.html') (Join-Path $site 'showcase\index.html')
 New-Item -ItemType Directory -Force (Join-Path $site 'assets') | Out-Null
