@@ -146,11 +146,14 @@ h2 em{color:var(--gold)}
     <h1 class="word" id="word" aria-label="Tailormade"></h1>
     <svg class="mono" id="mono" viewBox="560 560 1180 980" aria-hidden="true">
       <defs>
+        <filter id="monoSoft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="14"/></filter>
         <mask id="monoMask" maskUnits="userSpaceOnUse" x="560" y="560" width="1180" height="980">
-          <path class="pen" pathLength="1" stroke-width="112" d="M600 662 L1640 662"/>
-          <path class="pen" pathLength="1" stroke-width="112" d="M887 640 L887 1262"/>
-          <path class="pen" pathLength="1" stroke-width="124" d="M932 905 C990 800 1080 736 1160 736 C1230 740 1268 800 1268 880 L1268 1486"/>
-          <path class="pen" pathLength="1" stroke-width="124" d="M1313 892 C1370 800 1460 736 1550 736 C1620 740 1640 780 1640 860 L1640 1486"/>
+          <g filter="url(#monoSoft)">
+            <path class="pen" pathLength="1" stroke-width="116" d="M580 652 L1660 652"/>
+            <path class="pen" pathLength="1" stroke-width="150" d="M887 620 L887 1290"/>
+            <path class="pen" pathLength="1" stroke-width="160" d="M932 905 C990 800 1080 736 1160 736 C1230 740 1268 800 1268 880 L1268 1510"/>
+            <path class="pen" pathLength="1" stroke-width="160" d="M1313 892 C1370 800 1460 736 1550 736 C1620 740 1640 780 1640 860 L1640 1510"/>
+          </g>
         </mask>
       </defs>
       <path id="monoPath" mask="url(#monoMask)" fill="#f3efe8"/>
@@ -358,7 +361,7 @@ function applyProduct(p, animate){
 /* ---------------- 3D TM monogram ---------------- */
 const svgData = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><path d="${TM}"/></svg>`);
 const tmShapes = SVGLoader.createShapes(svgData.paths[0]);
-const tmGeo = new THREE.ExtrudeGeometry(tmShapes, {depth: 70, bevelEnabled: true, bevelThickness: 12, bevelSize: 6, bevelSegments: 6, curveSegments: 24});
+const tmGeo = new THREE.ExtrudeGeometry(tmShapes, {depth: 70, bevelEnabled: true, bevelThickness: 12, bevelSize: 6, bevelSegments: 12, curveSegments: 64});
 tmGeo.center(); tmGeo.rotateX(Math.PI);
 const tmMat = new THREE.MeshPhysicalMaterial({color: '#fff3dc', metalness: 1, roughness: .14, clearcoat: .8, clearcoatRoughness: .1, envMapIntensity: 3.4, transparent: true, opacity: 0});
 const tmLight = new THREE.PointLight('#fff2dc', 40, 14); tmLight.position.set(1.8, 1.6, 4); scene.add(tmLight);
@@ -380,7 +383,7 @@ floor.rotation.x = -Math.PI / 2; floor.position.y = -2.1; scene.add(floor);
 
 /* ---------------- State driven by GSAP ---------------- */
 const st = {
-  tmIntro: 0, tmScroll: 1, tmY: 0, tmScale: 1, tmSpin: 0,
+  tmIntro: 0, tmScroll: 1, tmY: 0, tmScale: 1, tmSpin: 0, idle: 0,
   caseY: -6, caseX: 0, caseRotY: -1.3, caseRotX: .12, caseScale: 1, spin: 0, glow: 0,
   camZ: 9, camY: 0, lookY: 0
 };
@@ -405,23 +408,25 @@ function resize(){
 addEventListener('resize', resize); resize();
 
 const clock = new THREE.Clock();
-const pointer = {x: 0, y: 0};
+const pointer = {x: 0, y: 0}, eased = {x: 0, y: 0};
 addEventListener('pointermove', e => { pointer.x = e.clientX / innerWidth - .5; pointer.y = e.clientY / innerHeight - .5; });
 
 function render(){
   const t = clock.getElapsedTime();
   const s = tmBase() * st.tmScale;
   tm.scale.setScalar(s);
-  tmRoot.position.y = logoFit.y + st.tmY + Math.sin(t * .8) * .04;
-  tmRoot.rotation.y = st.tmSpin + Math.sin(t * .45) * .25 + pointer.x * .3;
-  tmRoot.rotation.x = pointer.y * .15;
+  // ease the pointer so the logo glides instead of snapping to the mouse
+  eased.x += (pointer.x - eased.x) * .05; eased.y += (pointer.y - eased.y) * .05;
+  tmRoot.position.y = logoFit.y + st.tmY + Math.sin(t * .6) * .035 * st.idle;
+  tmRoot.rotation.y = st.tmSpin + st.idle * (Math.sin(t * .35) * .22 + eased.x * .3);
+  tmRoot.rotation.x = st.idle * eased.y * .12;
   tmMat.opacity = st.tmIntro * st.tmScroll;
   tm.visible = tmMat.opacity > .01;
 
   caseRoot.position.set(st.caseX, st.caseY + Math.sin(t * .9) * .05, 0);
   caseRoot.scale.setScalar(st.caseScale * (isMobile() ? .74 : 1));
-  phone.rotation.y = st.caseRotY + st.spin + Math.sin(t * .5) * .08 + pointer.x * .25;
-  phone.rotation.x = st.caseRotX + pointer.y * .12;
+  phone.rotation.y = st.caseRotY + st.spin + Math.sin(t * .5) * .08 + eased.x * .25;
+  phone.rotation.x = st.caseRotX + eased.y * .12;
   floor.material.opacity = st.glow;
   floor.position.y = st.caseY - 2.05 * st.caseScale;
 
@@ -430,7 +435,7 @@ function render(){
   dustGeo.attributes.position.needsUpdate = true;
   dust.rotation.y = t * .015;
 
-  camera.position.set(pointer.x * .3, st.camY - pointer.y * .2, st.camZ);
+  camera.position.set(eased.x * .3, st.camY - eased.y * .2, st.camZ);
   camera.lookAt(0, st.lookY, 0);
   renderer.render(scene, camera);
 }
@@ -478,13 +483,15 @@ function intro(){
   const tl = gsap.timeline();
   tl.to(letters, {opacity: 1, y: 0, filter: 'blur(0px)', duration: .5, ease: 'power3.out', stagger: .11}, .3)
     .to('.caret', {opacity: 0, duration: .3, onStart: () => { document.querySelector('.caret').style.animation = 'none'; }, onComplete: () => document.querySelector('.caret')?.remove()}, '+=.2')
-    .to(pens[0], {strokeDashoffset: 0, duration: .8, ease: 'power2.inOut'}, '-=.1')
-    .to(pens[1], {strokeDashoffset: 0, duration: .6, ease: 'power2.inOut'})
-    .to(pens[2], {strokeDashoffset: 0, duration: .9, ease: 'power2.inOut'}, '+=.1')
-    .to(pens[3], {strokeDashoffset: 0, duration: .9, ease: 'power2.inOut'})
-    // the flat monogram dissolves into the 3D one
-    .to('#mono', {opacity: 0, scale: 1.08, filter: 'blur(10px)', duration: 1, ease: 'power2.inOut'}, '+=.3')
-    .fromTo(st, {tmIntro: 0, tmSpin: -1.2}, {tmIntro: 1, tmSpin: 0, duration: 1.6, ease: 'power3.out'}, '<')
+    // one continuous pen: each stroke starts before the last one lands
+    .to(pens[0], {strokeDashoffset: 0, duration: 1.1, ease: 'sine.inOut'}, '-=.1')
+    .to(pens[1], {strokeDashoffset: 0, duration: .9, ease: 'sine.inOut'}, '-=.45')
+    .to(pens[2], {strokeDashoffset: 0, duration: 1.2, ease: 'sine.inOut'}, '-=.4')
+    .to(pens[3], {strokeDashoffset: 0, duration: 1.2, ease: 'sine.inOut'}, '-=.55')
+    // the drawn monogram melts into the 3D one in place, then it starts to breathe
+    .to('#mono', {opacity: 0, duration: 1.6, ease: 'sine.inOut'}, '+=.15')
+    .fromTo(st, {tmIntro: 0}, {tmIntro: 1, duration: 1.6, ease: 'sine.inOut'}, '<')
+    .to(st, {idle: 1, duration: 3, ease: 'sine.inOut'}, '-=.6')
     .to(['#bar', '#cue'], {opacity: 1, duration: .8, onStart: () => $('bar').classList.add('on')}, '-=.8');
   return tl;
 }
