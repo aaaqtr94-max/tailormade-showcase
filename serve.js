@@ -2,7 +2,7 @@
 const http = require('http'), fs = require('fs'), path = require('path');
 const root = __dirname, types = {'.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css'};
 http.createServer((req, res) => {
-  const p = path.join(root, decodeURIComponent(req.url.split('?')[0]).replace(/^\/$/, '/index.html'));
+  const p = path.join(root, decodeURIComponent(req.url.split('?')[0]).replace(/\/$/, '/index.html'));
   if (!p.startsWith(root)) { res.writeHead(403); return res.end(); }
   fs.readFile(p, (err, data) => {
     if (err) { res.writeHead(404); return res.end('Not found'); }
