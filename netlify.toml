@@ -1,5 +1,7 @@
-# Netlify publishes the "deploy" folder. The build step copies the latest
-# index.html into it, so only index.html needs editing.
+# Netlify publishes the "deploy" folder, rebuilt on every push:
+#   /           -> the 3D experience   (experience/index.html)
+#   /showcase/  -> the case shelf      (index.html, also the Shopify Custom Liquid source)
+#   /experience -> redirects to /
 [build]
-  command = "mkdir -p deploy && cp index.html deploy/index.html && rm -rf deploy/experience && cp -r experience deploy/experience"
+  command = "rm -rf deploy && mkdir -p deploy/showcase && cp experience/index.html deploy/index.html && cp index.html deploy/showcase/index.html && printf '/experience / 301\\n/experience/ / 301\\n' > deploy/_redirects"
   publish = "deploy"
