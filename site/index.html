@@ -914,8 +914,9 @@ const Film = (() => {
   const portrait = matchMedia('(max-aspect-ratio: 1/1)');
   const pick = () => { const n = portrait.matches ? 'bg-tall' : 'bg-wide'; if (!v.src.includes(n)) { v.poster = base + n + '.jpg'; v.src = base + n + '.mp4'; if (!reduce) v.play().catch(() => {}); } align(); };
   // keep the needle on the screen's centre line, which is the line between the product columns
-  // (measured: the needle stays at 52.22% across bg-tall and 50.73% across bg-wide for the whole film)
-  const NEEDLE = {'bg-tall': [1080, 1920, .5222], 'bg-wide': [1920, 1080, .5073]};
+  // (measured: the needle's shaft runs from x 541 to 566 of 1080 in bg-tall for the whole film, centre 553 = 51.2%;
+  //  in bg-wide the same film sits at 656 + x·0.5625 of 1920, so the centre is at 50.38%)
+  const NEEDLE = {'bg-tall': [1080, 1920, .5120], 'bg-wide': [1920, 1080, .5038]};
   function align(){
     const [vw, vh, nx] = NEEDLE[portrait.matches ? 'bg-tall' : 'bg-wide'];
     const W = innerWidth, H = innerHeight, shownW = vw * Math.max(W / vw, H / vh), slack = shownW - W;
