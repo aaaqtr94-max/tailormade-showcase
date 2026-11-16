@@ -910,9 +910,10 @@ document.getElementById('newsForm').addEventListener('submit', () => {
 const Film = (() => {
   const v = document.getElementById('film'), shade = document.getElementById('filmShade'), veil = document.getElementById('filmVeil');
   const base = location.pathname.includes('/site/') ? '../assets/video/' : 'assets/video/';
-  const portrait = matchMedia('(max-aspect-ratio: 1/1)');
-  const pick = () => { const n = portrait.matches ? 'bg-mobile' : 'bg-desktop'; if (!v.src.includes(n)) { v.poster = base + n + '.jpg'; v.src = base + n + '.mp4'; if (!reduce) v.play().catch(() => {}); } };
-  pick(); portrait.addEventListener('change', pick);
+  // phone upright: bg-mobile · iPad upright: bg-tablet (new stitching film) · computer and iPad sideways: bg-wide (same film, blurred sides)
+  const portrait = matchMedia('(max-aspect-ratio: 1/1)'), tablet = matchMedia('(min-width: 700px)');
+  const pick = () => { const n = portrait.matches ? (tablet.matches ? 'bg-tablet' : 'bg-mobile') : 'bg-wide'; if (!v.src.includes(n)) { v.poster = base + n + '.jpg'; v.src = base + n + '.mp4'; if (!reduce) v.play().catch(() => {}); } };
+  pick(); portrait.addEventListener('change', pick); tablet.addEventListener('change', pick);
   function update(){
     const op = document.getElementById('opening');
     // on the home opening the film is clear; everywhere else it sits behind a white wash
