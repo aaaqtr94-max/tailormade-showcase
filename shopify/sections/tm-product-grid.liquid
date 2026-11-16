@@ -1,0 +1,534 @@
+{%- comment -%}
+  TAILORMADE product grid: reads the products straight from the store, so prices, photos and
+  "Sold out" are always current. Cards lean toward the pointer, open in a 3D view, and link to
+  the store's own product page. Single-option products can be added to the cart from the card.
+{%- endcomment -%}
+{%- liquid
+  assign coll = section.settings.collection
+  if coll == blank
+    assign coll = collections.all
+  endif
+  assign limit = section.settings.limit
+  assign cols = section.settings.columns | plus: 0
+  assign vw = 100 | divided_by: cols
+  assign sizes = '(max-width: 749px) ' | append: '50vw, ' | append: vw | append: 'vw'
+  if section.settings.columns_mobile == '1'
+    assign sizes = '(max-width: 749px) 100vw, ' | append: vw | append: 'vw'
+  endif
+-%}
+
+<div
+  class="tmg"
+  id="tmg-{{ section.id }}"
+  data-tmg
+  data-sort="{{ section.settings.sort }}"
+  data-view3d="{{ section.settings.view_3d }}"
+  data-tilt="{{ section.settings.tilt }}"
+  data-cart="{{ routes.cart_url }}"
+  data-cart-add="{{ routes.cart_add_url }}"
+  style="--tmg-cols: {{ cols }}; --tmg-cols-m: {{ section.settings.columns_mobile }}; --tmg-pt: {{ section.settings.padding_top }}px; --tmg-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="tmg-head">
+    {%- if section.settings.title != blank -%}
+      <h2 class="tmg-title tmg-rv">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="tmg-desc tmg-rv">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_toolbar -%}
+    <div class="tmg-bar">
+      <span class="tmg-count">{{ coll.products_count | at_most: limit }} items</span>
+      <div class="tmg-sort">
+        <label for="tmg-sort-{{ section.id }}">Sort</label>
+        <svg aria-hidden="true" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <select id="tmg-sort-{{ section.id }}">
+          <option value="manual">Featured</option>
+          <option value="title-ascending">Alphabetically, A-Z</option>
+          <option value="title-descending">Alphabetically, Z-A</option>
+          <option value="price-ascending">Price, low to high</option>
+          <option value="price-descending">Price, high to low</option>
+          <option value="created-ascending">Date, old to new</option>
+          <option value="created-descending">Date, new to old</option>
+        </select>
+      </div>
+      <div class="tmg-cols" role="group" aria-label="Column grid">
+        <button type="button" class="d" data-view="default" aria-pressed="true" aria-label="Default"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.5" y="1.5" width="5" height="5" rx="1.5"/><rect x="9.5" y="1.5" width="5" height="5" rx="1.5"/><rect x="1.5" y="9.5" width="5" height="5" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.5"/></svg></button>
+        <button type="button" class="d" data-view="zoom" aria-pressed="false" aria-label="Zoom out"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" opacity=".55"><circle cx="2.5" cy="2.5" r="1"/><circle cx="8" cy="2.5" r="1"/><circle cx="13.5" cy="2.5" r="1"/><circle cx="2.5" cy="8" r="1"/><circle cx="8" cy="8" r="1"/><circle cx="13.5" cy="8" r="1"/><circle cx="2.5" cy="13.5" r="1"/><circle cx="8" cy="13.5" r="1"/><circle cx="13.5" cy="13.5" r="1"/></svg></button>
+        <button type="button" class="m" data-view="single" aria-pressed="false" aria-label="One per row"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3.5" y="1.5" width="9" height="13" rx="1.5"/></svg></button>
+        <button type="button" class="m" data-view="default" aria-pressed="true" aria-label="Two per row"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.5" y="1.5" width="5" height="5" rx="1.5"/><rect x="9.5" y="1.5" width="5" height="5" rx="1.5"/><rect x="1.5" y="9.5" width="5" height="5" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.5"/></svg></button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} paginate lifts Shopify's 50-product cap to 250 {%- endcomment -%}
+  {%- paginate coll.products by limit -%}
+  <ul class="tmg-grid" role="list">
+    {%- for product in coll.products -%}
+      {%- liquid
+        assign loading = 'lazy'
+        if forloop.index <= cols
+          assign loading = 'eager'
+        endif
+        assign quick = 0
+        if product.variants.size == 1 and product.available
+          assign quick = product.selected_or_first_available_variant.id
+        endif
+      -%}
+      <li
+        class="tmg-card"
+        data-i="{{ forloop.index0 }}"
+        data-handle="{{ product.handle }}"
+        data-title="{{ product.title | escape }}"
+        data-price="{{ product.price }}"
+        data-created="{{ product.created_at | date: '%s' }}"
+      >
+        <a class="tmg-link" href="{{ product.url }}" aria-label="{{ product.title | escape }}"></a>
+        <div class="tmg-media">
+          {%- if product.featured_image -%}
+            {{ product.featured_image | image_url: width: 1000 | image_tag: widths: '360, 500, 720, 1000', sizes: sizes, loading: loading, alt: product.title }}
+          {%- endif -%}
+          {%- unless product.available -%}
+            <span class="tmg-badge">Sold out</span>
+          {%- endunless -%}
+          {%- if section.settings.quick_add and product.available -%}
+            {%- if quick != 0 -%}
+              <button type="button" class="tmg-add" data-add="{{ quick }}" aria-label="Add {{ product.title | escape }} to cart">{%- render 'tm-bag-icon' -%}</button>
+            {%- else -%}
+              <a class="tmg-add" href="{{ product.url }}" aria-label="Choose options for {{ product.title | escape }}">{%- render 'tm-bag-icon' -%}</a>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+        <div class="tmg-info">
+          <p class="tmg-name">{{ product.title | escape }}</p>
+          <p class="tmg-price">
+            {%- if product.price_varies -%}From {% endif -%}
+            {{ product.price | money }}
+            {%- if product.compare_at_price > product.price -%}
+              <s>{{ product.compare_at_price | money }}</s>
+            {%- endif -%}
+          </p>
+        </div>
+      </li>
+    {%- else -%}
+      <li class="tmg-empty">No products in this collection yet.</li>
+    {%- endfor -%}
+  </ul>
+
+  <script type="application/json" data-tmg-data>
+    [
+      {%- for product in coll.products -%}
+        {%- liquid
+          assign quick = 0
+          if product.variants.size == 1 and product.available
+            assign quick = product.selected_or_first_available_variant.id
+          endif
+        -%}
+        {"handle": {{ product.handle | json }}, "title": {{ product.title | json }}, "url": {{ product.url | json }},
+         "price": {{ product.price | money | strip_html | json }}, "available": {{ product.available | json }}, "variant": {% if quick != 0 %}{{ quick | json }}{% else %}null{% endif %},
+         "images": [{%- for img in product.images limit: 6 -%}{{ img | image_url: width: 1400 | json }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  </script>
+  {%- endpaginate -%}
+</div>
+
+<style>
+  .tmg{--tmg-ease:cubic-bezier(.2,.7,.2,1);--tmg-gx:40px;padding:var(--tmg-pt,72px) var(--tmg-gx) var(--tmg-pb,80px);color:#000;font-family:'Instrument Sans',var(--font-body--family,system-ui),sans-serif;font-size:14px;line-height:1.4}
+  .tmg *{box-sizing:border-box}
+  .tmg p{margin:0}
+  .tmg-head{display:flex;flex-direction:column;gap:14px}
+  .tmg-title{margin:0;font-family:'Instrument Serif',var(--font-heading--family,Georgia),serif;font-weight:400;font-size:clamp(40px,4.6vw,65px);line-height:1.1;letter-spacing:0;text-transform:none}
+  .tmg-desc{max-width:620px;color:rgba(0,0,0,.75);font-size:15px;line-height:1.6}
+  .tmg-bar{display:flex;align-items:center;justify-content:flex-end;gap:24px;margin:48px 0 26px;color:rgba(0,0,0,.8)}
+  .tmg-sort{position:relative;display:flex;align-items:center;gap:6px;color:#000}
+  .tmg-sort select{appearance:none;-webkit-appearance:none;position:absolute;inset:0;opacity:0;cursor:pointer;font:inherit;width:100%}
+  .tmg-cols{display:flex;gap:4px}
+  .tmg-cols button{width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:4px;background:none;color:inherit;cursor:pointer;padding:0}
+  .tmg-cols button[aria-pressed="true"]{background:rgba(0,0,0,.06)}
+  .tmg-cols .m{display:none}
+  .tmg-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--tmg-cols,4),minmax(0,1fr));gap:16px}
+  .tmg-grid.zoom{grid-template-columns:repeat(7,minmax(0,1fr))}
+  .tmg-grid.zoom .tmg-info{display:none}
+  .tmg-card{position:relative;border-radius:10px;overflow:clip;background:#fff;opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .8s var(--tmg-ease)}
+  .tmg-card.in{opacity:1;transform:none}
+  .tmg-link{position:absolute;inset:0;z-index:1}
+  .tmg-media{position:relative;aspect-ratio:1/1;background:#fff;overflow:hidden}
+  .tmg-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--tmg-ease)}
+  .tmg-card:hover .tmg-media img{transform:scale(1.035)}
+  .tmg-badge{position:absolute;top:8px;left:8px;z-index:2;background:#000;color:#fff;font-size:13px;line-height:1.4;padding:4px 10px;border-radius:40px;pointer-events:none}
+  .tmg-add{position:absolute;right:12.8px;bottom:12.8px;z-index:2;width:36px;height:36px;border:0;border-radius:50px;background:#fff;color:#000;display:grid;place-items:center;cursor:pointer;padding:0;
+    box-shadow:0 1px 6px rgba(0,0,0,.12);opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
+  .tmg-add svg{width:20px;height:20px}
+  .tmg-add.busy{opacity:.5!important;pointer-events:none}
+  .tmg-card:hover .tmg-add,.tmg-add:focus-visible{opacity:1;transform:none}
+  .tmg-info{padding:20px}
+  .tmg-name,.tmg-price{font-size:14px;line-height:1.4}
+  .tmg-price s{margin-left:6px;color:rgba(0,0,0,.5)}
+  .tmg-empty{grid-column:1/-1;padding:60px 0;color:rgba(0,0,0,.6);text-align:center}
+  .tmg-rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform 1s var(--tmg-ease)}
+  .tmg-rv.in{opacity:1;transform:none}
+  @media (hover:hover) and (pointer:fine){
+    .tmg-grid{perspective:1100px}
+    .tmg-card{transform-style:preserve-3d;will-change:transform}
+    .tmg-card.in{transition:opacity .7s ease,transform .5s var(--tmg-ease),box-shadow .5s}
+    .tmg-card.in.tilt{transition:transform .08s linear,box-shadow .3s}
+    .tmg-card:hover{box-shadow:0 30px 60px -24px rgba(0,0,0,.28)}
+    .tmg-card .tmg-media{transform:translateZ(0);transition:transform .5s var(--tmg-ease)}
+    .tmg-card:hover .tmg-media{transform:translateZ(30px)}
+    .tmg-card .tmg-info{transform:translateZ(14px)}
+  }
+  @media (max-width:749px){
+    .tmg{--tmg-gx:0px;padding-top:calc(var(--tmg-pt,72px) * .78);padding-bottom:calc(var(--tmg-pb,80px) * .7)}
+    .tmg-head,.tmg-bar{padding:0 16px}
+    .tmg-title{font-size:48px}
+    .tmg-bar{justify-content:space-between;margin:36px 0 18px}
+    .tmg-count{display:none}
+    .tmg-cols .d{display:none}.tmg-cols .m{display:grid}
+    .tmg-grid{grid-template-columns:repeat(var(--tmg-cols-m,2),minmax(0,1fr));gap:12px}
+    .tmg-grid.single{grid-template-columns:1fr}
+    .tmg-grid.double{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .tmg-add{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tmg-card,.tmg-rv{opacity:1;transform:none;transition:none}
+  }
+
+  /* 3D view and the cart message live on <body>, shared by every grid on the page */
+  .tmv{position:fixed;inset:0;z-index:2147483000;display:none;color:#000;font-family:'Instrument Sans',system-ui,sans-serif;font-size:14px;line-height:1.4}
+  .tmv.open{display:block}
+  .tmv-bg{position:absolute;inset:0;background:#fff;opacity:0;transition:opacity .5s ease}
+  .tmv.show .tmv-bg{opacity:1}
+  .tmv-stage{position:absolute;inset:0;perspective:1100px;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+  .tmv-stage.drag{cursor:grabbing}
+  .tmv-obj{position:absolute;left:50%;top:0;transform-style:preserve-3d;will-change:transform}
+  .tmv-obj img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;-webkit-mask:radial-gradient(closest-corner,#000 58%,transparent 98%);mask:radial-gradient(closest-corner,#000 58%,transparent 98%)}
+  .tmv-shadow{position:absolute;left:50%;height:28px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.22),rgba(0,0,0,0));opacity:0;transition:opacity .5s .35s}
+  .tmv.show .tmv-shadow{opacity:1}
+  .tmv-close{position:absolute;z-index:2;top:calc(16px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;color:#000;display:grid;place-items:center;cursor:pointer;opacity:0;transition:opacity .35s .2s;padding:0}
+  .tmv.show .tmv-close{opacity:1}
+  .tmv-info{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+    padding:18px max(24px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px));opacity:0;transform:translateY(10px);transition:opacity .45s .3s,transform .6s .3s;pointer-events:none}
+  .tmv.show .tmv-info{opacity:1;transform:none}
+  .tmv-info p{margin:0}
+  .tmv-hint{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-top:8px!important}
+  .tmv-dots{display:flex;gap:6px;margin-top:10px;pointer-events:auto}
+  .tmv-dots button{width:26px;height:26px;display:grid;place-items:center;border:0;background:none;padding:0;cursor:pointer}
+  .tmv-dots button i{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.22);transition:background .2s}
+  .tmv-dots button[aria-pressed="true"] i{background:#000}
+  .tmv-actions{display:flex;gap:10px;pointer-events:auto;flex:0 0 auto}
+  .tmv-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 28px;border-radius:100px;border:1px solid #000;font:inherit;font-size:15px;cursor:pointer;text-decoration:none}
+  .tmv-btn svg{width:20px;height:20px}
+  .tmv-btn.dark{background:#000;color:#fff}
+  .tmv-btn.light{background:#fff;color:#000}
+  .tmv-btn[hidden]{display:none}
+  @media (max-width:749px){ .tmv-info{flex-direction:column;align-items:stretch} .tmv-actions{flex-direction:column} }
+  .tmt{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:2147483001;transform:translate(-50%,20px);display:flex;align-items:center;gap:16px;padding:12px 14px 12px 20px;border-radius:100px;background:#000;color:#fff;font-family:'Instrument Sans',system-ui,sans-serif;font-size:14px;opacity:0;pointer-events:none;transition:opacity .3s,transform .4s cubic-bezier(.2,.7,.2,1);max-width:calc(100vw - 32px)}
+  .tmt.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+  .tmt a{color:#000;background:#fff;border-radius:100px;padding:8px 16px;text-decoration:none;white-space:nowrap}
+</style>
+
+<script>
+(() => {
+  if (window.TMGrid) { document.querySelectorAll('[data-tmg]').forEach(window.TMGrid.init); return; }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fineHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const bag = '<svg aria-hidden="true" viewBox="0 0 20 20" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M16.608 9.421V6.906H3.392v8.016c0 .567.224 1.112.624 1.513.4.402.941.627 1.506.627H8.63M8.818 3h2.333c.618 0 1.212.247 1.649.686a2.35 2.35 0 0 1 .683 1.658v1.562H6.486V5.344c0-.622.246-1.218.683-1.658A2.33 2.33 0 0 1 8.82 3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.2" d="M14.608 12.563v5m2.5-2.5h-5"/></svg>';
+  const sized = (src, w) => src.replace(/([?&])width=\d+/, '$1width=' + w);
+
+  // a small tween (no animation library needed)
+  function tween(obj, to, ms, onUpdate, onDone){
+    const from = {}; for (const k in to) from[k] = obj[k];
+    const t0 = performance.now(), ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    let raf = 0, dead = false;
+    const step = now => {
+      if (dead) return;
+      const p = Math.min(1, (now - t0) / ms), e = ease(p);
+      for (const k in to) obj[k] = from[k] + (to[k] - from[k]) * e;
+      onUpdate && onUpdate();
+      p < 1 ? raf = requestAnimationFrame(step) : onDone && onDone();
+    };
+    raf = requestAnimationFrame(step);
+    return {kill(){ dead = true; cancelAnimationFrame(raf); }};
+  }
+
+  // ---------- cart ----------
+  let toastEl = null, toastT = 0;
+  function toast(msg, cartUrl){
+    if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 'tmt'; toastEl.setAttribute('role', 'status'); document.body.appendChild(toastEl); }
+    toastEl.innerHTML = '';
+    const s = document.createElement('span'); s.textContent = msg; toastEl.appendChild(s);
+    if (cartUrl) { const a = document.createElement('a'); a.href = cartUrl; a.textContent = 'View cart'; toastEl.appendChild(a); }
+    toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('on'), 4000);
+  }
+  async function addToCart(id, root){
+    const addUrl = (root?.dataset.cartAdd || '/cart/add') + '.js', cartUrl = root?.dataset.cart || '/cart';
+    try {
+      const r = await fetch(addUrl, {method: 'POST', headers: {'Content-Type': 'application/json', Accept: 'application/json'}, body: JSON.stringify({items: [{id: +id, quantity: 1}]})});
+      const body = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(body.description || body.message || 'Could not add to cart. Please try again.');
+      const cart = await fetch(cartUrl + '.js').then(x => x.json()).catch(() => null);
+      if (cart) {
+        // let the theme's cart icon and drawer refresh
+        document.dispatchEvent(new CustomEvent('cart:update', {bubbles: true, detail: {resource: cart, sourceId: 'tm-product-grid', data: {source: 'tm-product-grid', itemCount: cart.item_count}}}));
+        document.dispatchEvent(new CustomEvent('cart:refresh', {bubbles: true}));
+        document.querySelectorAll('[data-cart-count], .cart-count, .cart-count-bubble span:first-child').forEach(el => { el.textContent = cart.item_count; });
+      }
+      toast('Added to cart', cartUrl);
+    } catch (e) { toast(e instanceof TypeError ? 'Could not reach the store. Please try again.' : (e.message || 'Could not add to cart. Please try again.')); }
+  }
+
+  // ---------- 3D view: the product photo itself, lifted out of its card and tilted in perspective ----------
+  const View3D = (() => {
+    let el, bgEl, stage, objEl, img, shadow, dots, link, add, titleEl, priceEl, closeBtn;
+    const LIM_Y = 25, LIM_X = 10, st = {x: 0, y: 0, s: 1, rx: 0, ry: 0};
+    let open = false, busy = false, item = null, thumb = null, root = null, idx = 0, size = 0, cy = 0, drag = null, idleAt = 0, raf = 0, tw = null, lastFocus = null;
+    function build(){
+      el = document.createElement('div');
+      el.className = 'tmv'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', 'Product in 3D'); el.setAttribute('aria-hidden', 'true');
+      el.innerHTML = `<div class="tmv-bg"></div>
+        <div class="tmv-stage" aria-label="Drag to tilt the product"><div class="tmv-shadow"></div><div class="tmv-obj"><img alt="" draggable="false"></div></div>
+        <button type="button" class="tmv-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
+        <div class="tmv-info"><div><p class="tmv-title"></p><p class="tmv-price"></p><div class="tmv-dots"></div><p class="tmv-hint">Drag to tilt</p></div>
+          <div class="tmv-actions"><button type="button" class="tmv-btn dark tmv-add">${bag}<span>Add to cart</span></button><a class="tmv-btn light tmv-link" href="#">View product</a></div></div>`;
+      document.body.appendChild(el);
+      const q = s => el.querySelector(s);
+      bgEl = q('.tmv-bg'); stage = q('.tmv-stage'); objEl = q('.tmv-obj'); img = q('.tmv-obj img'); shadow = q('.tmv-shadow'); dots = q('.tmv-dots');
+      link = q('.tmv-link'); add = q('.tmv-add'); titleEl = q('.tmv-title'); priceEl = q('.tmv-price'); closeBtn = q('.tmv-close');
+      stage.addEventListener('pointerdown', e => { if (busy) return; drag = {x: e.clientX, y: e.clientY, ry: st.ry, rx: st.rx}; stage.setPointerCapture(e.pointerId); stage.classList.add('drag'); });
+      stage.addEventListener('pointermove', e => {
+        if (!drag) return;
+        st.ry = Math.max(-LIM_Y, Math.min(LIM_Y, drag.ry + (e.clientX - drag.x) * .12));
+        st.rx = Math.max(-LIM_X, Math.min(LIM_X, drag.rx - (e.clientY - drag.y) * .06));
+      });
+      const endDrag = () => { if (!drag) return; drag = null; idleAt = performance.now() + 1600; stage.classList.remove('drag'); };
+      stage.addEventListener('pointerup', endDrag); stage.addEventListener('pointercancel', endDrag);
+      dots.addEventListener('click', e => { const b = e.target.closest('button'); if (b) showImage([...dots.children].indexOf(b)); });
+      closeBtn.addEventListener('click', close);
+      add.addEventListener('click', () => { if (item?.variant) addToCart(item.variant, root); });
+      link.addEventListener('click', () => finish());
+      addEventListener('keydown', e => {
+        if (!open) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'Tab') { // keep focus inside the dialog
+          const f = [...el.querySelectorAll('button:not([hidden]),a[href]')].filter(x => x.offsetParent);
+          if (!f.length) return;
+          if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+          else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+        }
+      });
+      addEventListener('resize', () => { if (open && !busy) layout(); });
+    }
+    function backdrop(im){ // colour of the photo's corners (the studio backdrop); the page always stays light
+      try {
+        const c = document.createElement('canvas'); c.width = c.height = 16;
+        const g = c.getContext('2d', {willReadFrequently: true});
+        g.fillStyle = '#fff'; g.fillRect(0, 0, 16, 16); g.drawImage(im, 0, 0, 16, 16);
+        const px = [[0, 0], [15, 0], [0, 15], [15, 15]].map(([x, y]) => g.getImageData(x, y, 1, 1).data);
+        const avg = k => Math.round(px.reduce((a, p) => a + p[k], 0) / px.length);
+        const [r, gg, b] = [avg(0), avg(1), avg(2)];
+        return r * .3 + gg * .59 + b * .11 < 225 ? '#fff' : `rgb(${r},${gg},${b})`;
+      } catch (e) { return '#fff'; }
+    }
+    function layout(){
+      const mobile = innerWidth < 750;
+      size = Math.round(Math.min(innerWidth * (mobile ? .9 : .5), innerHeight * (mobile ? .52 : .7)));
+      cy = innerHeight * (mobile ? .38 : .46);
+      Object.assign(objEl.style, {width: size + 'px', height: size + 'px', marginLeft: -size / 2 + 'px', top: cy - size / 2 + 'px'});
+      Object.assign(shadow.style, {width: size * .62 + 'px', marginLeft: -size * .31 + 'px', top: cy + size * .44 + 'px'});
+    }
+    function apply(bob = 0){
+      objEl.style.transform = `translate3d(${st.x}px,${st.y + bob}px,0) scale(${st.s}) rotateX(${st.rx}deg) rotateY(${st.ry}deg)`;
+      const lift = 1 - bob / 40;
+      shadow.style.transform = `translateX(${st.ry * 1.4}px) scale(${(1 - Math.abs(st.ry) / 140) * lift},${lift})`;
+    }
+    function loop(now){
+      if (!open) return;
+      raf = requestAnimationFrame(loop);
+      if (busy) return;
+      let bob = 0;
+      if (!drag && now > idleAt && !reduce) {
+        const t = (now - idleAt) / 1000, k = Math.min(1, t / 1.5);
+        st.ry += (Math.sin(t * .7) * 16 * k - st.ry) * .04;
+        st.rx += (Math.sin(t * .5) * 3 * k - st.rx) * .04;
+        bob = Math.sin(t * 1.3) * 6 * k;
+      }
+      apply(bob);
+    }
+    function showImage(i){
+      idx = i;
+      const src = item.images[i];
+      if (!src) return;
+      const hi = new Image();
+      hi.onload = () => { if (open && item && item.images[idx] === src) { img.src = hi.src; bgEl.style.background = backdrop(hi); } };
+      hi.src = src;
+      dots.querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-pressed', k === i));
+    }
+    function fromThumb(){
+      const r = thumb.getBoundingClientRect();
+      return {x: r.left + r.width / 2 - innerWidth / 2, y: r.top + r.height / 2 - cy, s: r.width / size, rx: 0, ry: 0};
+    }
+    function lock(on){ document.documentElement.style.overflow = on ? 'hidden' : ''; }
+    function openView(it, th, gridRoot){
+      if (open || busy) return false;
+      if (!el) build();
+      item = it; thumb = th; root = gridRoot; open = true; busy = true; idx = 0; lastFocus = document.activeElement;
+      titleEl.textContent = it.title;
+      priceEl.textContent = it.price + (it.available ? '' : ' · Sold out');
+      link.href = it.url;
+      link.textContent = it.available ? (it.variant ? 'View product' : 'Choose options') : 'Sold out · View product';
+      add.hidden = !it.variant;
+      dots.innerHTML = it.images.length > 1 ? it.images.map((_, i) => `<button type="button" aria-label="Image ${i + 1}" aria-pressed="${i === 0}"><i></i></button>`).join('') : '';
+      img.src = th.currentSrc || th.src;
+      bgEl.style.background = backdrop(th);
+      layout();
+      Object.assign(st, fromThumb()); apply();
+      el.classList.add('open'); el.setAttribute('aria-hidden', 'false'); lock(true);
+      thumb.style.visibility = 'hidden';
+      requestAnimationFrame(loop);
+      requestAnimationFrame(() => el.classList.add('show'));
+      showImage(0);
+      const done = () => { busy = false; idleAt = performance.now() + 300; closeBtn.focus({preventScroll: true}); };
+      if (reduce) { Object.assign(st, {x: 0, y: 0, s: 1, rx: 0, ry: 0}); apply(); done(); return true; }
+      tw = tween(st, {x: 0, y: 0, s: 1, ry: -14, rx: 3}, 1000, () => apply(), done);
+      return true;
+    }
+    function finish(){
+      tw?.kill(); cancelAnimationFrame(raf);
+      open = false; busy = false; drag = null;
+      el.classList.remove('open', 'show'); el.setAttribute('aria-hidden', 'true'); lock(false);
+      if (thumb) thumb.style.visibility = '';
+    }
+    function close(){
+      if (!open || busy) return;
+      const r = thumb.getBoundingClientRect();
+      el.classList.remove('show');
+      const back = () => { finish(); (lastFocus && lastFocus.focus) ? lastFocus.focus({preventScroll: true}) : null; };
+      if (reduce || idx !== 0 || r.bottom < 0 || r.top > innerHeight) return back();
+      busy = true;
+      tw = tween(st, fromThumb(), 800, () => apply(), back);
+    }
+    return {open: openView};
+  })();
+
+  // ---------- one grid ----------
+  function init(root){
+    if (root.dataset.ready) return;
+    root.dataset.ready = '1';
+    let data = [];
+    try { data = JSON.parse(root.querySelector('script[data-tmg-data]').textContent); } catch (e) {}
+    const byHandle = new Map(data.map(p => [p.handle, p]));
+    const grid = root.querySelector('.tmg-grid'), cards = [...grid.querySelectorAll('.tmg-card')];
+
+    // reveal on scroll
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin: '0px 0px -8% 0px'});
+    const watch = () => {
+      root.querySelectorAll('.tmg-rv').forEach(el => io.observe(el));
+      cards.forEach((c, i) => { c.style.transitionDelay = (i % 4) * 60 + 'ms'; io.observe(c); });
+    };
+
+    // sort (on the page, no reload)
+    const sel = root.querySelector('.tmg-sort select');
+    const text = c => c.dataset.title || '';
+    const sorters = {
+      'title-ascending': (a, b) => text(a).localeCompare(text(b), undefined, {sensitivity: 'base'}),
+      'title-descending': (a, b) => text(b).localeCompare(text(a), undefined, {sensitivity: 'base'}),
+      'price-ascending': (a, b) => a.dataset.price - b.dataset.price || a.dataset.i - b.dataset.i,
+      'price-descending': (a, b) => b.dataset.price - a.dataset.price || a.dataset.i - b.dataset.i,
+      'created-ascending': (a, b) => a.dataset.created - b.dataset.created,
+      'created-descending': (a, b) => b.dataset.created - a.dataset.created
+    };
+    const sortBy = k => cards.slice().sort(sorters[k] || ((a, b) => a.dataset.i - b.dataset.i)).forEach(c => grid.appendChild(c));
+    const first = root.dataset.sort || 'manual';
+    if (sel) { sel.value = first; sel.addEventListener('change', () => sortBy(sel.value)); }
+    if (first !== 'manual') sortBy(first);
+    watch();
+
+    // column views
+    root.querySelector('.tmg-cols')?.addEventListener('click', e => {
+      const b = e.target.closest('button[data-view]'); if (!b) return;
+      grid.classList.toggle('zoom', b.dataset.view === 'zoom');
+      grid.classList.toggle('single', b.dataset.view === 'single');
+      grid.classList.toggle('double', b.dataset.view === 'default');
+      root.querySelectorAll('.tmg-cols button').forEach(x => x.setAttribute('aria-pressed', x.dataset.view === b.dataset.view));
+    });
+
+    // quick add + 3D view
+    grid.addEventListener('click', e => {
+      const addBtn = e.target.closest('button[data-add]');
+      if (addBtn) {
+        e.preventDefault(); addBtn.classList.add('busy');
+        addToCart(addBtn.dataset.add, root).finally(() => addBtn.classList.remove('busy'));
+        return;
+      }
+      const a = e.target.closest('.tmg-link');
+      if (!a || root.dataset.view3d !== 'true') return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      const card = a.closest('.tmg-card'), p = byHandle.get(card.dataset.handle), im = card.querySelector('.tmg-media img');
+      if (!p || !p.images.length || !im || !im.complete || !im.naturalWidth) return; // straight to the product page
+      if (View3D.open(p, im, root)) e.preventDefault();
+    });
+
+    // cards lean toward the pointer
+    if (fineHover && !reduce && root.dataset.tilt === 'true') {
+      grid.addEventListener('pointermove', e => {
+        const c = e.target.closest('.tmg-card.in'); if (!c) return;
+        const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        c.classList.add('tilt');
+        c.style.transform = `rotateX(${(-y * 10).toFixed(2)}deg) rotateY(${(x * 12).toFixed(2)}deg) translateZ(0)`;
+      });
+      grid.addEventListener('pointerout', e => {
+        const c = e.target.closest('.tmg-card'); if (!c || c.contains(e.relatedTarget)) return;
+        c.classList.remove('tilt'); c.style.transform = '';
+      });
+    }
+  }
+
+  window.TMGrid = {init};
+  document.querySelectorAll('[data-tmg]').forEach(init);
+  document.addEventListener('shopify:section:load', e => e.target.querySelectorAll('[data-tmg]').forEach(init));
+})();
+</script>
+
+{% schema %}
+{
+  "name": "TM Product grid",
+  "tag": "section",
+  "class": "tm-grid-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Products" },
+    { "type": "richtext", "id": "text", "label": "Description" },
+    { "type": "collection", "id": "collection", "label": "Collection", "info": "Leave empty to show every product." },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 10, "max": 250, "step": 10, "default": 250 },
+    {
+      "type": "select", "id": "sort", "label": "Starting order", "default": "title-ascending",
+      "options": [
+        { "value": "manual", "label": "Collection order" },
+        { "value": "title-ascending", "label": "Alphabetically, A-Z" },
+        { "value": "title-descending", "label": "Alphabetically, Z-A" },
+        { "value": "price-ascending", "label": "Price, low to high" },
+        { "value": "price-descending", "label": "Price, high to low" },
+        { "value": "created-ascending", "label": "Date, old to new" },
+        { "value": "created-descending", "label": "Date, new to old" }
+      ]
+    },
+    {
+      "type": "select", "id": "columns", "label": "Columns on computer", "default": "4",
+      "options": [ { "value": "3", "label": "3" }, { "value": "4", "label": "4" }, { "value": "5", "label": "5" } ]
+    },
+    {
+      "type": "select", "id": "columns_mobile", "label": "Columns on phone", "default": "2",
+      "options": [ { "value": "1", "label": "1" }, { "value": "2", "label": "2" } ]
+    },
+    { "type": "checkbox", "id": "show_toolbar", "label": "Show sort and grid buttons", "default": true },
+    { "type": "checkbox", "id": "quick_add", "label": "Show the quick add button", "default": true, "info": "One-option products go straight to the cart; others open the product page." },
+    { "type": "checkbox", "id": "view_3d", "label": "Open products in the 3D view first", "default": true },
+    { "type": "checkbox", "id": "tilt", "label": "Cards lean toward the mouse", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Space above", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Space below", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [ { "name": "TM Product grid" } ]
+}
+{% endschema %}

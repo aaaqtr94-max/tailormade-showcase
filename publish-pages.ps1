@@ -2,6 +2,7 @@
 #   /            -> the full TAILORMADE site (site/index.html): home, Best Selling, Shop, every collection
 #   /experience/ -> the earlier single-page version (experience/index.html)
 #   /showcase/   -> case shelf      (index.html)
+#   /shopify-preview/ -> the Shopify sections preview (shopify/preview/index.html)
 # Run from this folder:  powershell -ExecutionPolicy Bypass -File publish-pages.ps1
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -13,6 +14,9 @@ $page = $page.Replace('<meta name="build" content="dev">', '<meta name="build" c
 [IO.File]::WriteAllText((Join-Path $site 'index.html'), $page, (New-Object Text.UTF8Encoding $false))
 Copy-Item (Join-Path $repo 'experience\index.html') (Join-Path $site 'experience\index.html')
 Copy-Item (Join-Path $repo 'index.html') (Join-Path $site 'showcase\index.html')
+# /shopify-preview/ -> the Shopify sections (shopify/sections) rendered with the store snapshot
+New-Item -ItemType Directory -Force (Join-Path $site 'shopify-preview') | Out-Null
+Copy-Item (Join-Path $repo 'shopify\preview\index.html') (Join-Path $site 'shopify-preview\index.html')
 New-Item -ItemType Directory -Force (Join-Path $site 'assets') | Out-Null
 Copy-Item (Join-Path $repo 'assets\hfc-burgundy-face.jpg') (Join-Path $site 'assets\')
 Copy-Item (Join-Path $repo 'assets\video') (Join-Path $site 'assets\video') -Recurse
