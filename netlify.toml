@@ -1,7 +1,19 @@
-# Netlify publishes the "deploy" folder, rebuilt on every push:
-#   /           -> the 3D experience   (experience/index.html)
-#   /showcase/  -> the case shelf      (index.html, also the Shopify Custom Liquid source)
-#   /experience -> redirects to /
+# Netlify publishes the "deploy" folder, rebuilt by tools/build-deploy.sh on every push to main:
+#   /                 -> the full TAILORMADE site       (site/index.html)
+#   /experience/      -> the earlier single-page version (experience/index.html)
+#   /showcase/        -> the case shelf                  (index.html)
+#   /shopify-preview/ -> the Shopify sections preview    (shopify/preview/index.html)
 [build]
-  command = "rm -rf deploy && mkdir -p deploy/showcase && cp experience/index.html deploy/index.html && cp index.html deploy/showcase/index.html && mkdir -p deploy/assets && cp assets/hfc-burgundy-face.jpg deploy/assets/ &&printf '/experience / 301\\n/experience/ / 301\\n' > deploy/_redirects"
+  command = "sh tools/build-deploy.sh"
   publish = "deploy"
+
+# the page checks for a newer build itself, so the HTML must never be cached
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/video/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

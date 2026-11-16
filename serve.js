@@ -17,7 +17,9 @@ http.createServer((req, res) => {
     });
     return;
   }
-  const p = path.join(root, decodeURIComponent(url.pathname).replace(/\/$/, '/index.html'));
+  // same addresses as on Netlify (see tools/build-deploy.sh)
+  const route = decodeURIComponent(url.pathname).replace(/^\/shopify-preview\//, '/shopify/preview/').replace(/^\/showcase\//, '/');
+  const p = path.join(root, route.replace(/\/$/, '/index.html'));
   if (!p.startsWith(root)) { res.writeHead(403); return res.end(); }
   fs.readFile(p, (err, data) => {
     if (err) { res.writeHead(404); return res.end('Not found'); }

@@ -1,11 +1,17 @@
-# Tailormade Case Showcase
+# TAILORMADE
 
-Interactive iPhone 18 case shelf for tailormadeint.co: cases light up on hover, open with a cinematic fly-in, and the TM monogram writes itself in the background.
+Site and Shopify sections for tailormadeint.co.
 
-- `index.html` — the page. The block between `TAILORMADE SHOWCASE` and `END` is the code for a Shopify **Custom Liquid** section (place it right after the homepage hero).
-- `experience/index.html` — the 3D scroll page (Three.js, GSAP, Lenis). Served as the site's main page.
-- `deploy/` — what Netlify publishes, rebuilt by `netlify.toml` on every push: `/` is the 3D page, `/showcase/` is the case shelf, `/experience` redirects to `/`.
-- `assets/tm-logo.jpg` — the source logo that was traced into the background animation.
-- `serve.js` — local preview: `node serve.js`, then open http://localhost:5178
+Live: https://tailormade-showcase.netlify.app — every push to `main` rebuilds it (`netlify.toml` runs `tools/build-deploy.sh`).
 
-Live: https://tailormade-showcase.netlify.app — every push to `main` deploys automatically.
+| Address | Page | Source |
+|---|---|---|
+| `/` | the full TAILORMADE site: opening film, 3D TM monogram, products, product pages | `site/index.html` |
+| `/shopify-preview/` | the Shopify sections, rendered with the store snapshot | `shopify/preview/index.html` |
+| `/showcase/` | the case shelf | `index.html` |
+| `/experience/` | the earlier single-page version | `experience/index.html` |
+
+- `shopify/` — what goes into the store's theme: `sections/tm-opening.liquid`, `sections/tm-product-grid.liquid`, `snippets/tm-bag-icon.liquid`, and the Arabic install guide `README-AR.md`. Products, prices and stock come live from the store.
+- `assets/video/` — the background films (`bg-wide` for wide screens, `bg-tall` for phones).
+- `docs/` — snapshot of the store (products, collections, theme) taken 2026-11-15.
+- `serve.js` — local preview: `node serve.js`, then open http://localhost:5178 (same addresses as above, e.g. `/shopify-preview/`).
