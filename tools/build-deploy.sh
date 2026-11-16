@@ -16,4 +16,15 @@ cp shopify/preview/index.html deploy/shopify-preview/index.html
 cp assets/hfc-burgundy-face.jpg deploy/assets/
 mkdir -p deploy/assets/video
 cp assets/video/bg-tall.mp4 assets/video/bg-tall.jpg assets/video/bg-wide.mp4 assets/video/bg-wide.jpg deploy/assets/video/
+# the earlier /experience/ page uses its own films
+cp assets/video/bg-desktop.mp4 assets/video/bg-desktop.jpg assets/video/bg-mobile.mp4 assets/video/bg-mobile.jpg deploy/assets/video/
+# cache rules that also work when the folder is dragged into Netlify by hand
+cat > deploy/_headers <<'EOF'
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/video/*
+  Cache-Control: public, max-age=604800
+EOF
 echo "deploy/ built"
