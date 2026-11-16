@@ -274,8 +274,19 @@
     if (cartUrl) { const a = document.createElement('a'); a.href = cartUrl; a.textContent = 'View cart'; toastEl.appendChild(a); }
     toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('on'), 4000);
   }
+  // Newer Shopify themes (Tinker, Horizon 2026) update the cart icon from @shopify/events; older ones listen for "cart:update".
+  let shopifyEvents;
+  const loadEvents = () => shopifyEvents ??= import('@shopify/events').catch(() => null);
   async function addToCart(id, root){
     const addUrl = (root?.dataset.cartAdd || '/cart/add') + '.js', cartUrl = root?.dataset.cart || '/cart';
+    const Ev = await loadEvents(), Lines = Ev?.CartLinesUpdateEvent;
+    let pending = null;
+    if (Lines) { // tell the theme an add has started; it waits on the promise for the new cart
+      try {
+        pending = Lines.createPromise();
+        (root || document).dispatchEvent(new Lines({action: 'add', context: 'product', lines: [{merchandiseId: String(id), quantity: 1}], promise: pending.promise}));
+      } catch (e) { pending = null; }
+    }
     try {
       const r = await fetch(addUrl, {method: 'POST', headers: {'Content-Type': 'application/json', Accept: 'application/json'}, body: JSON.stringify({items: [{id: +id, quantity: 1}]})});
       const body = await r.json().catch(() => ({}));
@@ -283,13 +294,18 @@
       const cart = await fetch(cartUrl + '.js').then(x => x.json()).catch(() => null);
       if (cart) {
         // let the theme's cart icon and drawer refresh
+        if (pending) pending.resolve({cart: Lines.createCartFromAjaxResponse(cart), detail: {items: cart.items, source: 'tm-product-grid', sourceId: 'tm-product-grid', itemCount: 1, didError: false}});
         document.dispatchEvent(new CustomEvent('cart:update', {bubbles: true, detail: {resource: cart, sourceId: 'tm-product-grid', data: {source: 'tm-product-grid', itemCount: cart.item_count}}}));
         document.dispatchEvent(new CustomEvent('cart:refresh', {bubbles: true}));
         document.querySelectorAll('[data-cart-count], .cart-count, .cart-count-bubble span:first-child').forEach(el => { el.textContent = cart.item_count; });
-      }
+      } else if (pending) pending.reject(Object.assign(new Error('cart refresh failed'), {name: 'AbortError'}));
       toast('Added to cart', cartUrl);
-    } catch (e) { toast(e instanceof TypeError ? 'Could not reach the store. Please try again.' : (e.message || 'Could not add to cart. Please try again.')); }
+    } catch (e) {
+      if (pending) pending.reject(Object.assign(new Error(e.message), {name: 'AbortError'})); // AbortError: the theme stays quiet, our message shows
+      toast(e instanceof TypeError ? 'Could not reach the store. Please try again.' : (e.message || 'Could not add to cart. Please try again.'));
+    }
   }
+  loadEvents(); // warm up, so the first click is instant
 
   // ---------- 3D view: the product photo itself, lifted out of its card and tilted in perspective ----------
   const View3D = (() => {
