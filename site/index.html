@@ -912,8 +912,22 @@ const Film = (() => {
   const base = location.pathname.includes('/site/') ? '../assets/video/' : 'assets/video/';
   // the stitching film everywhere: upright screens (phone, iPad upright) bg-tall · wide screens (computer, iPad sideways) bg-wide (blurred sides)
   const portrait = matchMedia('(max-aspect-ratio: 1/1)');
-  const pick = () => { const n = portrait.matches ? 'bg-tall' : 'bg-wide'; if (!v.src.includes(n)) { v.poster = base + n + '.jpg'; v.src = base + n + '.mp4'; if (!reduce) v.play().catch(() => {}); } };
-  pick(); portrait.addEventListener('change', pick);
+  const pick = () => { const n = portrait.matches ? 'bg-tall' : 'bg-wide'; if (!v.src.includes(n)) { v.poster = base + n + '.jpg'; v.src = base + n + '.mp4'; if (!reduce) v.play().catch(() => {}); } align(); };
+  // keep the needle on the screen's centre line, which is the line between the product columns
+  // (measured: the needle stays at 52.22% across bg-tall and 50.73% across bg-wide for the whole film)
+  const NEEDLE = {'bg-tall': [1080, 1920, .5222], 'bg-wide': [1920, 1080, .5073]};
+  function align(){
+    const [vw, vh, nx] = NEEDLE[portrait.matches ? 'bg-tall' : 'bg-wide'];
+    const W = innerWidth, H = innerHeight, shownW = vw * Math.max(W / vw, H / vh), slack = shownW - W;
+    const p = slack > 1 ? Math.min(1, Math.max(0, (nx * shownW - W / 2) / slack)) : .5;
+    v.style.objectPosition = (p * 100).toFixed(2) + '% 50%';
+    // when the film already fills the width (e.g. iPad upright) there is nothing to slide:
+    // shift it and zoom in just enough that no edge shows
+    const off = (W - shownW) * p + nx * shownW - W / 2;
+    if (Math.abs(off) > .5) { const s = 1 / (1 - Math.abs(off) / (W / 2)); v.style.transform = `translateX(${(-off * s).toFixed(1)}px) scale(${s.toFixed(4)})`; }
+    else v.style.transform = '';
+  }
+  pick(); portrait.addEventListener('change', pick); addEventListener('resize', align);
   function update(){
     const op = document.getElementById('opening');
     // on the home opening the film is clear; everywhere else it sits behind a white wash
