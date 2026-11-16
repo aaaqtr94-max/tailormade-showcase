@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TAILORMADE · ألوان الكلمة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Sample page only — nothing here is on the site.
+   Each card is a copy of the home opening: the real film playing, the needle on the centre line,
+   and the word in the same font and spacing as the site, in a different colour. */
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f3f1;color:#000;font-family:'Instrument Sans',system-ui,sans-serif;padding:24px max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
+header{max-width:1100px;margin:0 auto 22px}
+h1{font-size:20px;font-weight:500}
+header p{color:#555;font-size:14px;margin-top:6px;line-height:1.6}
+.grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.film{position:relative;aspect-ratio:3/4;display:grid;place-items:center;overflow:hidden;background:#3a2c25}
+.film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.12) 45%,rgba(0,0,0,.38))}
+.word{position:relative;z-index:1;font-weight:500;font-size:clamp(22px,6.4vw,34px);letter-spacing:.42em;margin-right:-.42em;line-height:1;direction:ltr}
+.meta{display:flex;align-items:baseline;gap:10px;padding:14px 16px}
+.meta b{font-size:15px;font-weight:500}
+.meta span{color:#666;font-size:13px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#000;color:#fff;font-size:13px;flex:0 0 auto}
+.now{color:#8a6a3a!important}
+</style>
+</head>
+<body>
+<header>
+  <h1>ألوان كلمة TAILORMADE فوق الفيديو</h1>
+  <p>الفيديو شغال في كل كرت، والإبرة تمر ورا الكلمة مثل ما تمر في بداية الموقع. شوف أي لون يبان أوضح لما تمر الإبرة. صفحة تجربة بس، والموقع ما تغير.</p>
+</header>
+<div class="grid" id="grid"></div>
+<script>
+const COLOURS = [
+  ['أبيض', 'color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.3)', 'الحالي، الإبرة الفضية تذوب فيه', true],
+  ['أبيض بظل غامق', 'color:#fff;text-shadow:0 0 1px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.75),0 0 18px rgba(0,0,0,.55)', 'نفس الأبيض، بس حواف الحروف غامقة فتنفصل عن الإبرة'],
+  ['ذهبي شامبين', 'color:#e3c58f;text-shadow:0 2px 18px rgba(0,0,0,.45)', 'دافي ويمشي مع الجلد، ويختلف عن الإبرة الفضية'],
+  ['عاجي دافي', 'color:#f3e6cf;text-shadow:0 1px 2px rgba(0,0,0,.55),0 2px 18px rgba(0,0,0,.4)', 'قريب من الأبيض بس أدفى، مع ظل خفيف'],
+  ['أسود', 'color:#111;text-shadow:0 0 14px rgba(255,255,255,.25)', 'عكس الحالي، الإبرة الفاتحة تبان وراه بوضوح'],
+  ['عنابي', 'color:#7a1f32;text-shadow:0 0 1px rgba(255,255,255,.35),0 2px 16px rgba(0,0,0,.35)', 'من لون السويد العنابي اللي في الفيديو']
+];
+// the phone film on every card (most visitors are on phones), where the needle runs through the word
+const src = '../assets/video/bg-tall.mp4', NX = .5120, VW = 1080, VH = 1920; // needle centre, as on the site
+document.getElementById('grid').innerHTML = COLOURS.map(([name, css, note, now], i) => `
+  <article class="card">
+    <div class="film"><video src="${src}" muted autoplay loop playsinline preload="auto"></video><span class="word" style="${css}">TAILORMADE</span></div>
+    <div class="meta"><span class="num">${i + 1}</span><b>${name}</b><span class="${now ? 'now' : ''}">${note}</span></div>
+  </article>`).join('');
+// keep the needle on each card's centre line, the same way the site does
+function align(){
+  document.querySelectorAll('.film video').forEach(v => {
+    const W = v.clientWidth, H = v.clientHeight, shownW = VW * Math.max(W / VW, H / VH), slack = shownW - W;
+    const p = slack > 1 ? Math.min(1, Math.max(0, (NX * shownW - W / 2) / slack)) : .5;
+    v.style.objectPosition = (p * 100).toFixed(2) + '% 50%';
+  });
+}
+align(); addEventListener('resize', align);
+// play them in step so every card shows the needle at the same moment
+const vids = [...document.querySelectorAll('.film video')];
+vids[0].addEventListener('timeupdate', () => vids.slice(1).forEach(v => { if (Math.abs(v.currentTime - vids[0].currentTime) > .25) v.currentTime = vids[0].currentTime; }));
+vids.forEach(v => v.play().catch(() => {}));
+</script>
+</body>
+</html>
