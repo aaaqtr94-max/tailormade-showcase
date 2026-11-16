@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>تجربة رشة العطر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+/* Sample page only — a perfume bottle that sprays when tapped.
+   Mode 1: a 3D glass bottle built here. Mode 2: your own bottle photo, untouched, with the mist added on top. */
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:#1a1310;color:#f3e9dc;font-family:'Instrument Sans',system-ui,sans-serif;overflow:hidden}
+#bg{position:fixed;inset:0;background:radial-gradient(70% 60% at 50% 45%,#3a2a20 0%,#1a1310 70%);transition:background .6s}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:pointer}
+.top{position:fixed;top:0;left:0;right:0;padding:calc(18px + env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left));display:flex;justify-content:space-between;align-items:flex-start;gap:12px;pointer-events:none}
+.top h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(26px,5vw,40px);line-height:1.05;direction:ltr}
+.top p{font-size:13px;opacity:.7;margin-top:6px}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:16px max(18px,env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+button,label.btn{font:inherit;font-size:14px;min-height:48px;padding:0 22px;border-radius:100px;border:1px solid rgba(243,233,220,.35);background:rgba(0,0,0,.25);color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+button.main{background:#f3e9dc;color:#1a1310;border-color:#f3e9dc;font-weight:500}
+input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+.swatches{display:flex;gap:8px;align-items:center}
+.swatches button{width:36px;min-height:36px;height:36px;padding:0;border-radius:50%}
+.swatches button[aria-pressed="true"]{outline:2px solid #f3e9dc;outline-offset:2px}
+.light{color:#1a1310}
+.light button:not(.main),.light label.btn{border-color:rgba(26,19,16,.25);background:rgba(255,255,255,.5)}
+.light button.main{background:#1a1310;color:#fff;border-color:#1a1310}
+.light .swatches button[aria-pressed="true"]{outline-color:#1a1310}
+.hint{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);font-size:13px;opacity:0;transition:opacity .4s;pointer-events:none}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+</head>
+<body>
+<div id="bg"></div>
+<canvas id="cv" aria-label="Perfume bottle. Tap to spray, drag to turn."></canvas>
+<div class="top" id="top">
+  <div><h1>Eau de Parfum</h1><p>اضغط على العلبة عشان ترش، واسحبها عشان تلفها</p></div>
+</div>
+<div class="bar" id="bar">
+  <button class="main" id="spray">رشّة</button>
+  <div class="swatches" role="group" aria-label="لون العطر">
+    <button data-c="#c47a22" aria-pressed="true" style="background:#c47a22" aria-label="عنبري"></button>
+    <button data-c="#c9506a" aria-pressed="false" style="background:#c9506a" aria-label="وردي"></button>
+    <button data-c="#7fb8d8" aria-pressed="false" style="background:#7fb8d8" aria-label="أزرق"></button>
+    <button data-c="#f2ead8" aria-pressed="false" style="background:#f2ead8" aria-label="شفاف"></button>
+  </div>
+  <label class="btn" for="file">جرّب بصورة علبتك</label><input type="file" id="file" accept="image/*">
+  <button id="back3d" hidden>رجوع للعلبة 3D</button>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cv = document.getElementById('cv');
+const R = new THREE.WebGLRenderer({canvas: cv, antialias: true, alpha: true});
+R.setPixelRatio(Math.min(devicePixelRatio, 2)); R.toneMapping = THREE.ACESFilmicToneMapping; R.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene();
+// the backdrop lives inside the 3D scene, so the glass has something real to show through and bend
+function backdropTex(inner, outer){
+  const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d');
+  const gr = g.createRadialGradient(256, 230, 10, 256, 256, 360); gr.addColorStop(0, inner); gr.addColorStop(1, outer);
+  g.fillStyle = gr; g.fillRect(0, 0, 512, 512);
+  // a few soft warm lights in the distance, so the glass and liquid catch them
+  [[120, 150, '#f6c98a'], [400, 120, '#ffe3b8'], [330, 400, '#c98a52']].forEach(([x, y, col]) => { const l = g.createRadialGradient(x, y, 0, x, y, 70); l.addColorStop(0, col + '55'); l.addColorStop(1, col + '00'); g.fillStyle = l; g.fillRect(0, 0, 512, 512); });
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const darkBackdrop = backdropTex('#3a2a20', '#140e0b');
+scene.background = darkBackdrop;
+scene.environment = new THREE.PMREMGenerator(R).fromScene(new RoomEnvironment(), .04).texture; scene.environmentIntensity = .9;
+const cam = new THREE.PerspectiveCamera(32, 1, .1, 100); cam.position.set(0, .2, 11);
+const key = new THREE.DirectionalLight('#fff2dc', 2.4); key.position.set(3, 5, 6); scene.add(key);
+const rim = new THREE.DirectionalLight('#ffd9a8', 1.4); rim.position.set(-4, 2, -4); scene.add(rim);
+scene.add(new THREE.AmbientLight('#ffffff', .25));
+
+/* ---------------- Mode 1: a 3D glass bottle ---------------- */
+const bottle = new THREE.Group(); scene.add(bottle);
+const glass = new THREE.MeshPhysicalMaterial({color: '#ffffff', metalness: 0, roughness: .03, transmission: 1, thickness: 1.2, ior: 1.5, clearcoat: 1, clearcoatRoughness: .03, envMapIntensity: 1.3, specularIntensity: 1});
+const body = new THREE.Mesh(new RoundedBoxGeometry(2.2, 2.6, 1.2, 8, .28), glass); bottle.add(body);
+// the liquid is solid colour: the glass only shows solid objects through it
+const liquidMat = new THREE.MeshPhysicalMaterial({color: '#c47a22', roughness: .15, clearcoat: .8, envMapIntensity: .9, emissive: '#c47a22', emissiveIntensity: .35});
+const LIQ_H = 2.1;
+const liquid = new THREE.Mesh(new RoundedBoxGeometry(1.86, LIQ_H, .86, 6, .18), liquidMat); bottle.add(liquid);
+let level = .86; // share of the bottle that is full
+function setLevel(){ liquid.scale.y = level; liquid.position.y = -1.1 + .08 + (LIQ_H * level) / 2; }
+setLevel();
+const gold = new THREE.MeshPhysicalMaterial({color: '#d4af6a', metalness: 1, roughness: .2, envMapIntensity: 2.2});
+const collar = new THREE.Mesh(new THREE.CylinderGeometry(.42, .46, .3, 48), gold); collar.position.y = 1.45; bottle.add(collar);
+const pump = new THREE.Group(); pump.position.y = 1.6; bottle.add(pump);
+const stem = new THREE.Mesh(new THREE.CylinderGeometry(.12, .12, .3, 24), gold); stem.position.y = .12; pump.add(stem);
+const head = new THREE.Mesh(new THREE.CylinderGeometry(.36, .36, .42, 48), gold); head.position.y = .45; pump.add(head);
+const hole = new THREE.Mesh(new THREE.CircleGeometry(.06, 24), new THREE.MeshBasicMaterial({color: '#1a120c'})); hole.position.set(.361, .5, 0); hole.rotation.y = Math.PI / 2; pump.add(hole);
+// engraved label on the front
+const lc = document.createElement('canvas'); lc.width = 512; lc.height = 256; const lg = lc.getContext('2d');
+lg.fillStyle = 'rgba(0,0,0,0)'; lg.fillRect(0, 0, 512, 256); lg.fillStyle = '#d4af6a'; lg.textAlign = 'center';
+lg.font = '400 64px "Instrument Serif", serif'; lg.fillText('MAISON', 256, 118); lg.font = '500 22px "Instrument Sans", sans-serif'; lg.fillText('E A U   D E   P A R F U M', 256, 170);
+const labelTex = new THREE.CanvasTexture(lc); labelTex.colorSpace = THREE.SRGBColorSpace;
+const label = new THREE.Mesh(new THREE.PlaneGeometry(1.7, .85), new THREE.MeshBasicMaterial({map: labelTex, transparent: true})); label.position.set(0, -.15, .605); bottle.add(label);
+document.fonts && document.fonts.ready.then(() => { lg.clearRect(0, 0, 512, 256); lg.fillStyle = '#d4af6a'; lg.textAlign = 'center'; lg.font = '400 64px "Instrument Serif", serif'; lg.fillText('MAISON', 256, 118); lg.font = '500 22px "Instrument Sans", sans-serif'; lg.fillText('E A U   D E   P A R F U M', 256, 170); labelTex.needsUpdate = true; });
+bottle.position.y = -.5;
+
+/* ---------------- Mode 2: your own photo, untouched ---------------- */
+const photo = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({transparent: true, toneMapped: false}));
+photo.visible = false; scene.add(photo);
+let photoNozzle = new THREE.Vector3();
+
+/* ---------------- The mist ---------------- */
+const N = 2600;
+const pos = new Float32Array(N * 3), vel = new Float32Array(N * 3), life = new Float32Array(N), maxLife = new Float32Array(N), sizes = new Float32Array(N);
+const geo = new THREE.BufferGeometry();
+geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+geo.setAttribute('aLife', new THREE.BufferAttribute(new Float32Array(N), 1));
+geo.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
+const mistMat = new THREE.ShaderMaterial({
+  transparent: true, depthWrite: false,
+  uniforms: {uColor: {value: new THREE.Color('#fff7ea')}, uScale: {value: 1}, uAlpha: {value: .22}},
+  vertexShader: `attribute float aLife; attribute float aSize; varying float vLife; uniform float uScale;
+    void main(){ vLife = aLife; vec4 mv = modelViewMatrix * vec4(position, 1.); gl_Position = projectionMatrix * mv;
+      gl_PointSize = aSize * uScale * (1.0 + (1.0 - aLife) * 1.6) / -mv.z; }`,
+  fragmentShader: `varying float vLife; uniform vec3 uColor; uniform float uAlpha;
+    void main(){ vec2 p = gl_PointCoord - .5; float d = length(p); if (d > .5) discard;
+      float soft = smoothstep(.5, .0, d); float fade = smoothstep(0., .25, vLife) * smoothstep(1., .8, vLife);
+      gl_FragColor = vec4(uColor, soft * fade * uAlpha * vLife); }`
+});
+const mist = new THREE.Points(geo, mistMat); mist.frustumCulled = false; scene.add(mist);
+let next = 0;
+function emit(origin, dir, count){
+  const lifeAttr = geo.attributes.aLife;
+  for (let k = 0; k < count; k++) {
+    const i = next; next = (next + 1) % N;
+    pos[i * 3] = origin.x; pos[i * 3 + 1] = origin.y; pos[i * 3 + 2] = origin.z;
+    const spread = .5 + Math.random() * .25, sp = 2.4 + Math.random() * 4.6; // a widening cone of droplets
+    const d = new THREE.Vector3(dir.x + (Math.random() - .5) * spread, dir.y + (Math.random() - .5) * spread, dir.z + (Math.random() - .5) * spread).normalize();
+    vel[i * 3] = d.x * sp; vel[i * 3 + 1] = d.y * sp; vel[i * 3 + 2] = d.z * sp;
+    maxLife[i] = life[i] = 1.2 + Math.random() * 1.8; sizes[i] = Math.random() < .9 ? 2 + Math.random() * 4 : 8 + Math.random() * 12; // mostly fine droplets, a little soft haze
+    lifeAttr.array[i] = 1;
+  }
+}
+function stepMist(dt){
+  const lifeAttr = geo.attributes.aLife;
+  for (let i = 0; i < N; i++) {
+    if (life[i] <= 0) { lifeAttr.array[i] = 0; continue; }
+    life[i] -= dt;
+    const drag = Math.exp(-3.2 * dt);
+    vel[i * 3] *= drag; vel[i * 3 + 1] = vel[i * 3 + 1] * drag + .18 * dt; vel[i * 3 + 2] *= drag; // slows, then drifts up
+    vel[i * 3] += (Math.random() - .5) * .9 * dt; vel[i * 3 + 2] += (Math.random() - .5) * .9 * dt; // a little air movement
+    pos[i * 3] += vel[i * 3] * dt; pos[i * 3 + 1] += vel[i * 3 + 1] * dt; pos[i * 3 + 2] += vel[i * 3 + 2] * dt;
+    lifeAttr.array[i] = Math.max(0, life[i] / maxLife[i]);
+  }
+  geo.attributes.position.needsUpdate = true; lifeAttr.needsUpdate = true; geo.attributes.aSize.needsUpdate = true;
+}
+
+/* ---------------- Spray ---------------- */
+let mode = '3d', press = 0, spraying = 0, lastSpray = 0;
+function spray(){
+  lastSpray = performance.now(); spraying = .42; press = 1;
+  if (mode === '3d') { level = Math.max(.25, level - .012); setLevel(); }
+}
+function nozzleWorld(){
+  const up = innerWidth / innerHeight < .8 ? .75 : .12; // narrow phone screens: aim upward so the mist stays on screen
+  if (mode === 'photo') return {o: photoNozzle.clone(), d: new THREE.Vector3(1, up, .15).normalize()};
+  const o = new THREE.Vector3(.42, .5, 0); pump.localToWorld(o);
+  const d = new THREE.Vector3(1, up - .02, 0).applyQuaternion(bottle.quaternion).normalize();
+  return {o, d};
+}
+document.getElementById('spray').addEventListener('click', spray);
+
+/* ---------------- Turn and tap ---------------- */
+const rot = {y: -.35, x: 0, drag: null, moved: 0, idleAt: 0};
+cv.addEventListener('pointerdown', e => { rot.drag = {x: e.clientX, y: e.clientY, ry: rot.y, rx: rot.x}; rot.moved = 0; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', e => { if (!rot.drag) return; const dx = e.clientX - rot.drag.x, dy = e.clientY - rot.drag.y; rot.moved = Math.max(rot.moved, Math.hypot(dx, dy));
+  rot.y = rot.drag.ry + dx * .01; rot.x = Math.max(-.35, Math.min(.35, rot.drag.rx + dy * .005)); });
+cv.addEventListener('pointerup', () => { if (rot.drag && rot.moved < 6) spray(); rot.drag = null; rot.idleAt = performance.now() + 2500; });
+cv.addEventListener('pointercancel', () => { rot.drag = null; });
+
+/* ---------------- Perfume colour ---------------- */
+document.querySelectorAll('.swatches button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.swatches button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  liquidMat.color.set(b.dataset.c); liquidMat.emissive.set(b.dataset.c); liquidMat.emissiveIntensity = b.dataset.c === '#f2ead8' ? .15 : .35;
+}));
+
+/* ---------------- Your own photo ---------------- */
+const bgEl = document.getElementById('bg');
+document.getElementById('file').addEventListener('change', async e => {
+  const f = e.target.files[0]; if (!f) return;
+  const url = URL.createObjectURL(f), img = new Image(); img.src = url; await img.decode();
+  // backdrop colour from the corners, and the nozzle = the top of the bottle (first row that is not backdrop)
+  const w = 200, h = Math.round(200 * img.naturalHeight / img.naturalWidth), c = document.createElement('canvas'); c.width = w; c.height = h;
+  const g = c.getContext('2d', {willReadFrequently: true}); g.fillStyle = '#fff'; g.fillRect(0, 0, w, h); g.drawImage(img, 0, 0, w, h);
+  const d = g.getImageData(0, 0, w, h).data, px = (x, y) => { const i = (y * w + x) * 4; return [d[i], d[i + 1], d[i + 2]]; };
+  const corners = [px(0, 0), px(w - 1, 0), px(0, h - 1), px(w - 1, h - 1)], bgc = [0, 1, 2].map(k => Math.round(corners.reduce((a, p) => a + p[k], 0) / 4));
+  const far = (x, y) => { const p = px(x, y); return Math.abs(p[0] - bgc[0]) + Math.abs(p[1] - bgc[1]) + Math.abs(p[2] - bgc[2]) > 60; };
+  let topY = 0, xs = [];
+  outer: for (let y = 0; y < h; y++) { xs = []; for (let x = 0; x < w; x++) if (far(x, y)) xs.push(x); if (xs.length > 1) { topY = y; break outer; } }
+  const topX = xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : w / 2;
+  const tex = new THREE.Texture(img); tex.colorSpace = THREE.SRGBColorSpace; tex.needsUpdate = true;
+  photo.material.map = tex; photo.material.needsUpdate = true;
+  const H = 5.6, W = H * img.naturalWidth / img.naturalHeight; photo.scale.set(W, H, 1); photo.position.set(0, -.4, 0);
+  photoNozzle.set((topX / w - .5) * W + W * .03, (.5 - (topY + h * .03) / h) * H - .4, .1);
+  const light = (bgc[0] * .3 + bgc[1] * .59 + bgc[2] * .11) > 150;
+  bgEl.style.background = `rgb(${bgc.join(',')})`; scene.background = new THREE.Color(`rgb(${bgc.join(',')})`);
+  document.body.classList.toggle('light', light);
+  mistMat.uniforms.uColor.value.set(light ? '#8a96a6' : '#fff7ea'); mistMat.uniforms.uAlpha.value = light ? .3 : .22;
+  mode = 'photo'; bottle.visible = false; photo.visible = true;
+  document.querySelector('.swatches').hidden = true; document.getElementById('back3d').hidden = false;
+  document.querySelector('.top p').textContent = 'صورتك مثل ما هي، والرذاذ يطلع من أعلى العلبة. اضغط عشان ترش';
+  setTimeout(spray, 400);
+});
+document.getElementById('back3d').addEventListener('click', () => {
+  mode = '3d'; bottle.visible = true; photo.visible = false; bgEl.style.background = ''; document.body.classList.remove('light'); scene.background = darkBackdrop;
+  mistMat.uniforms.uColor.value.set('#fff7ea'); mistMat.uniforms.uAlpha.value = .22;
+  document.querySelector('.swatches').hidden = false; document.getElementById('back3d').hidden = true;
+  document.querySelector('.top p').textContent = 'اضغط على العلبة عشان ترش، واسحبها عشان تلفها';
+});
+
+/* ---------------- Loop ---------------- */
+function size(){ const w = innerWidth, h = innerHeight; R.setSize(w, h, false); cam.aspect = w / h; cam.fov = w / h < .8 ? 44 : 32; cam.updateProjectionMatrix();
+  mistMat.uniforms.uScale.value = h * R.getPixelRatio() / 60; }
+size(); addEventListener('resize', size);
+let last = performance.now();
+function frame(now){
+  requestAnimationFrame(frame);
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  if (!rot.drag && now > rot.idleAt && !reduce) rot.y += (Math.sin(now / 2600) * .45 - .25 - rot.y) * .02;
+  bottle.rotation.set(rot.x, rot.y, 0);
+  if (!reduce) bottle.position.y = -.5 + Math.sin(now / 1400) * .05;
+  press = Math.max(0, press - dt * 4); pump.position.y = 1.6 - Math.sin(Math.min(1, press) * Math.PI) * .14;
+  if (spraying > 0) { spraying -= dt; const {o, d} = nozzleWorld(); emit(o, d, Math.round(2400 * dt)); }
+  if (!reduce && now - lastSpray > 6500) spray(); // a spray every few seconds so the effect shows by itself
+  stepMist(dt);
+  R.render(scene, cam);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
