@@ -913,13 +913,14 @@ const Film = (() => {
   // the stitching film everywhere: upright screens (phone, iPad upright) bg-tall · wide screens (computer, iPad sideways) bg-wide (blurred sides)
   const portrait = matchMedia('(max-aspect-ratio: 1/1)');
   const pick = () => { const n = portrait.matches ? 'bg-tall' : 'bg-wide'; if (!v.src.includes(n)) { v.poster = base + n + '.jpg'; v.src = base + n + '.mp4'; if (!reduce) v.play().catch(() => {}); } align(); };
-  // keep the needle on the screen's centre line, which is the line between the product columns
-  // (measured: the needle's shaft runs from x 541 to 566 of 1080 in bg-tall for the whole film, centre 553 = 51.2%;
-  //  in bg-wide the same film sits at 656 + x·0.5625 of 1920, so the centre is at 50.38%)
-  const NEEDLE = {'bg-tall': [1080, 1920, .5120], 'bg-wide': [1920, 1080, .5038]};
+  // keep the leather's stitch line on the screen's centre line, which is the line between the product columns
+  // (film: the leather-and-suede macro, played forward then back. Measured: the stitching sits at x 598–609 of 1080
+  //  in bg-tall through the loop, centre 603 = 55.8%; in bg-wide the film sits at 656 + x·0.5625 of 1920 = 51.85%.
+  //  The earlier needle film, kept as bg-needle-*, was 51.2% / 50.38%.)
+  const NEEDLE = {'bg-tall': [1080, 1920, .5583], 'bg-wide': [1920, 1080, .5185]};
   function align(){
     const [vw, vh, nx] = NEEDLE[portrait.matches ? 'bg-tall' : 'bg-wide'];
-    const W = innerWidth, H = innerHeight, shownW = vw * Math.max(W / vw, H / vh), slack = shownW - W;
+    const W = v.clientWidth || innerWidth, H = v.clientHeight || innerHeight, shownW = vw * Math.max(W / vw, H / vh), slack = shownW - W; // the film's own box (excludes a scrollbar)
     const p = slack > 1 ? Math.min(1, Math.max(0, (nx * shownW - W / 2) / slack)) : .5;
     v.style.objectPosition = (p * 100).toFixed(2) + '% 50%';
     // when the film already fills the width (e.g. iPad upright) there is nothing to slide:
