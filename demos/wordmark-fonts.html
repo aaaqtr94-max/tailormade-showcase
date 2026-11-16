@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TAILORMADE · خطوط الكلمة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Cormorant+Garamond:wght@500;600&family=Cinzel:wght@400;500&family=Bodoni+Moda:opsz,wght@6..96,500&family=Italiana&family=Marcellus&family=Tenor+Sans&family=Montserrat:wght@300;400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* Sample page only — nothing here is on the site. Each card shows the opening word over the film and the header wordmark. */
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f4f3f1;color:#000;font-family:'Instrument Sans',system-ui,sans-serif;padding:24px max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
+header{max-width:1100px;margin:0 auto 22px}
+h1{font-size:20px;font-weight:500}
+header p{color:#555;font-size:14px;margin-top:6px;line-height:1.6}
+.grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.film{position:relative;aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden;background:#3a2c25}
+.film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.12) 45%,rgba(0,0,0,.38))}
+.big{position:relative;z-index:1;color:#fff;font-size:clamp(22px,6vw,34px);letter-spacing:.42em;margin-right:-.42em;line-height:1;text-shadow:0 2px 24px rgba(0,0,0,.3);direction:ltr}
+.bar{display:flex;align-items:center;justify-content:center;height:58px;border-bottom:1px solid #eee}
+.small{font-size:20px;letter-spacing:.14em;direction:ltr}
+.meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:14px 16px}
+.meta b{font-size:15px;font-weight:500}
+.meta span{color:#666;font-size:13px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#000;color:#fff;font-size:13px;margin-left:8px}
+.now{color:#8a6a3a!important}
+</style>
+</head>
+<body>
+<header>
+  <h1>اختيارات خط كلمة TAILORMADE</h1>
+  <p>كل كرت فيه الكلمة مثل ما تطلع على الفيديو في بداية الموقع، وتحتها مثل ما تطلع في الشريط اللي فوق. صفحة تجربة بس، والموقع ما تغير.</p>
+</header>
+<div class="grid" id="grid"></div>
+<script>
+const FONTS = [
+  ['Instrument Sans', 500, 'الحالي، نفس خط المتجر الأصلي', true],
+  ['Cormorant Garamond', 600, 'كلاسيكي فخم، مثل بيوت الخياطة القديمة'],
+  ['Cinzel', 500, 'حروف رومانية كبيرة، فخامة وتراث'],
+  ['Bodoni Moda', 500, 'خط مجلات الأزياء، تباين قوي'],
+  ['Italiana', 400, 'نحيف وأنيق، ستايل الموضة'],
+  ['Marcellus', 400, 'حروف بأطراف ناعمة، رسمي وراقي'],
+  ['Tenor Sans', 400, 'بسيط وأنيق، تستخدمه دور أزياء كثير'],
+  ['Montserrat', 300, 'عصري هندسي وخفيف'],
+  ['Josefin Sans', 300, 'رفيع وعصري بلمسة كلاسيكية']
+];
+const bg = innerWidth < 700 ? '../assets/video/bg-tall.jpg' : '../assets/video/bg-wide.jpg';
+document.getElementById('grid').innerHTML = FONTS.map(([f, w, note, now], i) => `
+  <article class="card">
+    <div class="film"><img src="${bg}" alt=""><span class="big" style="font-family:'${f}',serif;font-weight:${w}">TAILORMADE</span></div>
+    <div class="bar"><span class="small" style="font-family:'${f}',serif;font-weight:${w === 500 || w === 600 ? 400 : w}">TAILORMADE</span></div>
+    <div class="meta"><b><span class="num">${i + 1}</span>${f}</b><span class="${now ? 'now' : ''}">${note}</span></div>
+  </article>`).join('');
+</script>
+</body>
+</html>

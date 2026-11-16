@@ -3,7 +3,7 @@
 const http = require('http'), fs = require('fs'), path = require('path'), os = require('os');
 const root = __dirname, PORT = 5179;
 const types = {'.html': 'text/html; charset=utf-8', '.mp4': 'video/mp4', '.jpg': 'image/jpeg'};
-const allowed = p => p === '/site/index.html' || /^\/assets\/video\/[\w.-]+\.(mp4|jpg)$/.test(p);
+const allowed = p => p === '/site/index.html' || /^\/demos\/[\w-]+\.html$/.test(p) || /^\/assets\/video\/[\w.-]+\.(mp4|jpg)$/.test(p);
 http.createServer((req, res) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405); return res.end(); }
   let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
