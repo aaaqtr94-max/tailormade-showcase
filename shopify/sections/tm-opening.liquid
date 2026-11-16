@@ -58,8 +58,9 @@
   style="--tmo-h: {{ section.settings.height }}svh; --tmo-shade: {{ shade }}; --tmo-bg: {{ section.settings.background }};"
 >
   <div class="tmo-media" aria-hidden="true">
-    <video class="tmo-film" muted playsinline loop preload="metadata" tabindex="-1"></video>
+    <video class="tmo-film" muted autoplay playsinline loop preload="auto" disablepictureinpicture disableremoteplayback tabindex="-1"></video>
     <div class="tmo-shade"></div>
+    <div class="tmo-veil" style="--tmo-veil: {{ section.settings.veil | divided_by: 100.0 }}"></div>
   </div>
   <canvas class="tmo-canvas" aria-hidden="true"></canvas>
   <{{ tag }} class="tmo-word" aria-label="{{ word | escape }}">
@@ -74,9 +75,13 @@
 
 <style>
   .tmo{position:relative;isolation:isolate;height:100vh;height:var(--tmo-h,100svh);min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,4vh,40px);text-align:center;overflow:hidden;background:var(--tmo-bg,#2b2523);color:#fff}
-  .tmo-media{position:absolute;inset:0;z-index:-1;overflow:hidden}
-  .tmo-film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .tmo-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,calc(var(--tmo-shade) * 1.05)) 0%,rgba(0,0,0,calc(var(--tmo-shade) * .3)) 45%,rgba(0,0,0,calc(var(--tmo-shade) * .95)) 100%)}
+  /* the film is fixed to the screen (like the original site) and clipped to this section;
+     the product grid shows the same film under a white wash, so it reads as one film behind the page */
+  .tmo-media{position:absolute;inset:0;z-index:-1;clip-path:inset(0)}
+  .tmo-film,.tmo-shade,.tmo-veil{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;pointer-events:none}
+  .tmo-film{object-fit:cover}
+  .tmo-veil{background:#fff;opacity:0}
+  .tmo-shade{background:linear-gradient(180deg,rgba(0,0,0,calc(var(--tmo-shade) * 1.05)) 0%,rgba(0,0,0,calc(var(--tmo-shade) * .3)) 45%,rgba(0,0,0,calc(var(--tmo-shade) * .95)) 100%)}
   .tmo-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
   .tmo-word{position:relative;z-index:1;display:flex;margin:0 -.42em 0 0;font-family:'Instrument Sans',var(--font-body--family,system-ui),sans-serif;font-weight:500;font-size:clamp(22px,5.4vw,68px);letter-spacing:.42em;line-height:1;color:#fff;text-transform:none;
     text-shadow:0 0 1px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.75),0 0 18px rgba(0,0,0,.55)}
@@ -110,38 +115,79 @@ if (!window.TMOpening) {
   addEventListener('pointermove', e => { pointer.x = e.clientX / innerWidth - .5; pointer.y = e.clientY / innerHeight - .5; }, {passive: true});
 
   // ---------- background film: tall file on upright screens, wide file otherwise; the stitch line sits on the centre line ----------
+  // The opening's film, plus the copies other sections ask for (the product grid shows it under a white wash).
   function film(root){
-    const v = root.querySelector('.tmo-film');
     const portrait = matchMedia('(max-aspect-ratio: 1/1)');
-    let visible = false;
-    function align(){
-      if (!v.videoWidth) return;
+    const vids = [];
+    // the film plays like the original site (also with "reduce motion"); if a phone blocks autoplay
+    // (iPhone Low Power Mode, data saver), it starts on the first touch, scroll or key
+    const KICK = ['pointerdown', 'touchstart', 'scroll', 'keydown'];
+    let armed = false;
+    const kick = () => { KICK.forEach(t => removeEventListener(t, kick)); armed = false; vids.forEach(play); };
+    function play(o){
+      if (!o.visible || !o.v.src || document.hidden) return;
+      const p = o.v.play();
+      if (p) p.catch(() => { if (!armed) { armed = true; KICK.forEach(t => addEventListener(t, kick, {passive: true})); } });
+    }
+    function align(){ // keep the stitch line on the screen's centre line (the line between the product columns)
+      const ref = vids.find(o => o.v.videoWidth); if (!ref) return;
       const nx = parseFloat(portrait.matches ? root.dataset.nxTall : root.dataset.nxWide) || .5;
-      const vw = v.videoWidth, vh = v.videoHeight, W = root.clientWidth, H = root.clientHeight;
+      const vw = ref.v.videoWidth, vh = ref.v.videoHeight, W = document.documentElement.clientWidth, H = innerHeight;
       const shownW = vw * Math.max(W / vw, H / vh), slack = shownW - W;
       const p = slack > 1 ? clamp((nx * shownW - W / 2) / slack) : .5;
-      v.style.objectPosition = (p * 100).toFixed(2) + '% 50%';
       const off = (W - shownW) * p + nx * shownW - W / 2;
-      if (Math.abs(off) > .5 && Math.abs(off) < W / 2) { const s = 1 / (1 - Math.abs(off) / (W / 2)); v.style.transform = `translateX(${(-off * s).toFixed(1)}px) scale(${s.toFixed(4)})`; }
-      else v.style.transform = '';
+      let tf = '';
+      if (Math.abs(off) > .5 && Math.abs(off) < W / 2) { const s = 1 / (1 - Math.abs(off) / (W / 2)); tf = `translateX(${(-off * s).toFixed(1)}px) scale(${s.toFixed(4)})`; }
+      vids.forEach(o => { o.v.style.objectPosition = (p * 100).toFixed(2) + '% 50%'; o.v.style.transform = tf; });
     }
-    function pick(){
+    function setSrc(o){
       const k = portrait.matches ? 'tall' : 'wide';
       const src = root.dataset[k] || root.dataset.wide;
-      if (!src) { v.hidden = true; return; }
-      if (v.dataset.k === k) return align();
-      v.dataset.k = k;
-      const poster = root.dataset[k + 'Poster']; if (poster) v.poster = poster;
-      v.src = src;
-      if (!reduced && visible) v.play().catch(() => {});
+      if (!src) { o.v.hidden = true; return; }
+      if (o.v.dataset.k === k) return;
+      o.v.dataset.k = k;
+      const poster = root.dataset[k + 'Poster']; if (poster && o.main) o.v.poster = poster;
+      o.v.src = src;
+      play(o);
     }
-    v.addEventListener('loadedmetadata', align);
+    function add(v, el, main){
+      if (v.dataset.tmFilm) return; v.dataset.tmFilm = '1';
+      v.muted = true; v.defaultMuted = true; v.playsInline = true; // phones only autoplay a muted, inline film
+      const o = {v, main, visible: true};
+      vids.push(o);
+      v.addEventListener('loadedmetadata', align);
+      v.addEventListener('canplay', () => { if (v.paused) play(o); });
+      o.io = new IntersectionObserver(([e]) => { o.visible = e.isIntersecting; o.visible ? play(o) : v.pause(); });
+      o.io.observe(el);
+      setSrc(o); align();
+    }
+    add(root.querySelector('.tmo-film'), root, true);
+    const mirror = v => add(v, v.closest('[data-tmg]') || v.parentElement, false);
+    (window.TMFilmMirrors || []).forEach(mirror);
+    const onMirror = e => mirror(e.detail);
+    document.addEventListener('tm:film-mirror', onMirror);
+    const pick = () => { vids.forEach(setSrc); align(); };
     portrait.addEventListener('change', pick);
     addEventListener('resize', align);
-    pick();
-    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (reduced) return; visible ? v.play().catch(() => {}) : v.pause(); });
-    io.observe(root);
-    return () => { io.disconnect(); portrait.removeEventListener('change', pick); removeEventListener('resize', align); v.pause(); };
+    const onVis = () => { if (!document.hidden) vids.forEach(play); };
+    document.addEventListener('visibilitychange', onVis);
+
+    // as the opening scrolls away the dark shade lifts and the white wash comes in (same as the original site)
+    const shade = root.querySelector('.tmo-shade'), veil = root.querySelector('.tmo-veil');
+    const veilMax = parseFloat(getComputedStyle(veil).getPropertyValue('--tmo-veil')) || 0;
+    const fade = () => {
+      const r = root.getBoundingClientRect(), t = clamp(-r.top / (r.height * .7));
+      veil.style.opacity = (veilMax * t).toFixed(3);
+      shade.style.opacity = (1 - t).toFixed(3);
+      document.documentElement.classList.toggle('tm-on-film', r.bottom > 0 && t < .5);
+    };
+    addEventListener('scroll', fade, {passive: true}); fade();
+    return () => {
+      vids.forEach(o => { o.io.disconnect(); o.v.pause(); });
+      document.removeEventListener('tm:film-mirror', onMirror); document.removeEventListener('visibilitychange', onVis);
+      portrait.removeEventListener('change', pick); removeEventListener('resize', align); removeEventListener('scroll', fade);
+      KICK.forEach(t => removeEventListener(t, kick));
+    };
   }
 
   // ---------- the monogram ----------
@@ -276,6 +322,7 @@ if (!window.TMOpening) {
     { "type": "range", "id": "stitch_wide", "label": "Stitch line position, wide film", "min": 45, "max": 70, "step": 0.25, "unit": "%", "default": 51.75 },
     { "type": "range", "id": "stitch_tall", "label": "Stitch line position, tall film", "min": 45, "max": 70, "step": 0.25, "unit": "%", "default": 55.75 },
     { "type": "range", "id": "shade", "label": "Darken the film", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 40 },
+    { "type": "range", "id": "veil", "label": "White wash over the film when scrolling down", "min": 0, "max": 95, "step": 1, "unit": "%", "default": 72, "info": "Use the same value as the product grid's film wash so they meet without a line." },
     { "type": "color", "id": "background", "label": "Colour while the film loads", "default": "#2b2523" },
     { "type": "range", "id": "height", "label": "Height", "min": 60, "max": 100, "step": 5, "unit": "%", "default": 100 }
   ],

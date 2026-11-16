@@ -1,17 +1,101 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shopify sections preview</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TAILORMADE · Shopify preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<style>body{margin:0;background:#fff}.fake-hdr{position:sticky;top:0;z-index:5;height:58px;display:flex;align-items:center;justify-content:center;background:#fff;border-bottom:1px solid #eee;font:14px system-ui;letter-spacing:.14em}</style>
-</head><body>
-<div class="fake-hdr">TAILORMADE · Shopify sections preview</div>
+<style>
+:root{--bg:#fff;--ink:#000;--muted:rgba(0,0,0,.6);--line:rgba(0,0,0,.12);--soft:#f4f4f4;--serif:'Instrument Serif',Georgia,serif;--sans:'Instrument Sans',system-ui,sans-serif;
+  --gx:max(40px,env(safe-area-inset-left,0px));--gxr:max(40px,env(safe-area-inset-right,0px));--ease:cubic-bezier(.2,.7,.2,1)}
+*{box-sizing:border-box}
+html{background:#fff}
+body{margin:0;font-family:var(--sans);font-size:14px;line-height:1.4;color:#000;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none} button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ann,.hdr,.news,.foot,.legal{position:relative}
+.ann{z-index:31}
+/* ---------- announcement + header ---------- */
+.ann{height:44px;display:flex;align-items:center;overflow:hidden;font-size:14px;letter-spacing:.02em;text-transform:uppercase;background:rgba(255,255,255,.82);transition:background .4s,color .4s}
+.ann-track{display:flex;gap:120px;white-space:nowrap;animation:ann 28s linear infinite;padding-left:100%}
+.ann a{display:inline-block}
+@keyframes ann{to{transform:translateX(-100%)}}
+.hdr{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.82);transition:background .4s,color .4s,box-shadow .3s;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:box-shadow .3s}
+.hdr.scrolled{box-shadow:0 1px 0 var(--line)}
+.hdr-row{height:66px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--gxr) 0 var(--gx)}
+.hdr-left{display:flex;align-items:center;gap:18px}
+.wordmark{font-size:22px;font-weight:400;letter-spacing:.14em}
+.nav{display:flex;align-items:center;gap:26px;font-size:14px}
+.nav a,.nav button{position:relative;padding:6px 0}
+.nav a::after,.nav button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#000;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav a:hover::after,.nav a[aria-current="page"]::after,.nav button:hover::after,.nav button[aria-expanded="true"]::after{transform:scaleX(1)}
+.hdr-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.icon{width:36px;height:36px;display:grid;place-items:center;border-radius:50%;transition:background .2s}
+.icon:hover{background:var(--soft)}
+.icon svg{width:20px;height:20px}
+.cur{font-size:14px;display:flex;align-items:center;gap:6px}
+.cur i{width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,#fff 0 30%,#8a1538 30%)}
+.burger{display:none}
+
+/* ---------- newsletter + footer ---------- */
+.news{padding:96px var(--gxr) 88px var(--gx);text-align:center;border-top:1px solid var(--line)}
+.news h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.1;max-width:640px;margin:0 auto}
+.news form{max-width:520px;margin:44px auto 0;display:flex;align-items:center;border-bottom:1px solid #000}
+.news input{flex:1;border:0;background:none;font:inherit;font-size:16px;padding:14px 4px;outline:none;color:#000}
+.news input::placeholder{color:rgba(0,0,0,.55)}
+.news button{width:44px;height:44px;display:grid;place-items:center}
+.news .ok{margin-top:16px;color:var(--muted);font-size:13px;min-height:18px}
+.foot{padding:64px var(--gxr) 28px var(--gx);text-align:center}
+.foot h3{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px)}
+.foot .ig{display:inline-grid;place-items:center;width:44px;height:44px;margin-top:18px;border-radius:50%;transition:background .2s}
+.foot .ig:hover{background:var(--soft)}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;padding:22px var(--gxr) calc(22px + env(safe-area-inset-bottom,0px)) var(--gx);border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.legal nav{display:flex;flex-wrap:wrap;gap:20px}
+.legal a:hover{color:#000}
+
+.news h2,.foot h3{margin:0}
+/* over the film the announcement and header turn clear with white type, as on the original */
+html.tm-on-film .ann,html.tm-on-film .hdr{background:transparent;color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none}
+html.tm-on-film .hdr .icon:hover{background:rgba(255,255,255,.14)}
+html.tm-on-film .nav a::after{background:#fff}
+html.tm-on-film .cur i{box-shadow:0 0 0 1px rgba(255,255,255,.6)}
+#shopify-section-opening .tmo{margin-top:-110px}
+.news,.foot,.legal{background:transparent}
+@media (max-width:749px){
+  :root{--gx:max(16px,env(safe-area-inset-left,0px));--gxr:max(16px,env(safe-area-inset-right,0px))}
+  .hdr-row{height:58px} .nav,.cur,.hdr-left .search{display:none} .burger{display:grid} .wordmark{font-size:18px}
+  #shopify-section-opening .tmo{margin-top:-102px}
+}</style>
+</head><body id="top">
+<div class="ann" aria-label="Announcement">
+  <div class="ann-track"><a href="https://www.tailormadeint.co/collections/all">Worldwide shipping available</a><a href="https://www.tailormadeint.co/collections/all">Worldwide shipping available</a><a href="https://www.tailormadeint.co/collections/all">Worldwide shipping available</a></div>
+</div>
+<header class="hdr" id="hdr">
+  <div class="hdr-row">
+    <div class="hdr-left">
+      <button class="icon burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+      <a class="icon search" href="https://www.tailormadeint.co/search" target="_blank" rel="noopener" aria-label="Search the store"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="9" cy="9" r="5.5"/><path d="M13.2 13.2L17 17"/></svg></a>
+      <a class="wordmark" href="#top">TAILORMADE</a>
+    </div>
+    <nav class="nav" aria-label="Main">
+      <a href="#top" data-route="home">Home</a>
+      <a href="https://www.tailormadeint.co/collections/best-selling-products" data-route="best-selling">Best Selling</a>
+      <a href="https://www.tailormadeint.co/collections/all" data-route="shop">Shop</a>
+      <a href="https://www.tailormadeint.co/collections/iphone-18-series">iPhone 18</a>
+    </nav>
+    <div class="hdr-right">
+      <span class="cur" title="Prices in Qatari riyal"><i aria-hidden="true"></i>QAR</span>
+      <a class="icon" href="https://www.tailormadeint.co/account" target="_blank" rel="noopener" aria-label="Account"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="10" cy="7" r="3.2"/><path d="M3.8 17c.9-3.1 3.3-4.6 6.2-4.6s5.3 1.5 6.2 4.6"/></svg></a>
+      <a class="icon" href="https://www.tailormadeint.co/cart" target="_blank" rel="noopener" aria-label="Cart"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M4 6.8h12l-.8 10H4.8z"/><path d="M7.2 6.8V5.6a2.8 2.8 0 0 1 5.6 0v1.2"/></svg></a>
+    </div>
+  </div>
+</header>
+<main>
 <div id="shopify-section-opening" class="shopify-section"><section
   class="tmo"
   id="tmo-opening"
   data-tmo
-  data-wide="../assets/video/bg-wide.mp4"
-  data-tall="../assets/video/bg-tall.mp4"
-  data-wide-poster="../assets/video/bg-wide.jpg?width=1920"
-  data-tall-poster="../assets/video/bg-tall.jpg?width=1080"
+  data-wide="https://aaaqtr94-max.github.io/tailormade-showcase/assets/video/bg-wide.mp4"
+  data-tall="https://aaaqtr94-max.github.io/tailormade-showcase/assets/video/bg-tall.mp4"
+  data-wide-poster="https://aaaqtr94-max.github.io/tailormade-showcase/assets/video/bg-wide.jpg?width=1920"
+  data-tall-poster="https://aaaqtr94-max.github.io/tailormade-showcase/assets/video/bg-tall.jpg?width=1080"
   data-nx-wide="0.5175"
   data-nx-tall="0.5575"
   data-logo="true"
@@ -19,8 +103,9 @@
   style="--tmo-h: 100svh; --tmo-shade: 0.4; --tmo-bg: #2b2523;"
 >
   <div class="tmo-media" aria-hidden="true">
-    <video class="tmo-film" muted playsinline loop preload="metadata" tabindex="-1"></video>
+    <video class="tmo-film" muted autoplay playsinline loop preload="auto" disablepictureinpicture disableremoteplayback tabindex="-1"></video>
     <div class="tmo-shade"></div>
+    <div class="tmo-veil" style="--tmo-veil: 0.72"></div>
   </div>
   <canvas class="tmo-canvas" aria-hidden="true"></canvas>
   <h2 class="tmo-word" aria-label="TAILORMADE"><span aria-hidden="true" style="--i: 0">T</span><span aria-hidden="true" style="--i: 1">A</span><span aria-hidden="true" style="--i: 2">I</span><span aria-hidden="true" style="--i: 3">L</span><span aria-hidden="true" style="--i: 4">O</span><span aria-hidden="true" style="--i: 5">R</span><span aria-hidden="true" style="--i: 6">M</span><span aria-hidden="true" style="--i: 7">A</span><span aria-hidden="true" style="--i: 8">D</span><span aria-hidden="true" style="--i: 9">E</span><i class="tmo-caret" aria-hidden="true"></i>
@@ -29,9 +114,13 @@
 
 <style>
   .tmo{position:relative;isolation:isolate;height:100vh;height:var(--tmo-h,100svh);min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,4vh,40px);text-align:center;overflow:hidden;background:var(--tmo-bg,#2b2523);color:#fff}
-  .tmo-media{position:absolute;inset:0;z-index:-1;overflow:hidden}
-  .tmo-film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .tmo-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,calc(var(--tmo-shade) * 1.05)) 0%,rgba(0,0,0,calc(var(--tmo-shade) * .3)) 45%,rgba(0,0,0,calc(var(--tmo-shade) * .95)) 100%)}
+  /* the film is fixed to the screen (like the original site) and clipped to this section;
+     the product grid shows the same film under a white wash, so it reads as one film behind the page */
+  .tmo-media{position:absolute;inset:0;z-index:-1;clip-path:inset(0)}
+  .tmo-film,.tmo-shade,.tmo-veil{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;pointer-events:none}
+  .tmo-film{object-fit:cover}
+  .tmo-veil{background:#fff;opacity:0}
+  .tmo-shade{background:linear-gradient(180deg,rgba(0,0,0,calc(var(--tmo-shade) * 1.05)) 0%,rgba(0,0,0,calc(var(--tmo-shade) * .3)) 45%,rgba(0,0,0,calc(var(--tmo-shade) * .95)) 100%)}
   .tmo-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
   .tmo-word{position:relative;z-index:1;display:flex;margin:0 -.42em 0 0;font-family:'Instrument Sans',var(--font-body--family,system-ui),sans-serif;font-weight:500;font-size:clamp(22px,5.4vw,68px);letter-spacing:.42em;line-height:1;color:#fff;text-transform:none;
     text-shadow:0 0 1px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.75),0 0 18px rgba(0,0,0,.55)}
@@ -65,38 +154,79 @@ if (!window.TMOpening) {
   addEventListener('pointermove', e => { pointer.x = e.clientX / innerWidth - .5; pointer.y = e.clientY / innerHeight - .5; }, {passive: true});
 
   // ---------- background film: tall file on upright screens, wide file otherwise; the stitch line sits on the centre line ----------
+  // The opening's film, plus the copies other sections ask for (the product grid shows it under a white wash).
   function film(root){
-    const v = root.querySelector('.tmo-film');
     const portrait = matchMedia('(max-aspect-ratio: 1/1)');
-    let visible = false;
-    function align(){
-      if (!v.videoWidth) return;
+    const vids = [];
+    // the film plays like the original site (also with "reduce motion"); if a phone blocks autoplay
+    // (iPhone Low Power Mode, data saver), it starts on the first touch, scroll or key
+    const KICK = ['pointerdown', 'touchstart', 'scroll', 'keydown'];
+    let armed = false;
+    const kick = () => { KICK.forEach(t => removeEventListener(t, kick)); armed = false; vids.forEach(play); };
+    function play(o){
+      if (!o.visible || !o.v.src || document.hidden) return;
+      const p = o.v.play();
+      if (p) p.catch(() => { if (!armed) { armed = true; KICK.forEach(t => addEventListener(t, kick, {passive: true})); } });
+    }
+    function align(){ // keep the stitch line on the screen's centre line (the line between the product columns)
+      const ref = vids.find(o => o.v.videoWidth); if (!ref) return;
       const nx = parseFloat(portrait.matches ? root.dataset.nxTall : root.dataset.nxWide) || .5;
-      const vw = v.videoWidth, vh = v.videoHeight, W = root.clientWidth, H = root.clientHeight;
+      const vw = ref.v.videoWidth, vh = ref.v.videoHeight, W = document.documentElement.clientWidth, H = innerHeight;
       const shownW = vw * Math.max(W / vw, H / vh), slack = shownW - W;
       const p = slack > 1 ? clamp((nx * shownW - W / 2) / slack) : .5;
-      v.style.objectPosition = (p * 100).toFixed(2) + '% 50%';
       const off = (W - shownW) * p + nx * shownW - W / 2;
-      if (Math.abs(off) > .5 && Math.abs(off) < W / 2) { const s = 1 / (1 - Math.abs(off) / (W / 2)); v.style.transform = `translateX(${(-off * s).toFixed(1)}px) scale(${s.toFixed(4)})`; }
-      else v.style.transform = '';
+      let tf = '';
+      if (Math.abs(off) > .5 && Math.abs(off) < W / 2) { const s = 1 / (1 - Math.abs(off) / (W / 2)); tf = `translateX(${(-off * s).toFixed(1)}px) scale(${s.toFixed(4)})`; }
+      vids.forEach(o => { o.v.style.objectPosition = (p * 100).toFixed(2) + '% 50%'; o.v.style.transform = tf; });
     }
-    function pick(){
+    function setSrc(o){
       const k = portrait.matches ? 'tall' : 'wide';
       const src = root.dataset[k] || root.dataset.wide;
-      if (!src) { v.hidden = true; return; }
-      if (v.dataset.k === k) return align();
-      v.dataset.k = k;
-      const poster = root.dataset[k + 'Poster']; if (poster) v.poster = poster;
-      v.src = src;
-      if (!reduced && visible) v.play().catch(() => {});
+      if (!src) { o.v.hidden = true; return; }
+      if (o.v.dataset.k === k) return;
+      o.v.dataset.k = k;
+      const poster = root.dataset[k + 'Poster']; if (poster && o.main) o.v.poster = poster;
+      o.v.src = src;
+      play(o);
     }
-    v.addEventListener('loadedmetadata', align);
+    function add(v, el, main){
+      if (v.dataset.tmFilm) return; v.dataset.tmFilm = '1';
+      v.muted = true; v.defaultMuted = true; v.playsInline = true; // phones only autoplay a muted, inline film
+      const o = {v, main, visible: true};
+      vids.push(o);
+      v.addEventListener('loadedmetadata', align);
+      v.addEventListener('canplay', () => { if (v.paused) play(o); });
+      o.io = new IntersectionObserver(([e]) => { o.visible = e.isIntersecting; o.visible ? play(o) : v.pause(); });
+      o.io.observe(el);
+      setSrc(o); align();
+    }
+    add(root.querySelector('.tmo-film'), root, true);
+    const mirror = v => add(v, v.closest('[data-tmg]') || v.parentElement, false);
+    (window.TMFilmMirrors || []).forEach(mirror);
+    const onMirror = e => mirror(e.detail);
+    document.addEventListener('tm:film-mirror', onMirror);
+    const pick = () => { vids.forEach(setSrc); align(); };
     portrait.addEventListener('change', pick);
     addEventListener('resize', align);
-    pick();
-    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (reduced) return; visible ? v.play().catch(() => {}) : v.pause(); });
-    io.observe(root);
-    return () => { io.disconnect(); portrait.removeEventListener('change', pick); removeEventListener('resize', align); v.pause(); };
+    const onVis = () => { if (!document.hidden) vids.forEach(play); };
+    document.addEventListener('visibilitychange', onVis);
+
+    // as the opening scrolls away the dark shade lifts and the white wash comes in (same as the original site)
+    const shade = root.querySelector('.tmo-shade'), veil = root.querySelector('.tmo-veil');
+    const veilMax = parseFloat(getComputedStyle(veil).getPropertyValue('--tmo-veil')) || 0;
+    const fade = () => {
+      const r = root.getBoundingClientRect(), t = clamp(-r.top / (r.height * .7));
+      veil.style.opacity = (veilMax * t).toFixed(3);
+      shade.style.opacity = (1 - t).toFixed(3);
+      document.documentElement.classList.toggle('tm-on-film', r.bottom > 0 && t < .5);
+    };
+    addEventListener('scroll', fade, {passive: true}); fade();
+    return () => {
+      vids.forEach(o => { o.io.disconnect(); o.v.pause(); });
+      document.removeEventListener('tm:film-mirror', onMirror); document.removeEventListener('visibilitychange', onVis);
+      portrait.removeEventListener('change', pick); removeEventListener('resize', align); removeEventListener('scroll', fade);
+      KICK.forEach(t => removeEventListener(t, kick));
+    };
   }
 
   // ---------- the monogram ----------
@@ -220,9 +350,11 @@ if (!window.TMOpening) {
   data-tilt="true"
   data-cart="/cart"
   data-cart-add="/cart/add"
-  style="--tmg-cols: 4; --tmg-cols-m: 2; --tmg-pt: 72px; --tmg-pb: 80px;"
->
-  <div class="tmg-head"><h2 class="tmg-title tmg-rv">Products</h2></div><div class="tmg-bar">
+  style="--tmg-cols: 4; --tmg-cols-m: 2; --tmg-pt: 72px; --tmg-pb: 80px; --tmg-veil: 0.72;"
+><div class="tmg-film" aria-hidden="true">
+      <video muted autoplay playsinline loop preload="none" disablepictureinpicture disableremoteplayback tabindex="-1"></video>
+      <div class="tmg-veil"></div>
+    </div><div class="tmg-head"><h2 class="tmg-title tmg-rv">Products</h2></div><div class="tmg-bar">
       <span class="tmg-count">43 items</span>
       <div class="tmg-sort">
         <label for="tmg-sort-grid">Sort</label>
@@ -973,7 +1105,11 @@ if (!window.TMOpening) {
   </script></div>
 
 <style>
-  .tmg{--tmg-ease:cubic-bezier(.2,.7,.2,1);--tmg-gx:40px;padding:var(--tmg-pt,72px) var(--tmg-gx) var(--tmg-pb,80px);color:#000;font-family:'Instrument Sans',var(--font-body--family,system-ui),sans-serif;font-size:14px;line-height:1.4}
+  .tmg-film{position:absolute;inset:0;z-index:-1;clip-path:inset(0);pointer-events:none}
+  .tmg-film video,.tmg-veil{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh}
+  .tmg-film video{object-fit:cover}
+  .tmg-veil{background:#fff;opacity:var(--tmg-veil,.72)}
+  .tmg{position:relative;isolation:isolate;--tmg-ease:cubic-bezier(.2,.7,.2,1);--tmg-gx:40px;padding:var(--tmg-pt,72px) var(--tmg-gx) var(--tmg-pb,80px);color:#000;font-family:'Instrument Sans',var(--font-body--family,system-ui),sans-serif;font-size:14px;line-height:1.4}
   .tmg *{box-sizing:border-box}
   .tmg p{margin:0}
   .tmg-head{display:flex;flex-direction:column;gap:14px}
@@ -989,7 +1125,7 @@ if (!window.TMOpening) {
   .tmg-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--tmg-cols,4),minmax(0,1fr));gap:16px}
   .tmg-grid.zoom{grid-template-columns:repeat(7,minmax(0,1fr))}
   .tmg-grid.zoom .tmg-info{display:none}
-  .tmg-card{position:relative;border-radius:10px;overflow:clip;background:#fff;opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .8s var(--tmg-ease)}
+  .tmg-card{position:relative;border-radius:10px;overflow:clip;opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .8s var(--tmg-ease)}
   .tmg-card.in{opacity:1;transform:none}
   .tmg-link{position:absolute;inset:0;z-index:1}
   .tmg-media{position:relative;aspect-ratio:1/1;background:#fff;overflow:hidden}
@@ -1259,6 +1395,13 @@ if (!window.TMOpening) {
     const byHandle = new Map(data.map(p => [p.handle, p]));
     const grid = root.querySelector('.tmg-grid'), cards = [...grid.querySelectorAll('.tmg-card')];
 
+    // ask the TM Opening (if the page has one) to play its film here too, under the white wash
+    const filmV = root.querySelector('.tmg-film video');
+    if (filmV) {
+      (window.TMFilmMirrors = window.TMFilmMirrors || []).push(filmV);
+      document.dispatchEvent(new CustomEvent('tm:film-mirror', {detail: filmV}));
+    }
+
     // reveal on scroll
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin: '0px 0px -8% 0px'});
     const watch = () => {
@@ -1331,4 +1474,34 @@ if (!window.TMOpening) {
 
 
 </div>
+</main>
+<section class="news" aria-labelledby="newsTitle">
+  <h2 id="newsTitle" class="rv">Join our Newsletter — Get Updates, Offers and Invites.</h2>
+  <form class="rv" id="newsForm" action="https://www.tailormadeint.co/contact#contact_form" method="post" target="_blank" accept-charset="UTF-8">
+    <input type="hidden" name="form_type" value="customer">
+    <input type="hidden" name="utf8" value="✓">
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <label for="newsEmail" class="vh">Email address</label>
+    <input id="newsEmail" type="email" name="contact[email]" placeholder="Email address" required autocomplete="email">
+    <button type="submit" aria-label="Subscribe"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 11h16M13 5l6 6-6 6"/></svg></button>
+  </form>
+  <p class="ok" id="newsOk" role="status"></p>
+</section>
+<footer class="foot">
+  <h3 class="rv">Stay Connected</h3>
+  <a class="ig" href="https://www.instagram.com/tailormadeint/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg></a>
+</footer>
+<div class="legal">
+  <span>© 2026 TAILORMADE</span>
+  <nav aria-label="Terms and Policies">
+    <a href="https://www.tailormadeint.co/policies/privacy-policy" target="_blank" rel="noopener">Privacy policy</a>
+    <a href="https://www.tailormadeint.co/policies/refund-policy" target="_blank" rel="noopener">Refund policy</a>
+    <a href="https://www.tailormadeint.co/policies/terms-of-service" target="_blank" rel="noopener">Terms of service</a>
+  </nav>
+</div>
+<script>
+const hdr = document.getElementById('hdr');
+addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 10), {passive: true});
+document.getElementById('newsForm')?.addEventListener('submit', () => { document.getElementById('newsOk').textContent = 'Thank you — your sign-up opens on the TAILORMADE store to confirm.'; });
+</script>
 </body></html>

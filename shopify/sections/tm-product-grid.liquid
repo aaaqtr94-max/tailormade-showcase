@@ -26,8 +26,15 @@
   data-tilt="{{ section.settings.tilt }}"
   data-cart="{{ routes.cart_url }}"
   data-cart-add="{{ routes.cart_add_url }}"
-  style="--tmg-cols: {{ cols }}; --tmg-cols-m: {{ section.settings.columns_mobile }}; --tmg-pt: {{ section.settings.padding_top }}px; --tmg-pb: {{ section.settings.padding_bottom }}px;"
+  style="--tmg-cols: {{ cols }}; --tmg-cols-m: {{ section.settings.columns_mobile }}; --tmg-pt: {{ section.settings.padding_top }}px; --tmg-pb: {{ section.settings.padding_bottom }}px; --tmg-veil: {{ section.settings.film_veil | divided_by: 100.0 }};"
 >
+  {%- if section.settings.film_behind -%}
+    {%- comment -%} the TM Opening's film, under a white wash; it stays empty if the page has no TM Opening {%- endcomment -%}
+    <div class="tmg-film" aria-hidden="true">
+      <video muted autoplay playsinline loop preload="none" disablepictureinpicture disableremoteplayback tabindex="-1"></video>
+      <div class="tmg-veil"></div>
+    </div>
+  {%- endif -%}
   <div class="tmg-head">
     {%- if section.settings.title != blank -%}
       <h2 class="tmg-title tmg-rv">{{ section.settings.title | escape }}</h2>
@@ -136,7 +143,11 @@
 </div>
 
 <style>
-  .tmg{--tmg-ease:cubic-bezier(.2,.7,.2,1);--tmg-gx:40px;padding:var(--tmg-pt,72px) var(--tmg-gx) var(--tmg-pb,80px);color:#000;font-family:'Instrument Sans',var(--font-body--family,system-ui),sans-serif;font-size:14px;line-height:1.4}
+  .tmg-film{position:absolute;inset:0;z-index:-1;clip-path:inset(0);pointer-events:none}
+  .tmg-film video,.tmg-veil{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh}
+  .tmg-film video{object-fit:cover}
+  .tmg-veil{background:#fff;opacity:var(--tmg-veil,.72)}
+  .tmg{position:relative;isolation:isolate;--tmg-ease:cubic-bezier(.2,.7,.2,1);--tmg-gx:40px;padding:var(--tmg-pt,72px) var(--tmg-gx) var(--tmg-pb,80px);color:#000;font-family:'Instrument Sans',var(--font-body--family,system-ui),sans-serif;font-size:14px;line-height:1.4}
   .tmg *{box-sizing:border-box}
   .tmg p{margin:0}
   .tmg-head{display:flex;flex-direction:column;gap:14px}
@@ -152,7 +163,7 @@
   .tmg-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--tmg-cols,4),minmax(0,1fr));gap:16px}
   .tmg-grid.zoom{grid-template-columns:repeat(7,minmax(0,1fr))}
   .tmg-grid.zoom .tmg-info{display:none}
-  .tmg-card{position:relative;border-radius:10px;overflow:clip;background:#fff;opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .8s var(--tmg-ease)}
+  .tmg-card{position:relative;border-radius:10px;overflow:clip;opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .8s var(--tmg-ease)}
   .tmg-card.in{opacity:1;transform:none}
   .tmg-link{position:absolute;inset:0;z-index:1}
   .tmg-media{position:relative;aspect-ratio:1/1;background:#fff;overflow:hidden}
@@ -422,6 +433,13 @@
     const byHandle = new Map(data.map(p => [p.handle, p]));
     const grid = root.querySelector('.tmg-grid'), cards = [...grid.querySelectorAll('.tmg-card')];
 
+    // ask the TM Opening (if the page has one) to play its film here too, under the white wash
+    const filmV = root.querySelector('.tmg-film video');
+    if (filmV) {
+      (window.TMFilmMirrors = window.TMFilmMirrors || []).push(filmV);
+      document.dispatchEvent(new CustomEvent('tm:film-mirror', {detail: filmV}));
+    }
+
     // reveal on scroll
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin: '0px 0px -8% 0px'});
     const watch = () => {
@@ -526,6 +544,8 @@
     { "type": "checkbox", "id": "quick_add", "label": "Show the quick add button", "default": true, "info": "One-option products go straight to the cart; others open the product page." },
     { "type": "checkbox", "id": "view_3d", "label": "Open products in the 3D view first", "default": true },
     { "type": "checkbox", "id": "tilt", "label": "Cards lean toward the mouse", "default": true },
+    { "type": "checkbox", "id": "film_behind", "label": "Show the TM Opening film behind the products", "default": true },
+    { "type": "range", "id": "film_veil", "label": "White wash over the film", "min": 50, "max": 95, "step": 1, "unit": "%", "default": 72 },
     { "type": "range", "id": "padding_top", "label": "Space above", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
     { "type": "range", "id": "padding_bottom", "label": "Space below", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
   ],
