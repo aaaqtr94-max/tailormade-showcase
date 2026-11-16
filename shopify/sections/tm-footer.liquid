@@ -1,0 +1,153 @@
+{%- comment -%}
+  TAILORMADE footer: newsletter sign-up (Shopify's own customer form, so sign-ups land in Customers
+  with the "newsletter" tag), "Stay Connected" with Instagram, and the copyright with the store's policies.
+  The TM Opening's film runs behind it under the white wash, as on the original site.
+  Add it to the footer (Customize > Footer > Add section) and hide the theme's own footer sections.
+{%- endcomment -%}
+{%- liquid
+  assign year = 'now' | date: '%Y'
+  assign brand = section.settings.brand | default: shop.name
+  assign form_id = 'tmf-form-' | append: section.id
+-%}
+
+<div
+  class="tmf"
+  id="tmf-{{ section.id }}"
+  data-tmf
+  style="--tmf-veil: {{ section.settings.film_veil | divided_by: 100.0 }};"
+>
+  {%- if section.settings.film_behind -%}
+    <div class="tmf-film" aria-hidden="true">
+      <video muted autoplay playsinline loop preload="none" disablepictureinpicture disableremoteplayback tabindex="-1"></video>
+      <div class="tmf-veil"></div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_newsletter -%}
+    <section class="tmf-news" aria-labelledby="tmf-title-{{ section.id }}">
+      <h2 class="tmf-title tmf-rv" id="tmf-title-{{ section.id }}">{{ section.settings.newsletter_heading | escape }}</h2>
+      {%- form 'customer', id: form_id, class: 'tmf-form tmf-rv' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label for="tmf-email-{{ section.id }}" class="tmf-vh">Email address</label>
+        <input
+          id="tmf-email-{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          placeholder="Email address"
+          autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
+          required
+          {% if form.errors %}aria-invalid="true" aria-describedby="tmf-msg-{{ section.id }}"{% endif %}
+        >
+        <button type="submit" aria-label="Subscribe">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 11h16M13 5l6 6-6 6"/></svg>
+        </button>
+      {%- endform -%}
+      {%- comment -%} the form object only lives inside the form tag, so the message is worked out from the URL {%- endcomment -%}
+      <p class="tmf-msg" id="tmf-msg-{{ section.id }}" role="status" data-ok="{{ section.settings.success_text | escape }}" data-err="Please enter a valid email address."></p>
+    </section>
+  {%- endif -%}
+
+  <footer class="tmf-foot">
+    {%- if section.settings.connect_heading != blank -%}
+      <h3 class="tmf-sub tmf-rv">{{ section.settings.connect_heading | escape }}</h3>
+    {%- endif -%}
+    <div class="tmf-social">
+      {%- if section.settings.instagram != blank -%}
+        <a class="tmf-ig" href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg>
+        </a>
+      {%- endif -%}
+      {%- if section.settings.tiktok != blank -%}
+        <a class="tmf-ig" href="{{ section.settings.tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.4 5 4.6"/></svg>
+        </a>
+      {%- endif -%}
+    </div>
+  </footer>
+
+  <div class="tmf-legal">
+    <span>&copy; {{ year }} {{ brand | escape }}</span>
+    <nav aria-label="Terms and Policies">
+      {%- for policy in shop.policies -%}
+        {%- if policy != blank -%}
+          <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  </div>
+</div>
+
+<style>
+  .tmf{position:relative;isolation:isolate;color:#000;font-family:'Instrument Sans',var(--font-body--family,system-ui),sans-serif;font-size:14px;line-height:1.4;--tmf-gx:40px}
+  .tmf *{box-sizing:border-box}
+  .tmf a{color:inherit;text-decoration:none}
+  .tmf-film{position:absolute;inset:0;z-index:-1;clip-path:inset(0);pointer-events:none}
+  .tmf-film video,.tmf-veil{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh}
+  .tmf-film video{object-fit:cover}
+  .tmf-veil{background:#fff;opacity:var(--tmf-veil,.72)}
+  .tmf-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .tmf-news{padding:96px var(--tmf-gx) 88px;text-align:center;border-top:1px solid rgba(0,0,0,.12)}
+  .tmf-title{font-family:'Instrument Serif',var(--font-heading--family,Georgia),serif;font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.1;letter-spacing:0;text-transform:none;max-width:640px;margin:0 auto;color:#000}
+  .tmf-form{max-width:520px;margin:44px auto 0;display:flex;align-items:center;border-bottom:1px solid #000}
+  .tmf-form input[type=email]{flex:1;min-width:0;border:0;background:none;box-shadow:none;border-radius:0;font:inherit;font-size:16px;padding:14px 4px;outline:none;color:#000;height:auto}
+  .tmf-form input[type=email]::placeholder{color:rgba(0,0,0,.55)}
+  .tmf-form button{width:44px;height:44px;display:grid;place-items:center;flex:0 0 auto;border:0;background:none;color:#000;cursor:pointer;padding:0}
+  .tmf-form:focus-within{border-bottom-width:2px;margin-bottom:-1px}
+  .tmf-msg{margin:16px 0 0;color:rgba(0,0,0,.6);font-size:13px;min-height:18px}
+  .tmf-msg.err{color:#a1001f}
+  .tmf-foot{padding:64px var(--tmf-gx) 28px;text-align:center}
+  .tmf-sub{font-family:'Instrument Serif',var(--font-heading--family,Georgia),serif;font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:0;text-transform:none;margin:0;color:#000}
+  .tmf-social{display:flex;justify-content:center;gap:6px;margin-top:18px}
+  .tmf-ig{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;transition:background .2s}
+  .tmf-ig:hover{background:rgba(0,0,0,.06)}
+  .tmf-legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;padding:22px var(--tmf-gx) calc(22px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(0,0,0,.12);font-size:13px;color:rgba(0,0,0,.6)}
+  .tmf-legal nav{display:flex;flex-wrap:wrap;gap:20px}
+  .tmf-legal a:hover{color:#000}
+  .tmf-rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+  .tmf-rv.in{opacity:1;transform:none}
+  @media (max-width:749px){ .tmf{--tmf-gx:16px} .tmf-news{padding:72px var(--tmf-gx) 64px} }
+  @media (prefers-reduced-motion:reduce){ .tmf-rv{opacity:1;transform:none;transition:none} }
+</style>
+
+<script>
+(() => {
+  function init(root){
+    if (root.dataset.ready) return;
+    root.dataset.ready = '1';
+    // fade the heading and form in as they scroll into view
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin: '0px 0px -8% 0px'});
+    root.querySelectorAll('.tmf-rv').forEach(el => io.observe(el));
+    // the TM Opening (if the page has one) plays its film here too, under the white wash
+    const v = root.querySelector('.tmf-film video');
+    if (v) { (window.TMFilmMirrors = window.TMFilmMirrors || []).push(v); document.dispatchEvent(new CustomEvent('tm:film-mirror', {detail: v})); }
+    // after signing up, Shopify reloads the page with ?customer_posted=true (or shows errors); say so under the form
+    const msg = root.querySelector('.tmf-msg'), q = new URLSearchParams(location.search);
+    if (msg && q.get('customer_posted') === 'true') { msg.textContent = msg.dataset.ok; }
+    else if (msg && root.querySelector('[aria-invalid="true"]')) { msg.textContent = msg.dataset.err; msg.classList.add('err'); }
+  }
+  document.querySelectorAll('[data-tmf]').forEach(init);
+  document.addEventListener('shopify:section:load', e => e.target.querySelectorAll('[data-tmf]').forEach(init));
+})();
+</script>
+
+{% schema %}
+{
+  "name": "TM Footer",
+  "tag": "div",
+  "class": "tm-footer-section",
+  "settings": [
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show the newsletter sign-up", "default": true },
+    { "type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "Join our Newsletter — Get Updates, Offers and Invites." },
+    { "type": "text", "id": "success_text", "label": "Message after signing up", "default": "Thank you for subscribing." },
+    { "type": "text", "id": "connect_heading", "label": "Social heading", "default": "Stay Connected" },
+    { "type": "text", "id": "instagram", "label": "Instagram link", "default": "https://www.instagram.com/tailormadeint/" },
+    { "type": "text", "id": "tiktok", "label": "TikTok link", "info": "Full link, e.g. https://www.tiktok.com/@name" },
+    { "type": "text", "id": "brand", "label": "Name in the copyright line", "default": "TAILORMADE", "info": "Leave empty to use the store name." },
+    { "type": "checkbox", "id": "film_behind", "label": "Show the TM Opening film behind the footer", "default": true },
+    { "type": "range", "id": "film_veil", "label": "White wash over the film", "min": 50, "max": 95, "step": 1, "unit": "%", "default": 72 }
+  ],
+  "presets": [ { "name": "TM Footer" } ]
+}
+{% endschema %}
