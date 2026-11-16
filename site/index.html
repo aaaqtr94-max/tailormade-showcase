@@ -683,13 +683,16 @@ if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce) {
   const st = {x: 0, y: 0, s: 1, rx: 0, ry: 0};
   let open = false, busy = false, item = null, thumb = null, idx = 0, size = 0, cy = 0, drag = null, idleAt = 0, raf = 0, tween = null;
 
-  function backdrop(el){ // colour of the photo's corners (the studio backdrop)
+  function backdrop(el){ // colour of the photo's corners (the studio backdrop); the page always stays light
     try {
       const c = document.createElement('canvas'); c.width = c.height = 16;
-      const g = c.getContext('2d', {willReadFrequently: true}); g.drawImage(el, 0, 0, 16, 16);
+      const g = c.getContext('2d', {willReadFrequently: true});
+      g.fillStyle = '#fff'; g.fillRect(0, 0, 16, 16); // transparent PNGs (e.g. Full Black Alcantara) count as white, not black
+      g.drawImage(el, 0, 0, 16, 16);
       const px = [[0, 0], [15, 0], [0, 15], [15, 15]].map(([x, y]) => g.getImageData(x, y, 1, 1).data);
       const avg = k => Math.round(px.reduce((a, p) => a + p[k], 0) / px.length);
-      return `rgb(${avg(0)},${avg(1)},${avg(2)})`;
+      const [r, gg, b] = [avg(0), avg(1), avg(2)];
+      return r * .3 + gg * .59 + b * .11 < 225 ? '#fff' : `rgb(${r},${gg},${b})`; // a dark or busy corner is product, not backdrop
     } catch (e) { return '#fff'; }
   }
   function layout(){
